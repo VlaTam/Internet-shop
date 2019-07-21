@@ -1,4 +1,4 @@
-package ru.tampashev.databaselayer;
+package ru.tampashev.databaselayer.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -6,13 +6,13 @@ import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
 
+//@SuppressWarnings(value = "unused")
 public abstract class AbstractGenericDao <E, K extends Serializable> implements GenericDao <E, K> {
 
     private SessionFactory sessionFactory;
     private Class<E> type;
 
-    public AbstractGenericDao(Class<E> type, SessionFactory sessionFactory){
-        this.sessionFactory = sessionFactory;
+    public AbstractGenericDao(Class<E> type){
         this.type = type;
     }
 

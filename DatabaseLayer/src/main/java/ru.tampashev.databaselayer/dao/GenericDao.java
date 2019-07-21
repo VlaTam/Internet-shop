@@ -1,4 +1,4 @@
-package ru.tampashev.databaselayer;
+package ru.tampashev.databaselayer.dao;
 
 import java.io.Serializable;
 
