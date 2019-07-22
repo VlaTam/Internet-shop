@@ -1,10 +1,11 @@
 package ru.tampashev.databaselayer.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 //@SuppressWarnings(value = "unused")
 @Entity(name = "internet_shop.parameters")
-public class Product {
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,12 +19,12 @@ public class Product {
     private Integer price = 1;
 
     @ManyToOne
-    @JoinColumn(name = "category.id", nullable = false)
-    private Category category;
+    @JoinColumn(name = "categoryEntity.id", nullable = false)
+    private CategoryEntity categoryEntity;
 
     @ManyToOne
-    @JoinColumn(name = "parameters.id", nullable = false)
-    private Parameters parameters;
+    @JoinColumn(name = "parametersEntity.id", nullable = false)
+    private ParametersEntity parametersEntity;
 
     @Column(nullable = false)
     private Integer weight = 1;
@@ -34,32 +35,32 @@ public class Product {
     @Column(name = "quantity_in_stock", nullable = false)
     private Integer quantityInStock = 0;
 
-    public Product() {
+    public ProductEntity() {
     }
 
-    public Product(String name, Category category) {
+    public ProductEntity(String name, CategoryEntity categoryEntity) {
         this.name = name;
-        this.category = category;
+        this.categoryEntity = categoryEntity;
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof Product)) return false;
-        Product product = (Product) other;
-        return  name.equals(product.name) &&
-                price.equals(product.price) &&
-                category.equals(product.category) &&
-                parameters.equals(product.parameters) &&
-                weight.equals(product.weight) &&
-                volume.equals(product.volume) &&
-                quantityInStock.equals(product.quantityInStock);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProductEntity)) return false;
+        ProductEntity that = (ProductEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(categoryEntity, that.categoryEntity) &&
+                Objects.equals(parametersEntity, that.parametersEntity) &&
+                Objects.equals(weight, that.weight) &&
+                Objects.equals(volume, that.volume) &&
+                Objects.equals(quantityInStock, that.quantityInStock);
     }
 
     @Override
     public int hashCode() {
-        return  name.hashCode() + price.hashCode() + category.hashCode() +
-                parameters.hashCode() + weight.hashCode() + volume.hashCode() + quantityInStock.hashCode();
+        return Objects.hash(id, name, price, categoryEntity, parametersEntity, weight, volume, quantityInStock);
     }
 
     public Integer getId() {
@@ -74,12 +75,12 @@ public class Product {
         return price;
     }
 
-    public Category getCategory() {
-        return category;
+    public CategoryEntity getCategoryEntity() {
+        return categoryEntity;
     }
 
-    public Parameters getParameters() {
-        return parameters;
+    public ParametersEntity getParametersEntity() {
+        return parametersEntity;
     }
 
     public Integer getWeight() {
@@ -106,12 +107,12 @@ public class Product {
         this.price = price;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryEntity(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
     }
 
-    public void setParameters(Parameters parameters) {
-        this.parameters = parameters;
+    public void setParametersEntity(ParametersEntity parametersEntity) {
+        this.parametersEntity = parametersEntity;
     }
 
     public void setWeight(Integer weight) {

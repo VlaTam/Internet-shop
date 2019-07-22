@@ -2,11 +2,12 @@ package ru.tampashev.databaselayer.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 //@SuppressWarnings(value = "unused")
 @Entity(name = "internet_shop.parameters")
-public class Parameters implements Serializable {
+public class ParametersEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,13 +26,13 @@ public class Parameters implements Serializable {
     @Column(nullable = false)
     private Integer radius;
 
-    @OneToMany(targetEntity = Product.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
-    private Set<Product> products;
+    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
+    private Set<ProductEntity> productEntities;
 
-    public Parameters() {
+    public ParametersEntity() {
     }
 
-    public Parameters(String brand, Integer width, Integer height, Integer radius) {
+    public ParametersEntity(String brand, Integer width, Integer height, Integer radius) {
         this.brand = brand;
         this.width = width;
         this.height = height;
@@ -39,19 +40,21 @@ public class Parameters implements Serializable {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof Parameters)) return false;
-        Parameters that = (Parameters) other;
-        return  brand.equals(that.brand) &&
-                width.equals(that.width) &&
-                height.equals(that.height) &&
-                radius.equals(that.radius);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ParametersEntity)) return false;
+        ParametersEntity that = (ParametersEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(brand, that.brand) &&
+                Objects.equals(width, that.width) &&
+                Objects.equals(height, that.height) &&
+                Objects.equals(radius, that.radius) &&
+                Objects.equals(productEntities, that.productEntities);
     }
 
     @Override
     public int hashCode() {
-        return brand.hashCode() + width.hashCode() + height.hashCode() + radius.hashCode();
+        return Objects.hash(id, brand, width, height, radius, productEntities);
     }
 
     public Integer getId() {

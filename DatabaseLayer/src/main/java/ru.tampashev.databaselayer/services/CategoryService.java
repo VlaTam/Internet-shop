@@ -1,15 +1,16 @@
 package ru.tampashev.databaselayer.services;
 
-import ru.tampashev.databaselayer.dao.CategoryDao;
+import ru.tampashev.databaselayer.dto.Category;
 
-public class CategoryService {
+import java.util.Collection;
 
-    private CategoryDao categoryDao = new CategoryDao();
+public interface CategoryService {
 
-    public CategoryService() {
-    }
+    Category createCategory(Category category);
 
-    public void addCategory(){
+    Collection<Category> findAll();
 
-    }
+    Category findById(Integer id);
+
+    void deleteCategory(Integer id);
 }

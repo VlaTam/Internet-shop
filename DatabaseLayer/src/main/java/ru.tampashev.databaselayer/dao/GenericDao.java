@@ -2,10 +2,10 @@ package ru.tampashev.databaselayer.dao;
 
 import java.io.Serializable;
 
-public interface GenericDao <E, K extends Serializable>{
+public interface GenericDao <E extends Serializable> {
 
-    K create(E newInstance);
-    E getById(K id);
+    Integer create(E newInstance);
+    E getById(Integer id);
     void update(E transientObject);
     void delete(E persistentObject);
 }

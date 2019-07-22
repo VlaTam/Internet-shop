@@ -1,14 +1,13 @@
 package ru.tampashev.databaselayer.services;
 
-import ru.tampashev.databaselayer.dao.ProductDao;
-import ru.tampashev.databaselayer.entities.Product;
+import ru.tampashev.databaselayer.entities.ProductEntity;
 
 import javax.transaction.Transactional;
 
 @Transactional
 public class ProductService {
 
-    public void addProduct(Product product){
-        new ProductDao().create(product);
+    public void addProduct(ProductEntity productEntity){
+        new ProductDao().create(productEntity);
     }
 }

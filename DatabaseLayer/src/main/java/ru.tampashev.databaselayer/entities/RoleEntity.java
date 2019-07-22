@@ -2,11 +2,12 @@ package ru.tampashev.databaselayer.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 //@SuppressWarnings(value = "unused")
-@Entity(name = "internet_shop.category")
-public class Category implements Serializable {
+@Entity(name = "internet_shop.roles")
+public class RoleEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,27 +17,29 @@ public class Category implements Serializable {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @OneToMany(targetEntity = Product.class, mappedBy = "category", cascade = CascadeType.MERGE)
-    private Set<Product> products;
+    @OneToMany(targetEntity = UserEntity.class, mappedBy = "role", cascade = CascadeType.MERGE)
+    private Set<UserEntity> userEntities;
 
-    public Category() {
+    public RoleEntity() {
     }
 
-    public Category(String name) {
+    public RoleEntity(String name) {
         this.name = name;
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof Category)) return false;
-        Category category = (Category) other;
-        return name.equals(category.name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RoleEntity)) return false;
+        RoleEntity that = (RoleEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(userEntities, that.userEntities);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return Objects.hash(id, name, userEntities);
     }
 
     public Integer getId() {
@@ -47,19 +50,11 @@ public class Category implements Serializable {
         return name;
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 }

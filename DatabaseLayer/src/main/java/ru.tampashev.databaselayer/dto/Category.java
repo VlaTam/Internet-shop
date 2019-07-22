@@ -1,6 +1,6 @@
 package ru.tampashev.databaselayer.dto;
 
-public class CategoryDto {
+public class Category {
 
     public Integer id;
     public String name;

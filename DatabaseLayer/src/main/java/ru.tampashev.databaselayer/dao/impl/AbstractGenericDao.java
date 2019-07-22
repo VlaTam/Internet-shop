@@ -1,20 +1,19 @@
-package ru.tampashev.databaselayer.dao;
+package ru.tampashev.databaselayer.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import ru.tampashev.databaselayer.dao.GenericDao;
 
 import java.io.Serializable;
 
 //@SuppressWarnings(value = "unused")
-public abstract class AbstractGenericDao <E, K extends Serializable> implements GenericDao <E, K> {
+public abstract class AbstractGenericDao <E extends Serializable> implements GenericDao<E> {
 
     private SessionFactory sessionFactory;
     private Class<E> type;
 
-    public AbstractGenericDao(Class<E> type){
-        this.type = type;
-    }
+    protected abstract Class<E> getEntityClass();
 
     @SuppressWarnings(value = "all")
     protected Session getSession(){
@@ -26,11 +25,11 @@ public abstract class AbstractGenericDao <E, K extends Serializable> implements 
     }
 
     @SuppressWarnings(value = "unchecked")
-    public K create(E newInstance){
-        return (K) getSession().save(newInstance);
+    public Integer create(E newInstance){
+        return (Integer) getSession().save(newInstance);
     }
 
-    public E getById(K id) {
+    public E getById(Integer id) {
         return getSession().get(type, id);
     }
 

@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`roles`
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
 );
 
-/*User table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`user`
+/*UserEntity table*/
+CREATE TABLE IF NOT EXISTS `internet_shop`.`userEntity`
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `last_name` VARCHAR(50) NOT NULL,
@@ -19,19 +19,19 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`user`
   `birthday` DATE NOT NULL,
   `mail_address` VARCHAR(50) NOT NULL,
   `password` VARCHAR(50) NOT NULL,
-  `role` INT NOT NULL,
+  `roleEntity` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `mail_address_UNIQUE` (`mail_address` ASC) VISIBLE,
-  INDEX `role_fk_idx` (`role` ASC) VISIBLE,
+  INDEX `role_fk_idx` (`roleEntity` ASC) VISIBLE,
   CONSTRAINT `fk_user_role_id`
-  FOREIGN KEY (`role`)
+  FOREIGN KEY (`roleEntity`)
   REFERENCES `internet_shop`.`roles` (`id`)
   ON DELETE RESTRICT
   ON UPDATE CASCADE
 );
 
-/*CategoryDto table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`category`
+/*CategoryEntity table*/
+CREATE TABLE IF NOT EXISTS `internet_shop`.`categoryEntity`
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`category`
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
 );
 
-/*Parameters table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`parameters`
+/*ParametersEntity table*/
+CREATE TABLE IF NOT EXISTS `internet_shop`.`parametersEntity`
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `brand` VARCHAR(50) NOT NULL,
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`parameters`
   UNIQUE INDEX `brand_UNIQUE` (`brand` ASC) VISIBLE
 );
 
-/*Product table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`product` (
+/*ProductEntity table*/
+CREATE TABLE IF NOT EXISTS `internet_shop`.`productEntity` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `price` INT NOT NULL DEFAULT 1 CHECK ( price > 0 ),
@@ -66,12 +66,12 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`product` (
   INDEX `fk_product_parameters_id_idx` (`parameter_id` ASC) VISIBLE,
   CONSTRAINT `fk_product_category_id`
      FOREIGN KEY (`category_id`)
-       REFERENCES `internet_shop`.`category` (`id`)
+       REFERENCES `internet_shop`.`categoryEntity` (`id`)
        ON DELETE RESTRICT
        ON UPDATE CASCADE,
   CONSTRAINT `fk_product_parameters_id`
      FOREIGN KEY (`parameter_id`)
-       REFERENCES `internet_shop`.`parameters` (`id`)
+       REFERENCES `internet_shop`.`parametersEntity` (`id`)
        ON DELETE RESTRICT
        ON UPDATE CASCADE
 );

@@ -3,10 +3,11 @@ package ru.tampashev.databaselayer.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 //@SuppressWarnings(value = "unused")
 @Entity(name = "internet_shop.user")
-public abstract class User implements Serializable {
+public abstract class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,24 +30,29 @@ public abstract class User implements Serializable {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role.id", nullable = false)
-    private Role role;
+    @JoinColumn(name = "roleEntity.id", nullable = false)
+    private RoleEntity roleEntity;
 
-    public User() {
+    public UserEntity() {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof User)) return false;
-        User user = (User) other;
-        return mailAddress.equals(user.mailAddress) &&
-                password.equals(user.password);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserEntity)) return false;
+        UserEntity that = (UserEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(birthday, that.birthday) &&
+                Objects.equals(mailAddress, that.mailAddress) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(roleEntity, that.roleEntity);
     }
 
     @Override
     public int hashCode() {
-        return mailAddress.hashCode() + password.hashCode();
+        return Objects.hash(id, lastName, firstName, birthday, mailAddress, password, roleEntity);
     }
 
     public Integer getId() {
@@ -73,8 +79,8 @@ public abstract class User implements Serializable {
         return password;
     }
 
-    public Role getRole() {
-        return role;
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
     }
 
     public void setId(Integer id) {
@@ -101,7 +107,7 @@ public abstract class User implements Serializable {
         this.password = password;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
     }
 }

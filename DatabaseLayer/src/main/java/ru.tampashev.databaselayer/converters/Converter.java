@@ -1,11 +1,9 @@
 package ru.tampashev.databaselayer.converters;
 
-import java.util.Set;
+import java.io.Serializable;
 
-public interface Converter <E, D> {
+public interface Converter <E extends Serializable, D> {
 
     D convertToDao(E entity);
-    Set<D> convertToDaoSet(Set<E> entities);
-    E convertToEntity(D dao);
-    Set<E> convertToEntitySet(Set<D> daoSet);
+    E convertToEntity(D dto);
 }

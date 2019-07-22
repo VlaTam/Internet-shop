@@ -1,10 +1,13 @@
 package ru.tampashev.databaselayer.dao;
 
-import ru.tampashev.databaselayer.entities.Category;
+import ru.tampashev.databaselayer.entities.CategoryEntity;
 
-public class CategoryDao extends AbstractGenericDao<Category, Integer> {
+import java.util.Collection;
 
-    public CategoryDao() {
-        super(Category.class);
-    }
+public interface CategoryDao extends GenericDao<CategoryEntity> {
+
+    Collection<CategoryEntity> findByCategoryName(String categoryName);
+
+    Collection<CategoryEntity> findAll();
+
 }
