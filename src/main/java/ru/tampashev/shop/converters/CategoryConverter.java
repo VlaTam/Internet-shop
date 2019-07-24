@@ -10,7 +10,7 @@ public class CategoryConverter extends AbstractConverter<CategoryEntity, Categor
     @Override
     protected Category convertEntity(CategoryEntity categoryEntity) {
         Category category = new Category();
-        category.id = categoryEntity.getId();
+        //category.id = categoryEntity.getId();
         category.name = categoryEntity.getName();
         return category;
     }
@@ -18,7 +18,7 @@ public class CategoryConverter extends AbstractConverter<CategoryEntity, Categor
     @Override
     protected CategoryEntity convertDto(Category category) {
         CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(category.id);
+        //categoryEntity.setId(category.id);
         categoryEntity.setName(category.name);
         return categoryEntity;
     }

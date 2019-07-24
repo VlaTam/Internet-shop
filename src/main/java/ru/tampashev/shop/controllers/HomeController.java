@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping({"/", "/home"})
-    public String showHomePage(String model){
-        model = "Hello, I'm Vladimir Tampashev - creator of the online store!";
+    @RequestMapping({"/"})
+    public String showHomePage(){
         return "home";
     }
 }
