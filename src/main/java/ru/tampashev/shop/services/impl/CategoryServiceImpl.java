@@ -11,7 +11,7 @@ import ru.tampashev.shop.services.CategoryService;
 import javax.transaction.Transactional;
 import java.util.Collection;
 
-@Service("categoryServiceImpl")
+@Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
 

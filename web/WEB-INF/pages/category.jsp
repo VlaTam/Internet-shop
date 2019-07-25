@@ -5,7 +5,7 @@
         <title>Category</title>
     </head>
     <body>
-        <form action="/category" method="POST">
+        <form action="${pageContext.servletContext.contextPath}" method="POST">
             <div>
                 <label for = "category_name_id">Название категории</label>
                 <input id="category_name_id" type="text" name="name">
@@ -16,3 +16,4 @@
         </form>
     </body>
 </html>
+

@@ -1,7 +1,11 @@
 package ru.tampashev.shop.config;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-//https://java-master.com/spring-mvs-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B1%D0%B5%D0%B7-xml-web-xml/
+
+@Import(DatabaseConfig.class)
+//@ComponentScan(basePackages = {"ru.tampashev.shop.dao", "ru.tampashev.shop.converters", "ru.tampashev.shop.services", "ru.tampashev.shop.controllers"})
 public class ApplicationConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     // для ресурсов

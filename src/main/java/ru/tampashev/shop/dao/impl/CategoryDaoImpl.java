@@ -6,7 +6,7 @@ import ru.tampashev.shop.entities.CategoryEntity;
 
 import java.util.Collection;
 
-@Repository("categoryDaoImpl")
+@Repository
 public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity> implements CategoryDao {
 
     @Override

@@ -4,6 +4,11 @@
     <title>Internet shop home</title>
   </head>
   <body>
-    <h1>It is main page</h1>
+    <div>
+      <h1>It is main page</h1>
+    </div>
+    <div>
+      <a href="${pageContext.servletContext.contextPath}/category">Category</a>
+    </div>
   </body>
 </html>
