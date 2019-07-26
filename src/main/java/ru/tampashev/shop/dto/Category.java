@@ -5,6 +5,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Category {
 
-    //public Integer id;
-    public String name;
+    private String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -1,19 +1,21 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Category</title>
     </head>
     <body>
-        <form action="${pageContext.servletContext.contextPath}" method="POST">
+        <form:form action="${pageContext.servletContext.contextPath}/category" method="POST" modelAttribute="category">
             <div>
-                <label for = "category_name_id">Название категории</label>
-                <input id="category_name_id" type="text" name="name">
+                <%--<label for = "category_name_id">Название категории</label>--%>
+                <form:input type = "text" name="name" path="name"/>
             </div>
             <div>
-                <input type="submit">
+                <button type="submit">Submit</button>
             </div>
-        </form>
+        </form:form>
     </body>
 </html>
 

@@ -32,7 +32,7 @@ public class InternetShopTest {
         context.refresh();
 
         Category category = new Category();
-        category.name = "Winter tyres";
+        category.setName("Winter tyres");
 
         CategoryService categoryService = (CategoryService) context.getBean("categoryServiceImpl");
         categoryService.createCategory(category);
