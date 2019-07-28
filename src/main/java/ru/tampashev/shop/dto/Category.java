@@ -1,10 +1,8 @@
 package ru.tampashev.shop.dto;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Category {
 
+    private Integer id;
     private String name;
 
     public void setName(String name) {
@@ -13,5 +11,13 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

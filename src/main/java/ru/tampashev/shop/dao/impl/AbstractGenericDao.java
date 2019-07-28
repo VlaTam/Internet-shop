@@ -16,9 +16,7 @@ public abstract class AbstractGenericDao <E extends Serializable> implements Gen
     @Autowired
     private SessionFactory sessionFactory;
 
-    private Class<E> type;
-
-    protected abstract Class<E> getEntityClass();
+    protected Class<E> type;
 
     @SuppressWarnings(value = "all")
     protected Session getSession(){
@@ -34,7 +32,7 @@ public abstract class AbstractGenericDao <E extends Serializable> implements Gen
         return (Integer) getSession().save(entity);
     }
 
-    public E getById(Integer id) {
+    public E findById(Integer id) {
         return getSession().get(type, id);
     }
 

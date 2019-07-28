@@ -1,11 +1,12 @@
 package ru.tampashev.shop.config;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+
 @Import(DatabaseConfig.class)
-//@ComponentScan(basePackages = {"ru.tampashev.shop.dao", "ru.tampashev.shop.converters", "ru.tampashev.shop.services", "ru.tampashev.shop.controllers"})
 public class ApplicationConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     // для ресурсов
@@ -23,5 +24,11 @@ public class ApplicationConfig extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected String[] getServletMappings() {
         return new String[] {"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter("UTF-8", true);
+        return new Filter[] {filter};
     }
 }

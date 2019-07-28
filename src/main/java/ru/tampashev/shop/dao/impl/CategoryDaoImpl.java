@@ -9,9 +9,8 @@ import java.util.Collection;
 @Repository
 public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity> implements CategoryDao {
 
-    @Override
-    protected Class<CategoryEntity> getEntityClass() {
-        return CategoryEntity.class;
+    public CategoryDaoImpl() {
+        type = CategoryEntity.class;
     }
 
     @Override
@@ -21,6 +20,6 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity> implemen
 
     @Override
     public Collection<CategoryEntity> findAll() {
-        return null;
+        return getSession().createNamedQuery("category-find-all", CategoryEntity.class).getResultList();
     }
 }

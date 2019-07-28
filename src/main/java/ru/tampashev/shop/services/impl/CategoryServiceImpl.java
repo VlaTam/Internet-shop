@@ -10,6 +10,7 @@ import ru.tampashev.shop.services.CategoryService;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Service
 @Transactional
@@ -25,21 +26,36 @@ public class CategoryServiceImpl implements CategoryService {
     public Category createCategory(Category category) {
         CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
         categoryDao.create(categoryEntity);
-        return categoryConverter.convertToDao(categoryEntity);
+        return categoryConverter.convertToDto(categoryEntity);
+    }
+
+    @Override
+    public void update(Category category) {
+        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
+        categoryDao.update(categoryEntity);
     }
 
     @Override
     public Collection<Category> findAll() {
-        return null;
+        Collection<CategoryEntity> entities = categoryDao.findAll();
+        Collection<Category> categories = new HashSet<>(entities.size());
+
+        for (CategoryEntity categoryEntity : entities) {
+            Category category = new CategoryConverter().convertToDto(categoryEntity);
+            categories.add(category);
+        }
+        return categories;
     }
 
     @Override
     public Category findById(Integer id) {
-        return null;
+        CategoryEntity categoryEntity = categoryDao.findById(id);
+        return new CategoryConverter().convertToDto(categoryEntity);
     }
 
     @Override
-    public void deleteCategory(Integer id) {
-
+    public void deleteCategory(Category category) {
+        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
+        categoryDao.delete(categoryEntity);
     }
 }

@@ -5,20 +5,20 @@ import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.entities.CategoryEntity;
 
 @Component("categoryConverter")
-public class CategoryConverter extends AbstractConverter<CategoryEntity, Category> {
+public class CategoryConverter implements Converter<CategoryEntity, Category> {
 
     @Override
-    protected Category convertEntity(CategoryEntity categoryEntity) {
+    public Category convertToDto(CategoryEntity categoryEntity) {
         Category category = new Category();
-        //category.id = categoryEntity.getId();
+        category.setId(categoryEntity.getId());
         category.setName(categoryEntity.getName());
         return category;
     }
 
     @Override
-    protected CategoryEntity convertDto(Category category) {
+    public CategoryEntity convertToEntity(Category category) {
         CategoryEntity categoryEntity = new CategoryEntity();
-        //categoryEntity.setId(category.id);
+        categoryEntity.setId(category.getId());
         categoryEntity.setName(category.getName());
         return categoryEntity;
     }

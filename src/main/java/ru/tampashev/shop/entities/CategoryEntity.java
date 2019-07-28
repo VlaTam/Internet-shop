@@ -5,8 +5,13 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "category", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "category-find-all",
+                query = "FROM CategoryEntity")
+})
 //@SuppressWarnings(value = "unused")
-@Entity(name = "internet_shop.category")
 public class CategoryEntity implements Serializable {
 
     @Id
