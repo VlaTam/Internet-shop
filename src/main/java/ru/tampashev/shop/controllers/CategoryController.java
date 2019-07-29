@@ -30,7 +30,7 @@ public class CategoryController {
 
     @PostMapping
     public void addCategory(@ModelAttribute("category") Category category) {
-        categoryService.createCategory(category);
+        categoryService.create(category);
     }
 
     @PostMapping("/edit")
@@ -41,10 +41,10 @@ public class CategoryController {
         return "updated_category";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") Integer id){
         Category category = categoryService.findById(id);
-        categoryService.deleteCategory(category);
+        categoryService.delete(category);
         return "delete_category";
     }
 }

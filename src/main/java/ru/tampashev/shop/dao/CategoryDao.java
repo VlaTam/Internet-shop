@@ -8,8 +8,5 @@ import java.util.Collection;
 @Repository
 public interface CategoryDao extends GenericDao<CategoryEntity> {
 
-    Collection<CategoryEntity> findByCategoryName(String categoryName);
-
     Collection<CategoryEntity> findAll();
-
 }

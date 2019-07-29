@@ -7,6 +7,7 @@ import ru.tampashev.shop.dao.CategoryDao;
 import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.entities.CategoryEntity;
 import ru.tampashev.shop.services.CategoryService;
+import ru.tampashev.shop.services.GenericService;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
@@ -14,7 +15,7 @@ import java.util.HashSet;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl implements GenericService<Category>, CategoryService {
 
     @Autowired
     private CategoryDao categoryDao;
@@ -23,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryConverter categoryConverter;
 
     @Override
-    public Category createCategory(Category category) {
+    public Category create(Category category) {
         CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
         categoryDao.create(categoryEntity);
         return categoryConverter.convertToDto(categoryEntity);
@@ -54,7 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Category category) {
+    public void delete(Category category) {
         CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
         categoryDao.delete(categoryEntity);
     }

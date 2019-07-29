@@ -38,7 +38,7 @@ public class InternetShopTest {
         category.setName("Winter tyres");
 
         CategoryService categoryService = (CategoryService) context.getBean("categoryServiceImpl");
-        categoryService.createCategory(category);
+        categoryService.create(category);
     }
 
     @Ignore
@@ -78,6 +78,6 @@ public class InternetShopTest {
         category.setName("winter tyres");
 
         CategoryService categoryService = (CategoryService) context.getBean("categoryServiceImpl");
-        categoryService.deleteCategory(category);
+        categoryService.delete(category);
     }
 }
