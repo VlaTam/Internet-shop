@@ -1,16 +1,12 @@
 package ru.tampashev.shop.services;
 
-import java.util.Collection;
+public interface GenericService <T> {
 
-public interface GenericService <E> {
+    T create(T object);
 
-    E create(E object);
+    T findById(Integer id);
 
-    Collection<E> findAll();
+    void delete(T object);
 
-    E findById(Integer id);
-
-    void delete(E object);
-
-    void update(E object);
+    void update(T object);
 }

@@ -3,11 +3,12 @@ package ru.tampashev.shop.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.CategoryConverter;
+import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.CategoryDao;
+import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.entities.CategoryEntity;
 import ru.tampashev.shop.services.CategoryService;
-import ru.tampashev.shop.services.GenericService;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
@@ -15,26 +16,13 @@ import java.util.HashSet;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements GenericService<Category>, CategoryService {
+public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, Category> implements CategoryService {
 
     @Autowired
     private CategoryDao categoryDao;
 
     @Autowired
     private CategoryConverter categoryConverter;
-
-    @Override
-    public Category create(Category category) {
-        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
-        categoryDao.create(categoryEntity);
-        return categoryConverter.convertToDto(categoryEntity);
-    }
-
-    @Override
-    public void update(Category category) {
-        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
-        categoryDao.update(categoryEntity);
-    }
 
     @Override
     public Collection<Category> findAll() {
@@ -49,14 +37,12 @@ public class CategoryServiceImpl implements GenericService<Category>, CategorySe
     }
 
     @Override
-    public Category findById(Integer id) {
-        CategoryEntity categoryEntity = categoryDao.findById(id);
-        return new CategoryConverter().convertToDto(categoryEntity);
+    protected Converter<CategoryEntity, Category> getConverter() {
+        return categoryConverter;
     }
 
     @Override
-    public void delete(Category category) {
-        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
-        categoryDao.delete(categoryEntity);
+    protected GenericDao<CategoryEntity> getDao() {
+        return categoryDao;
     }
 }

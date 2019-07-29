@@ -74,10 +74,12 @@ public class InternetShopTest {
         context.refresh();
 
         Category category = new Category();
-        category.setId(1);
-        category.setName("winter tyres");
+        category.setId(5);
+        category.setName("Tampashev tyres");
 
         CategoryService categoryService = (CategoryService) context.getBean("categoryServiceImpl");
+        Category findCategory = categoryService.findById(5);
+
         categoryService.delete(category);
     }
 }
