@@ -1,4 +1,6 @@
 package ru.tampashev.shop.dao;
 
-public interface ParametersDao {
+import ru.tampashev.shop.entities.ParametersEntity;
+
+public interface ParametersDao extends GenericDao<ParametersEntity>{
 }

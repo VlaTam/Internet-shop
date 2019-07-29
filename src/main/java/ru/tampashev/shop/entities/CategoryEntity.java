@@ -22,8 +22,8 @@ public class CategoryEntity implements Serializable {
     @Column(unique = true, nullable = false)
     private String name;
 
-    /*@OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = CascadeType.MERGE)
-    private Set<ProductEntity> productEntities = null;*/
+    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = CascadeType.MERGE)
+    private Set<ProductEntity> productEntities = null;
 
     public CategoryEntity() {
     }
@@ -38,13 +38,12 @@ public class CategoryEntity implements Serializable {
         if (!(o instanceof CategoryEntity)) return false;
         CategoryEntity that = (CategoryEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name); /*&&
-                Objects.equals(productEntities, that.productEntities);*/
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);//, productEntities);
+        return Objects.hash(id, name);
     }
 
     public Integer getId() {
@@ -55,9 +54,9 @@ public class CategoryEntity implements Serializable {
         return name;
     }
 
-    /*public Set<ProductEntity> getProductEntities() {
+    public Set<ProductEntity> getProductEntities() {
         return productEntities;
-    }*/
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -67,7 +66,7 @@ public class CategoryEntity implements Serializable {
         this.name = name;
     }
 
-    /*public void setProductEntities(Set<ProductEntity> productEntities) {
+    public void setProductEntities(Set<ProductEntity> productEntities) {
         this.productEntities = productEntities;
-    }*/
+    }
 }

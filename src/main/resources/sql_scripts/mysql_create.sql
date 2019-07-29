@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`roles`
 );
 
 /*UserEntity table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`userEntity`
+CREATE TABLE IF NOT EXISTS `internet_shop`.`user`
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `last_name` VARCHAR(50) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`parameters`
 );
 
 /*ProductEntity table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`productEntity` (
+CREATE TABLE IF NOT EXISTS `internet_shop`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `price` INT NOT NULL DEFAULT 1 CHECK ( price > 0 ),

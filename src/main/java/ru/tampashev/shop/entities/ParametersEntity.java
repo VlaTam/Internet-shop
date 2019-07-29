@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity()
-@Table(name = "category", schema = "internet_shop")
+@Entity
+@Table(name = "parameters", schema = "internet_shop")
 //@SuppressWarnings(value = "unused")
 public class ParametersEntity implements Serializable {
 
@@ -27,8 +27,8 @@ public class ParametersEntity implements Serializable {
     @Column(nullable = false)
     private Integer radius;
 
-    /*@OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
-    private Set<ProductEntity> productEntities;*/
+    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
+    private Set<ProductEntity> productEntities;
 
     public ParametersEntity() {
     }
@@ -49,13 +49,12 @@ public class ParametersEntity implements Serializable {
                 Objects.equals(brand, that.brand) &&
                 Objects.equals(width, that.width) &&
                 Objects.equals(height, that.height) &&
-                Objects.equals(radius, that.radius);// &&
-                //Objects.equals(productEntities, that.productEntities);
+                Objects.equals(radius, that.radius);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, width, height, radius);//, productEntities);
+        return Objects.hash(id, brand, width, height, radius);
     }
 
     public Integer getId() {
@@ -78,6 +77,10 @@ public class ParametersEntity implements Serializable {
         return radius;
     }
 
+    public Set<ProductEntity> getProductEntities() {
+        return productEntities;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -96,5 +99,9 @@ public class ParametersEntity implements Serializable {
 
     public void setRadius(Integer radius) {
         this.radius = radius;
+    }
+
+    public void setProductEntities(Set<ProductEntity> productEntities) {
+        this.productEntities = productEntities;
     }
 }

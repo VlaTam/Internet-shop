@@ -1,6 +1,7 @@
 package ru.tampashev.shop.services;
 
-public interface ParametersService {
+import ru.tampashev.shop.dto.Parameters;
 
+public interface ParametersService extends GenericService<Parameters> {
 
 }
