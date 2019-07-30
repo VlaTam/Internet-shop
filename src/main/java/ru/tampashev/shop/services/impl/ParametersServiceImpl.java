@@ -10,6 +10,9 @@ import ru.tampashev.shop.dto.Parameters;
 import ru.tampashev.shop.entities.ParametersEntity;
 import ru.tampashev.shop.services.ParametersService;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 @Service
 public class ParametersServiceImpl extends AbstractGenericService<ParametersEntity, Parameters> implements ParametersService {
 
@@ -27,5 +30,17 @@ public class ParametersServiceImpl extends AbstractGenericService<ParametersEnti
     @Override
     protected GenericDao<ParametersEntity> getDao() {
         return parametersDao;
+    }
+
+    @Override
+    public Collection<Parameters> findAll() {
+        Collection<ParametersEntity> entities = parametersDao.findAll();
+        Collection<Parameters> categories = new HashSet<>(entities.size());
+
+        for (ParametersEntity categoryEntity : entities) {
+            Parameters category = new ParametersConverter().convertToDto(categoryEntity);
+            categories.add(category);
+        }
+        return categories;
     }
 }

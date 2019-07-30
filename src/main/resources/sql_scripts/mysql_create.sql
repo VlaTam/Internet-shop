@@ -2,7 +2,7 @@
 CREATE SCHEMA IF NOT EXISTS internet_shop;
 
 /*Roles table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`roles`
+CREATE TABLE IF NOT EXISTS internet_shop.roles
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`roles`
 );
 
 /*UserEntity table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`user`
+CREATE TABLE IF NOT EXISTS internet_shop.user
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `last_name` VARCHAR(50) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`user`
 );
 
 /*CategoryEntity table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`category`
+CREATE TABLE IF NOT EXISTS internet_shop.category
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`category`
 );
 
 /*ParametersEntity table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`parameters`
+CREATE TABLE IF NOT EXISTS internet_shop.parameters
 (
   `id` INT NOT NULL AUTO_INCREMENT,
   `brand` VARCHAR(50) NOT NULL,
@@ -52,10 +52,10 @@ CREATE TABLE IF NOT EXISTS `internet_shop`.`parameters`
 );
 
 /*ProductEntity table*/
-CREATE TABLE IF NOT EXISTS `internet_shop`.`product` (
+CREATE TABLE IF NOT EXISTS internet_shop.product (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
-  `price` INT NOT NULL DEFAULT 1 CHECK ( price > 0 ),
+  `price` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( price > 0 ),
   `category_id` INT NOT NULL,
   `parameter_id` INT NOT NULL,
   `weight` INT NOT NULL DEFAULT 1 CHECK ( weight > 0 ),

@@ -2,11 +2,15 @@ package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "parameters", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "parameters-find-all",
+                query = "FROM ParametersEntity")
+})
 //@SuppressWarnings(value = "unused")
 public class ParametersEntity implements Serializable {
 
@@ -28,16 +32,9 @@ public class ParametersEntity implements Serializable {
     private Integer radius;
 
     @OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
-    private Set<ProductEntity> productEntities;
+    private Collection<ProductEntity> productEntities;
 
     public ParametersEntity() {
-    }
-
-    public ParametersEntity(String brand, Integer width, Integer height, Integer radius) {
-        this.brand = brand;
-        this.width = width;
-        this.height = height;
-        this.radius = radius;
     }
 
     @Override
@@ -77,7 +74,7 @@ public class ParametersEntity implements Serializable {
         return radius;
     }
 
-    public Set<ProductEntity> getProductEntities() {
+    public Collection<ProductEntity> getProductEntities() {
         return productEntities;
     }
 
@@ -101,7 +98,7 @@ public class ParametersEntity implements Serializable {
         this.radius = radius;
     }
 
-    public void setProductEntities(Set<ProductEntity> productEntities) {
+    public void setProductEntities(Collection<ProductEntity> productEntities) {
         this.productEntities = productEntities;
     }
 }

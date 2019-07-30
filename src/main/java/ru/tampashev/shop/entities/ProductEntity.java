@@ -1,47 +1,44 @@
 package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 //@SuppressWarnings(value = "unused")
 @Entity
 @Table(name = "product", schema = "internet_shop")
-public class ProductEntity {
+public class ProductEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false, nullable = false)
     private Integer id;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
-    private Integer price = 1;
+    private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "parameter_id", nullable = false)
     private ParametersEntity parameters;
 
     @Column(nullable = false)
-    private Integer weight = 1;
+    private Integer weight;
 
     @Column(nullable = false)
-    private Integer volume = 1;
+    private Integer volume;
 
     @Column(name = "quantity_in_stock", nullable = false)
-    private Integer quantityInStock = 0;
+    private Integer quantityInStock;
 
     public ProductEntity() {
-    }
-
-    public ProductEntity(String name, CategoryEntity category) {
-        this.name = name;
-        this.category = category;
     }
 
     @Override
@@ -72,7 +69,7 @@ public class ProductEntity {
         return name;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -104,7 +101,7 @@ public class ProductEntity {
         this.name = name;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

@@ -1,10 +1,12 @@
 package ru.tampashev.shop.dto;
 
+import java.math.BigDecimal;
+
 public class Product {
 
     private Integer id;
     private String name;
-    private Integer price;
+    private BigDecimal price;
     private Category category;
     private Parameters parameters;
     private Integer weight ;
@@ -19,7 +21,7 @@ public class Product {
         return name;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -51,7 +53,7 @@ public class Product {
         this.name = name;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

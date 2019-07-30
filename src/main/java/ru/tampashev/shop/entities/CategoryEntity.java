@@ -2,8 +2,8 @@ package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "category", schema = "internet_shop")
@@ -23,13 +23,9 @@ public class CategoryEntity implements Serializable {
     private String name;
 
     @OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = CascadeType.MERGE)
-    private Set<ProductEntity> productEntities = null;
+    private Collection<ProductEntity> productEntities;
 
     public CategoryEntity() {
-    }
-
-    public CategoryEntity(String name) {
-        this.name = name;
     }
 
     @Override
@@ -54,7 +50,7 @@ public class CategoryEntity implements Serializable {
         return name;
     }
 
-    public Set<ProductEntity> getProductEntities() {
+    public Collection<ProductEntity> getProductEntities() {
         return productEntities;
     }
 
@@ -66,7 +62,7 @@ public class CategoryEntity implements Serializable {
         this.name = name;
     }
 
-    public void setProductEntities(Set<ProductEntity> productEntities) {
+    public void setProductEntities(Collection<ProductEntity> productEntities) {
         this.productEntities = productEntities;
     }
 }

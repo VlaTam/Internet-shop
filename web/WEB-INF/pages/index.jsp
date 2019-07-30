@@ -5,5 +5,6 @@
   <div>
     <a href="${pageContext.servletContext.contextPath}/category">Category</a>
     <a href="${pageContext.servletContext.contextPath}/parameters">Parameters</a>
+    <a href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
   </div>
 </common:layout>
