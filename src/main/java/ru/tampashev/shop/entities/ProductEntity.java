@@ -8,6 +8,10 @@ import java.util.Objects;
 //@SuppressWarnings(value = "unused")
 @Entity
 @Table(name = "product", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "product-find-all",
+                query = "FROM ProductEntity")
+})
 public class ProductEntity implements Serializable {
 
     @Id

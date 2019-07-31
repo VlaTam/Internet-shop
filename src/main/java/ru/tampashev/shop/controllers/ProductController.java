@@ -3,10 +3,7 @@ package ru.tampashev.shop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.dto.Parameters;
 import ru.tampashev.shop.dto.Product;
@@ -39,6 +36,13 @@ public class ProductController {
         Collection<Parameters> parameters = parametersService.findAll();
         model.addAttribute("parameters", parameters);
         return "employee/product/add_product";
+    }
+
+    @GetMapping("/{id}")
+    public String openProduct(@PathVariable("id") Integer id, Model model){
+        Product product = productService.findById(id);
+        model.addAttribute("product", product);
+        return "customer/product";
     }
 
     @PostMapping("/add")

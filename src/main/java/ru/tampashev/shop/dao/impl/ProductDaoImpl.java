@@ -12,4 +12,9 @@ public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements
     public ProductDaoImpl() {
         type = ProductEntity.class;
     }
+
+    @Override
+    public Collection<ProductEntity> findAll() {
+        return getSession().createNamedQuery("product-find-all", type).getResultList();
+    }
 }

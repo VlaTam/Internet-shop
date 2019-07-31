@@ -1,18 +1,21 @@
-package ru.tampashev.shop.services;
+package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
-import ru.tampashev.shop.converters.RoleConverter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dao.RoleDao;
 import ru.tampashev.shop.dto.Role;
 import ru.tampashev.shop.entities.RoleEntity;
-import ru.tampashev.shop.services.impl.AbstractGenericService;
+import ru.tampashev.shop.services.RoleService;
 
+@Service
 public class RoleServiceImpl extends AbstractGenericService<RoleEntity, Role> implements RoleService {
 
     @Autowired
-    private RoleConverter roleConverter;
+    @Qualifier("roleConverter")
+    private Converter<RoleEntity, Role> roleConverter;
 
     @Autowired
     private RoleDao roleDao;

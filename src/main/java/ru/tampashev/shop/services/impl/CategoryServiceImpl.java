@@ -1,8 +1,8 @@
 package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import ru.tampashev.shop.converters.CategoryConverter;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.CategoryDao;
 import ru.tampashev.shop.dao.GenericDao;
@@ -22,7 +22,8 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
     private CategoryDao categoryDao;
 
     @Autowired
-    private CategoryConverter categoryConverter;
+    @Qualifier("categoryConverter")
+    private Converter<CategoryEntity, Category> categoryConverter;
 
     @Override
     public Collection<Category> findAll() {
@@ -30,7 +31,7 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
         Collection<Category> categories = new HashSet<>(entities.size());
 
         for (CategoryEntity categoryEntity : entities) {
-            Category category = new CategoryConverter().convertToDto(categoryEntity);
+            Category category = categoryConverter.convertToDto(categoryEntity);
             categories.add(category);
         }
         return categories;
