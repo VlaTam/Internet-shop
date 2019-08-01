@@ -17,7 +17,7 @@ public class DeliveryEntity implements Serializable {
     private String method;
 
     @Column(nullable = false)
-    private String status;
+    private String deliveryStatus;
 
     public DeliveryEntity() {
     }
@@ -29,12 +29,12 @@ public class DeliveryEntity implements Serializable {
         DeliveryEntity that = (DeliveryEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(method, that.method) &&
-                Objects.equals(status, that.status);
+                Objects.equals(deliveryStatus, that.deliveryStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, method, status);
+        return Objects.hash(id, method, deliveryStatus);
     }
 
     public Integer getId() {
@@ -45,8 +45,8 @@ public class DeliveryEntity implements Serializable {
         return method;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDeliveryStatus() {
+        return deliveryStatus;
     }
 
     public void setId(Integer id) {
@@ -57,7 +57,7 @@ public class DeliveryEntity implements Serializable {
         this.method = method;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDeliveryStatus(String status) {
+        this.deliveryStatus = status;
     }
 }

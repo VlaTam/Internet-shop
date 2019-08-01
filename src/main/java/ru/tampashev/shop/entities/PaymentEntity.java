@@ -17,7 +17,7 @@ public class PaymentEntity implements Serializable {
     private String method;
 
     @Column(nullable = false)
-    private String status;
+    private String paymentStatus;
 
     public PaymentEntity() {
     }
@@ -29,12 +29,12 @@ public class PaymentEntity implements Serializable {
         PaymentEntity that = (PaymentEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(method, that.method) &&
-                Objects.equals(status, that.status);
+                Objects.equals(paymentStatus, that.paymentStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, method, status);
+        return Objects.hash(id, method, paymentStatus);
     }
 
     public Integer getId() {
@@ -45,8 +45,8 @@ public class PaymentEntity implements Serializable {
         return method;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 
     public void setId(Integer id) {
@@ -57,7 +57,7 @@ public class PaymentEntity implements Serializable {
         this.method = method;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPaymentStatus(String status) {
+        this.paymentStatus = status;
     }
 }

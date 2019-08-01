@@ -7,11 +7,11 @@
     <form:form action="${pageContext.servletContext.contextPath}/product/add" method="POST" modelAttribute="product">
         <div>
             <label for="product_name">Name</label>
-            <form:input path="name" id="product_name" autofocus="true" />
+            <form:input path="name" id="product_name" autofocus="true" required="true"/>
         </div>
         <div>
             <label for="product_price">Price</label>
-            <form:input path="price" id="product_price"/>
+            <form:input path="price" id="product_price" required="true"/>
         </div>
         <div>
             <label for="product_category">Category</label>
@@ -32,15 +32,15 @@
         </div>
         <div>
             <label for="product_weight">Weight</label>
-            <form:input path="weight" id="product_weight"/>
+            <form:input path="weight" id="product_weight" required="true"/>
         </div>
         <div>
             <label for="product_volume">Volume</label>
-            <form:input path="volume" id="product_volume"/>
+            <form:input path="volume" id="product_volume" required="true"/>
         </div>
         <div>
             <label for="product_quantityInStock">Quantity in stock</label>
-            <form:input path="quantityInStock" id="product_quantityInStock"/>
+            <form:input path="quantityInStock" id="product_quantityInStock" required="true"/>
         </div>
         <button>Save</button>
     </form:form>

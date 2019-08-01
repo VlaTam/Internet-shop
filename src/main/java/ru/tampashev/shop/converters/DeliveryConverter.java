@@ -12,7 +12,7 @@ public class DeliveryConverter implements Converter<DeliveryEntity, Delivery> {
         Delivery delivery = new Delivery();
         delivery.setId(deliveryEntity.getId());
         delivery.setMethod(deliveryEntity.getMethod());
-        delivery.setStatus(deliveryEntity.getStatus());
+        delivery.setDeliveryStatus(deliveryEntity.getDeliveryStatus());
         return delivery;
     }
 
@@ -21,7 +21,7 @@ public class DeliveryConverter implements Converter<DeliveryEntity, Delivery> {
         DeliveryEntity deliveryEntity = new DeliveryEntity();
         deliveryEntity.setId(delivery.getId());
         deliveryEntity.setMethod(delivery.getMethod());
-        deliveryEntity.setStatus(delivery.getStatus());
+        deliveryEntity.setDeliveryStatus(delivery.getDeliveryStatus());
         return deliveryEntity;
     }
 }

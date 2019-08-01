@@ -18,19 +18,20 @@ public class CategoryController {
     public String openPage(Model model){
         model.addAttribute("category", new Category());
         model.addAttribute("categories", categoryService.findAll());
-        return "category";
+        return "employee/product/category";
     }
 
     @GetMapping("/edit/{id}")
     public String openEditPage(@PathVariable("id") Integer categoryId, Model model){
         Category category = categoryService.findById(categoryId);
         model.addAttribute("category", category);
-        return "edit_category";
+        return "employee/product/edit_category";
     }
 
     @PostMapping
-    public void addCategory(@ModelAttribute("category") Category category) {
+    public String addCategory(@ModelAttribute("category") Category category) {
         categoryService.create(category);
+        return "index";
     }
 
     @PostMapping("/edit")
@@ -38,13 +39,13 @@ public class CategoryController {
         categoryService.update(category);
         Category newCategory = categoryService.findById(category.getId());
         model.addAttribute("category", newCategory);
-        return "updated_category";
+        return "employee/product/updated_category";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") Integer id){
         Category category = categoryService.findById(id);
         categoryService.delete(category);
-        return "delete_category";
+        return "employee/product/delete_category";
     }
 }

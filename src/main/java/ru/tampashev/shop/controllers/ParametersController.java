@@ -21,7 +21,7 @@ public class ParametersController {
     public String openPage(Model model){
         Parameters parameters = new Parameters();
         model.addAttribute("parameters", parameters);
-        return "employee/parameters";
+        return "employee/product/parameters";
     }
 
     @PostMapping

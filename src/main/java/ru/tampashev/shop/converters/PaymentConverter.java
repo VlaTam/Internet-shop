@@ -12,7 +12,7 @@ public class PaymentConverter implements Converter<PaymentEntity, Payment> {
         Payment payment = new Payment();
         payment.setId(paymentEntity.getId());
         payment.setMethod(paymentEntity.getMethod());
-        payment.setStatus(paymentEntity.getStatus());
+        payment.setPaymentStatus(paymentEntity.getPaymentStatus());
         return payment;
     }
 
@@ -21,7 +21,7 @@ public class PaymentConverter implements Converter<PaymentEntity, Payment> {
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setId(payment.getId());
         paymentEntity.setMethod(payment.getMethod());
-        paymentEntity.setStatus(payment.getStatus());
+        paymentEntity.setPaymentStatus(payment.getPaymentStatus());
         return paymentEntity;
     }
 }

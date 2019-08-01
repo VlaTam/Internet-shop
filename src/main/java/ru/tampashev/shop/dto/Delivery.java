@@ -4,7 +4,7 @@ public class Delivery {
 
     private Integer id;
     private String method;
-    private String status;
+    private String deliveryStatus;
 
     public Integer getId() {
         return id;
@@ -14,8 +14,8 @@ public class Delivery {
         return method;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDeliveryStatus() {
+        return deliveryStatus;
     }
 
     public void setId(Integer id) {
@@ -26,7 +26,7 @@ public class Delivery {
         this.method = method;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 }

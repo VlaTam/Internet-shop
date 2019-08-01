@@ -32,13 +32,19 @@ CREATE TABLE IF NOT EXISTS internet_shop.user
     `birthday` DATE NOT NULL,
     `mail_address` VARCHAR(50) NOT NULL,
     `password` VARCHAR(50) NOT NULL,
-    `role` INT NOT NULL,
+    role_id INT NOT NULL,
+    `address_id` INT NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `mail_address_UNIQUE` (`mail_address` ASC),
-    INDEX `role_fk_idx` (`role` ASC) VISIBLE,
+    INDEX `role_fk_idx` (role_id ASC),
     CONSTRAINT `fk_user_role_id`
-    FOREIGN KEY (`role`)
+    FOREIGN KEY (role_id)
     REFERENCES `internet_shop`.`roles` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    CONSTRAINT `fk_user_address_id`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `internet_shop`.`address` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
@@ -60,8 +66,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.parameters
     `width` INT NOT NULL DEFAULT 1 CHECK ( width > 0 ),
     `height` INT NOT NULL DEFAULT 1 CHECK ( height > 0 ),
     `radius` INT NOT NULL DEFAULT 1 CHECK ( radius > 0 ),
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `brand_UNIQUE` (`brand` ASC)
+    PRIMARY KEY (`id`)
 );
 
 /*ProductEntity table*/
@@ -94,7 +99,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.payment
 (
     `id` INT NOT NULL AUTO_INCREMENT,
     `method` VARCHAR(50) NOT NULL,
-    `status` VARCHAR(50) NOT NULL,
+    `payment_status` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `method_UNIQUE` (`method` ASC)
 );
@@ -104,7 +109,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.delivery
 (
     `id` INT NOT NULL AUTO_INCREMENT,
     `method` VARCHAR(50) NOT NULL,
-    `status` VARCHAR(50) NOT NULL,
+    `delivery_status` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `method_UNIQUE` (`method` ASC)
 )

@@ -4,7 +4,7 @@ public class Payment {
 
     private Integer id;
     private String method;
-    private String status;
+    private String paymentStatus;
 
     public Integer getId() {
         return id;
@@ -14,8 +14,8 @@ public class Payment {
         return method;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 
     public void setId(Integer id) {
@@ -26,7 +26,7 @@ public class Payment {
         this.method = method;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }
