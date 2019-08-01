@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.product (
          ON UPDATE CASCADE
 );
 
-/*paymentEntity table*/
+/*PaymentEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.payment
 (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.payment
     UNIQUE INDEX `method_UNIQUE` (`method` ASC)
 );
 
-/*deliveryEntity table*/
+/*DeliveryEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.delivery
 (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -112,4 +112,34 @@ CREATE TABLE IF NOT EXISTS internet_shop.delivery
     `delivery_status` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `method_UNIQUE` (`method` ASC)
+);
+
+/*OrderEntity table*/
+CREATE TABLE IF NOT EXISTS internet_shop.order
+(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `payment_id` INT NOT NULL,
+    `delivery_id` INT NOT NULL,
+    `date` DATE NOT NULL,
+    `order_price` DECIMAL(12,2) NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_order_payment_id_idx` (`payment_id` ASC),
+    INDEX `fk_order_delivery_id_idx` (`delivery_id` ASC),
+    INDEX `fk_order_user_id_idx` (`user_id` ASC),
+    CONSTRAINT `fk_order_payment_id`
+    FOREIGN KEY (`payment_id`)
+    REFERENCES `internet_shop`.`payment` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    CONSTRAINT `fk_order_delivery_id`
+    FOREIGN KEY (`delivery_id`)
+    REFERENCES `internet_shop`.`delivery` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    CONSTRAINT `fk_order_user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `internet_shop`.`user` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
 )
