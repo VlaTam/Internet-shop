@@ -3,6 +3,7 @@ package ru.tampashev.shop.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Objects;
 
 //@SuppressWarnings(value = "unused")
@@ -42,8 +43,11 @@ public class ProductEntity implements Serializable {
     @Column(name = "quantity_in_stock", nullable = false)
     private Integer quantityInStock;
 
-    public ProductEntity() {
-    }
+    @ManyToMany
+    @JoinTable( name = "order_product",
+                joinColumns = @JoinColumn(name = "product_id"),
+                inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Collection<OrderEntity> orders;
 
     @Override
     public boolean equals(Object o) {

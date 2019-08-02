@@ -1,6 +1,7 @@
 package ru.tampashev.shop.dto;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 public class Product {
 
@@ -12,6 +13,7 @@ public class Product {
     private Integer weight ;
     private Integer volume;
     private Integer quantityInStock;
+    private Collection<Order> orders;
 
     public Integer getId() {
         return id;
@@ -45,6 +47,10 @@ public class Product {
         return quantityInStock;
     }
 
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -75,5 +81,9 @@ public class Product {
 
     public void setQuantityInStock(Integer quantityInStock) {
         this.quantityInStock = quantityInStock;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
     }
 }

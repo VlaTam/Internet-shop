@@ -25,9 +25,6 @@ public class CategoryEntity implements Serializable {
     @OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = CascadeType.MERGE)
     private Collection<ProductEntity> productEntities;
 
-    public CategoryEntity() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

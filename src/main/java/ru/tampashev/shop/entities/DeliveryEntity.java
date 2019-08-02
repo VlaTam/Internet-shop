@@ -2,6 +2,7 @@ package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -19,8 +20,8 @@ public class DeliveryEntity implements Serializable {
     @Column(nullable = false)
     private String deliveryStatus;
 
-    public DeliveryEntity() {
-    }
+    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "delivery", cascade = CascadeType.MERGE)
+    private Collection<OrderEntity> orders;
 
     @Override
     public boolean equals(Object o) {

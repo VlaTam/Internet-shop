@@ -1,5 +1,6 @@
 package ru.tampashev.shop.dto;
 
+import java.util.Collection;
 import java.util.Date;
 
 public class User {
@@ -10,11 +11,9 @@ public class User {
     private Date birthday;
     private String mailAddress;
     private String password;
-    private Role role;
+    private Role role = new Role();
     private Address address;
-
-    //TODO add order collection
-
+    private Collection<Order> orders;
 
     public Integer getId() {
         return id;
@@ -48,6 +47,10 @@ public class User {
         return address;
     }
 
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -78,5 +81,9 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
     }
 }

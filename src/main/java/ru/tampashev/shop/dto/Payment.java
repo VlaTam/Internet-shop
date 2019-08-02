@@ -1,10 +1,13 @@
 package ru.tampashev.shop.dto;
 
+import java.util.Collection;
+
 public class Payment {
 
     private Integer id;
     private String method;
     private String paymentStatus;
+    private Collection<Order> orders;
 
     public Integer getId() {
         return id;
@@ -18,6 +21,10 @@ public class Payment {
         return paymentStatus;
     }
 
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -28,5 +35,9 @@ public class Payment {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
     }
 }

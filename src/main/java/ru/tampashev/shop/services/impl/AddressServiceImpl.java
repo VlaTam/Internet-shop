@@ -14,7 +14,6 @@ import ru.tampashev.shop.services.AddressService;
 public class AddressServiceImpl extends AbstractGenericService<AddressEntity, Address> implements AddressService {
 
     @Autowired
-    @Qualifier("addressConverter")
     private Converter<AddressEntity, Address> addressConverter;
 
     @Autowired

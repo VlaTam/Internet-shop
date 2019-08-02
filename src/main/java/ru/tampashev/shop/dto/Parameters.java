@@ -1,5 +1,7 @@
 package ru.tampashev.shop.dto;
 
+import java.util.Collection;
+
 public class Parameters {
 
     private Integer id;
@@ -7,6 +9,7 @@ public class Parameters {
     private Integer width;
     private Integer height;
     private Integer radius;
+    private Collection<Product> products;
 
     public Integer getId() {
         return id;
@@ -28,6 +31,10 @@ public class Parameters {
         return radius;
     }
 
+    public Collection<Product> getProducts() {
+        return products;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -46,5 +53,9 @@ public class Parameters {
 
     public void setRadius(Integer radius) {
         this.radius = radius;
+    }
+
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
     }
 }

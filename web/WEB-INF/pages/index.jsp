@@ -36,12 +36,21 @@
       </div>
     </div>
 
-    <%--<div>
+    <div>
+      <h1>Add user</h1>
+      <a href="${pageContext.servletContext.contextPath}/user/authorization">Authorize</a>
+    </div>
+    <div>
+      <h1>Add address</h1>
+      <a href="${pageContext.servletContext.contextPath}/address/add">Add address</a>
+    </div>
+  </div>
+</common:layout>
+
+
+<%--<div>
         <a href="${pageContext.servletContext.contextPath}/category">Category</a>
         <a href="${pageContext.servletContext.contextPath}/parameters">Parameters</a>
         &lt;%&ndash;<a href="${pageContext.servletContext.contextPath}/product/add">Add product</a>&ndash;%&gt;
         <a href="${pageContext.servletContext.contextPath}/catalog">Catalog</a>
     </div>--%>
-
-  </div>
-</common:layout>

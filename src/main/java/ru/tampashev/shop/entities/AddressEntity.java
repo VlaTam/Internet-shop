@@ -31,9 +31,6 @@ public class AddressEntity implements Serializable {
     @Column(name = "flat_number", nullable = false)
     private Integer flatNumber;
 
-    public AddressEntity() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

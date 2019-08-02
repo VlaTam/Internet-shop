@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.user
     `mail_address` VARCHAR(50) NOT NULL,
     `password` VARCHAR(50) NOT NULL,
     role_id INT NOT NULL,
-    `address_id` INT NOT NULL,
+    `address_id` INT,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `mail_address_UNIQUE` (`mail_address` ASC),
     INDEX `role_fk_idx` (role_id ASC),
@@ -142,4 +142,24 @@ CREATE TABLE IF NOT EXISTS internet_shop.order
     REFERENCES `internet_shop`.`user` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
+);
+
+/*The table provides connection between tables Order and Product*/
+CREATE TABLE IF NOT EXISTS internet_shop.order_product
+(
+    `order_id` INT NOT NULL,
+    `product_id` INT NOT NULL,
+    `number_of_product` INT NOT NULL,
+    PRIMARY KEY (`order_id`, `product_id`),
+    INDEX `fk_order_product_id_idx` (`product_id` ASC),
+    CONSTRAINT `fk_product_order_id`
+       FOREIGN KEY (`order_id`)
+           REFERENCES `internet_shop`.`order` (`id`)
+           ON DELETE RESTRICT
+           ON UPDATE CASCADE,
+    CONSTRAINT `fk_order_product_id`
+       FOREIGN KEY (`product_id`)
+           REFERENCES `internet_shop`.`product` (`id`)
+           ON DELETE RESTRICT
+           ON UPDATE CASCADE
 )

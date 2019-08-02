@@ -1,7 +1,6 @@
 package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
@@ -14,7 +13,6 @@ import ru.tampashev.shop.services.RoleService;
 public class RoleServiceImpl extends AbstractGenericService<RoleEntity, Role> implements RoleService {
 
     @Autowired
-    @Qualifier("roleConverter")
     private Converter<RoleEntity, Role> roleConverter;
 
     @Autowired

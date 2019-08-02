@@ -34,9 +34,6 @@ public class ParametersEntity implements Serializable {
     @OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
     private Collection<ProductEntity> productEntities;
 
-    public ParametersEntity() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

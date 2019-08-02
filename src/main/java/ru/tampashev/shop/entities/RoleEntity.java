@@ -18,9 +18,6 @@ public class RoleEntity implements Serializable {
 
                     //TODO add Set of users!!!
 
-    public RoleEntity() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

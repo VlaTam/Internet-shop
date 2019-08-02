@@ -45,6 +45,7 @@ public class ProductController {
         return "customer/product";
     }
 
+    //TODO: there are a lot of logic, move statements into service
     @PostMapping("/add")
     public String saveProduct(@ModelAttribute("product") Product product){
         Integer categoryId = product.getCategory().getId();

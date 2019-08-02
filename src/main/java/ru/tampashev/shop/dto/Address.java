@@ -1,5 +1,7 @@
 package ru.tampashev.shop.dto;
 
+import java.util.Collection;
+
 public class Address {
 
     private Integer id;
@@ -9,6 +11,7 @@ public class Address {
     private String street;
     private Integer houseNumber;
     private Integer flatNumber;
+    private Collection<User> users;
 
     public Integer getId() {
         return id;
@@ -38,6 +41,10 @@ public class Address {
         return flatNumber;
     }
 
+    public Collection<User> getUsers() {
+        return users;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -64,5 +71,9 @@ public class Address {
 
     public void setFlatNumber(Integer flatNumber) {
         this.flatNumber = flatNumber;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }

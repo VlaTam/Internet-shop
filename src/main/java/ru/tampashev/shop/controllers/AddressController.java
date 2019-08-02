@@ -7,26 +7,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.tampashev.shop.dto.User;
-import ru.tampashev.shop.services.UserService;
+import ru.tampashev.shop.dto.Address;
+import ru.tampashev.shop.services.AddressService;
 
 @Controller
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("address")
+public class AddressController {
 
     @Autowired
-    private UserService userService;
+    private AddressService addressService;
 
-    @GetMapping("/authorization")
+    @GetMapping("/add")
     public String openPage(Model model){
-        User user = new User();
-        model.addAttribute("user", user);
-        return "/customer/authorization";
+        Address address = new Address();
+        model.addAttribute("address", address);
+        return "/customer/add_address";
     }
 
-    @PostMapping("/authorization")
-    public String addUser(@ModelAttribute("user") User user){
-        userService.create(user);
-        return "redirect:/address/add";
+    @PostMapping("/add")
+    public String addAddress(@ModelAttribute("address") Address address){
+        addressService.create(address);
+        return "redirect:/index";
     }
 }

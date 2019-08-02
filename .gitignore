@@ -199,7 +199,7 @@ fabric.properties
 
 # User-specific files
 *.suo
-*.user
+*.userEntity
 *.userosscache
 *.sln.docstates
 
@@ -308,7 +308,7 @@ $tf/
 # ReSharper is a .NET coding add-in
 _ReSharper*/
 *.[Rr]e[Ss]harper
-*.DotSettings.user
+*.DotSettings.userEntity
 
 # JustCode is a .NET coding add-in
 .JustCode

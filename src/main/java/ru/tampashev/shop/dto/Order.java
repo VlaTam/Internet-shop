@@ -1,31 +1,33 @@
 package ru.tampashev.shop.dto;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 
 public class Order {
 
     private Integer id;
-    private Integer userId;
-    private Integer paymentId;
-    private Integer deliveryId;
+    private User user;
+    private Payment payment;
+    private Delivery delivery;
     private Date date;
     private BigDecimal orderPrice;
+    private Collection<Product> products;
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public Integer getPaymentId() {
-        return paymentId;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public Integer getDeliveryId() {
-        return deliveryId;
+    public Delivery getDelivery() {
+        return delivery;
     }
 
     public Date getDate() {
@@ -36,20 +38,24 @@ public class Order {
         return orderPrice;
     }
 
+    public Collection<Product> getProducts() {
+        return products;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setPaymentId(Integer paymentId) {
-        this.paymentId = paymentId;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
-    public void setDeliveryId(Integer deliveryId) {
-        this.deliveryId = deliveryId;
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
     }
 
     public void setDate(Date date) {
@@ -58,5 +64,9 @@ public class Order {
 
     public void setOrderPrice(BigDecimal orderPrice) {
         this.orderPrice = orderPrice;
+    }
+
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
     }
 }

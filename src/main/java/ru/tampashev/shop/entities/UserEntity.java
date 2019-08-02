@@ -2,7 +2,9 @@ package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "user", schema = "internet_shop")
@@ -33,14 +35,11 @@ public class UserEntity implements Serializable {
     private RoleEntity roleEntity;
 
     @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id")
     private AddressEntity addressEntity;
 
-    //TODO add order collection
-
-
-    public UserEntity() {
-    }
+    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)
+    private Collection<OrderEntity> orderEntity = new HashSet<>();
 
     public Integer getId() {
         return id;
