@@ -6,7 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import javax.servlet.Filter;
 
-@Import(DatabaseConfig.class)
+@Import({DatabaseConfig.class, WebSecurityConfig.class})
 public class ApplicationConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     // для ресурсов

@@ -29,4 +29,9 @@ public class UserController {
         userService.create(user);
         return "redirect:/address/add";
     }
+
+    @GetMapping("/registration")
+    public String openRegistration(){
+        return "registration";
+    }
 }

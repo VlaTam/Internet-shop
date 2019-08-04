@@ -24,12 +24,15 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
         category.setName(categoryEntity.getName());
 
         Collection<ProductEntity> productEntities = categoryEntity.getProductEntities();
-        Set<Product> products = new HashSet<>(productEntities.size());
 
-        for (ProductEntity productEntity : productEntities)
-            products.add(converter.convertToDto(productEntity));
+        if (productEntities != null) {
+            Set<Product> products = new HashSet<>(productEntities.size());
 
-        category.setProducts(products);
+            for (ProductEntity productEntity : productEntities)
+                products.add(converter.convertToDto(productEntity));
+
+            category.setProducts(products);
+        }
         return category;
     }
 
@@ -40,12 +43,15 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
         categoryEntity.setName(category.getName());
 
         Collection<Product> products = category.getProducts();
-        Set<ProductEntity> productEntities = new HashSet<>(products.size());
 
-        for (Product product : products)
-            productEntities.add(converter.convertToEntity(product));
+        if (products != null) {
+            Set<ProductEntity> productEntities = new HashSet<>(products.size());
 
-        categoryEntity.setProductEntities(productEntities);
+            for (Product product : products)
+                productEntities.add(converter.convertToEntity(product));
+
+            categoryEntity.setProductEntities(productEntities);
+        }
         return categoryEntity;
     }
 }

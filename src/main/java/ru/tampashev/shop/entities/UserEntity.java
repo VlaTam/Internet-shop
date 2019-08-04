@@ -8,6 +8,12 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "user", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "user-find-all",
+                query = "FROM UserEntity"),
+        @NamedQuery(name = "user-find-by-email",
+                query = "FROM UserEntity user WHERE user.mailAddress = :mailAddress")
+})
 public class UserEntity implements Serializable {
 
     @Id
@@ -35,7 +41,7 @@ public class UserEntity implements Serializable {
     private RoleEntity roleEntity;
 
     @ManyToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private AddressEntity addressEntity;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)

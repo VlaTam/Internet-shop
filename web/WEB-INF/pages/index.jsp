@@ -44,6 +44,10 @@
       <h1>Add address</h1>
       <a href="${pageContext.servletContext.contextPath}/address/add">Add address</a>
     </div>
+    <div>
+      <h1>Registration</h1>
+      <a href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
+    </div>
   </div>
 </common:layout>
 

@@ -10,43 +10,49 @@ CREATE TABLE IF NOT EXISTS internet_shop.roles
     UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 );
 
+/*Main roles*/
+INSERT INTO internet_shop.roles (name)
+VALUES ('admin'),
+       ('customer');
+
 /*AddressEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.address
 (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `country` VARCHAR(50) NOT NULL,
-    `city` VARCHAR(50) NOT NULL,
-    `postal_code` INT NOT NULL,
-    `street` VARCHAR(50) NOT NULL,
-    `house_number` INT NOT NULL,
-    `flat_number` INT NOT NULL,
+    `country` VARCHAR(50) NULL,
+    `city` VARCHAR(50) NULL,
+    `postal_code` INT NULL,
+    `street` VARCHAR(50) NULL,
+    `house_number` INT NULL,
+    `flat_number` INT NULL,
     PRIMARY KEY (`id`)
 );
 
 /*UserEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.user
 (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `last_name` VARCHAR(50) NOT NULL,
-    `first_name` VARCHAR(50) NOT NULL,
-    `birthday` DATE NOT NULL,
-    `mail_address` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(50) NOT NULL,
-    role_id INT NOT NULL,
-    `address_id` INT,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `mail_address_UNIQUE` (`mail_address` ASC),
-    INDEX `role_fk_idx` (role_id ASC),
-    CONSTRAINT `fk_user_role_id`
-    FOREIGN KEY (role_id)
-    REFERENCES `internet_shop`.`roles` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-    CONSTRAINT `fk_user_address_id`
-    FOREIGN KEY (`address_id`)
-    REFERENCES `internet_shop`.`address` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `last_name` VARCHAR(50) NOT NULL,
+  `first_name` VARCHAR(50) NOT NULL,
+  `birthday` DATE NOT NULL,
+  `mail_address` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  `role_id` INT NOT NULL,
+  `address_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `mail_address_UNIQUE` (`mail_address` ASC),
+  INDEX `role_fk_idx` (`role_id` ASC),
+  INDEX `fk_user_address_id_idx` (`address_id` ASC),
+  CONSTRAINT `fk_user_role_id`
+      FOREIGN KEY (`role_id`)
+      REFERENCES `internet_shop`.`roles` (`id`)
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+  CONSTRAINT `fk_user_address_id`
+      FOREIGN KEY (`address_id`)
+      REFERENCES `internet_shop`.`address` (`id`)
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE
 );
 
 /*CategoryEntity table*/

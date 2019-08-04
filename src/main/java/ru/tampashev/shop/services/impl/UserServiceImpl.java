@@ -27,4 +27,10 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
     protected GenericDao<UserEntity> getDao() {
         return userDao;
     }
+
+    @Override
+    public User findByMailAddress(String mailAddress) {
+        UserEntity userEntity = userDao.findByMailAddress(mailAddress);
+        return converter.convertToDto(userEntity);
+    }
 }

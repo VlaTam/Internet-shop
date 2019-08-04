@@ -13,22 +13,22 @@ public class AddressEntity implements Serializable {
     @Column(updatable = false, nullable = false)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column
     private String country;
 
-    @Column(nullable = false)
+    @Column
     private String city;
 
-    @Column(name = "postal_code", nullable = false)
+    @Column(name = "postal_code")
     private Integer postalCode;
 
-    @Column(nullable = false)
+    @Column
     private String street;
 
-    @Column(name = "house_number", nullable = false)
+    @Column(name = "house_number")
     private Integer houseNumber;
 
-    @Column(name = "flat_number", nullable = false)
+    @Column(name = "flat_number")
     private Integer flatNumber;
 
     @Override

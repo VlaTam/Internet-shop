@@ -10,7 +10,7 @@ public class RoleEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(insertable = false, updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false)
     private Integer id;
 
     @Column(nullable = false, unique = true)
