@@ -2,7 +2,7 @@ package ru.tampashev.shop.services;
 
 public interface GenericService <T> {
 
-    T create(T object);
+    Integer create(T object);
 
     T findById(Integer id);
 

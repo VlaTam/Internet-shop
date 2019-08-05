@@ -27,4 +27,9 @@ public class RoleServiceImpl extends AbstractGenericService<RoleEntity, Role> im
     protected GenericDao<RoleEntity> getDao() {
         return roleDao;
     }
+
+    public Role findByName(String name){
+        RoleEntity roleEntity = roleDao.findByName(name);
+        return roleConverter.convertToDto(roleEntity);
+    }
 }

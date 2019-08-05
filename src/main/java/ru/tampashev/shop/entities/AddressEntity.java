@@ -6,6 +6,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "address", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "address-find-all",
+                    query = "FROM AddressEntity")
+})
 public class AddressEntity implements Serializable {
 
     @Id

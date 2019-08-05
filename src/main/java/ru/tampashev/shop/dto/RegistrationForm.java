@@ -1,39 +1,38 @@
 package ru.tampashev.shop.dto;
 
-import java.util.Collection;
-import java.util.Objects;
+public class RegistrationForm {
 
-public class Address {
+    private String lastName;
+    private String firstName;
+    private String birthday;
+    private String mailAddress;
+    private String password;
 
-    private Integer id;
     private String country;
     private String city;
     private Integer postalCode;
     private String street;
     private Integer houseNumber;
     private Integer flatNumber;
-    private Collection<User> users;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Address)) return false;
-        Address address = (Address) o;
-        return Objects.equals(country, address.country) &&
-                Objects.equals(city, address.city) &&
-                Objects.equals(postalCode, address.postalCode) &&
-                Objects.equals(street, address.street) &&
-                Objects.equals(houseNumber, address.houseNumber) &&
-                Objects.equals(flatNumber, address.flatNumber);
+    public String getLastName() {
+        return lastName;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(country, city, postalCode, street, houseNumber, flatNumber);
+    public String getFirstName() {
+        return firstName;
     }
 
-    public Integer getId() {
-        return id;
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getCountry() {
@@ -60,12 +59,24 @@ public class Address {
         return flatNumber;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setCountry(String country) {
@@ -90,9 +101,5 @@ public class Address {
 
     public void setFlatNumber(Integer flatNumber) {
         this.flatNumber = flatNumber;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
     }
 }

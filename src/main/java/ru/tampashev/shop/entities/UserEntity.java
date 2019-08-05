@@ -45,7 +45,7 @@ public class UserEntity implements Serializable {
     private AddressEntity addressEntity;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)
-    private Collection<OrderEntity> orderEntity = new HashSet<>();
+    private Collection<OrderEntity> orderEntity;
 
     public Integer getId() {
         return id;

@@ -10,4 +10,10 @@ public class RoleDaoImpl extends AbstractGenericDao<RoleEntity> implements RoleD
     public RoleDaoImpl() {
         type = RoleEntity.class;
     }
+
+    @Override
+    public RoleEntity findByName(String name) {
+        return  getSession().createNamedQuery("role-find-by-name", type)
+                .setParameter("name", name).getSingleResult();
+    }
 }

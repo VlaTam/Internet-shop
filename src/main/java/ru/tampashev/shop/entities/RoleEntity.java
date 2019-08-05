@@ -6,6 +6,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "roles", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "role-find-all",
+                query = "FROM RoleEntity"),
+        @NamedQuery(name = "role-find-by-name",
+                query = "FROM RoleEntity role WHERE role.name = :name")
+})
 public class RoleEntity implements Serializable {
 
     @Id

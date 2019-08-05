@@ -3,11 +3,10 @@ package ru.tampashev.shop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.tampashev.shop.dto.RegistrationForm;
 import ru.tampashev.shop.dto.User;
+import ru.tampashev.shop.services.RegistrationService;
 import ru.tampashev.shop.services.UserService;
 
 @Controller
@@ -16,6 +15,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RegistrationService registrationService;
 
     @GetMapping("/authorization")
     public String openPage(Model model){
@@ -31,7 +33,17 @@ public class UserController {
     }
 
     @GetMapping("/registration")
-    public String openRegistration(){
+    public String openRegistration(Model model){
+        RegistrationForm registrationForm = new RegistrationForm();
+        model.addAttribute("registrationForm", registrationForm);
         return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String doRegistration(@ModelAttribute("registrationForm") RegistrationForm registrationForm){
+        System.out.println(registrationForm.getBirthday());
+        if (registrationService.doRegistration(registrationForm))
+            return "redirect:/";
+        return "/registration";
     }
 }

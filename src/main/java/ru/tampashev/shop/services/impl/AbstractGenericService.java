@@ -11,10 +11,9 @@ import java.io.Serializable;
 public abstract class AbstractGenericService <E extends Serializable, T> implements GenericService<T> {
 
     @Override
-    public T create(T object) {
+    public Integer create(T object) {
         E entity = getConverter().convertToEntity(object);
-        getDao().create(entity);
-        return getConverter().convertToDto(entity);
+        return getDao().create(entity);
     }
 
     @Override
