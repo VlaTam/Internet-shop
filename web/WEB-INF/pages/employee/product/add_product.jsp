@@ -1,9 +1,39 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="message/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/common" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <common:layout title="Add product">
+    <form id="addProductForm" onsubmit="addProduct()">
+        <div>
+            <label for="nameId">Name of product</label>
+            <input name="name" id="nameId" required="true"/>
+        </div>
+        <div>
+            <label for="priceId">Name of product</label>
+            <input name="price" id="priceId" required="true"/>
+        </div>
+        <div>
+            <button>Add product</button>
+        </div>
+    </form>
+    <script src="<c:url value="/resources/add_product.js"/>"></script>
+</common:layout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%--<common:layout title="Add product">
     <form:form action="${pageContext.servletContext.contextPath}/product/add" method="POST" modelAttribute="product">
         <div>
             <label for="product_name">Name</label>
@@ -44,4 +74,4 @@
         </div>
         <button>Save</button>
     </form:form>
-</common:layout>
+</common:layout>--%>
