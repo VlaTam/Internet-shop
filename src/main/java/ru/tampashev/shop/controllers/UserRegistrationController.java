@@ -12,26 +12,27 @@ import ru.tampashev.shop.services.RegistrationService;
 import ru.tampashev.shop.services.UserService;
 import ru.tampashev.shop.transfer.ResponseTransfer;
 
-@Controller
-@RequestMapping("user")
-public class UserController {
 
-    @Autowired
-    private UserService userService;
+
+@Controller
+@RequestMapping("/registration")
+public class UserRegistrationController {
 
     @Autowired
     private RegistrationService registrationService;
 
-    @GetMapping("/registration")
+    @Autowired
+    private UserService userService;
+
+    @GetMapping
     public String openRegistration(Model model){
         RegistrationForm registrationForm = new RegistrationForm();
         model.addAttribute("registrationForm", registrationForm);
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping
     public String doRegistration(@ModelAttribute("registrationForm") RegistrationForm registrationForm){
-        System.out.println(registrationForm.getBirthday());
         if (registrationService.doRegistration(registrationForm))
             return "redirect:/";
         return "/registration";
@@ -49,6 +50,7 @@ public class UserController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseTransfer authorize(@RequestBody User user){
+
         return userService.authorize(user);
     }
 }

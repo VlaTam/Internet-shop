@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="message/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/common" %>
 
 <common:layout title="Tyres shop">
@@ -38,7 +38,7 @@
 
     <div>
       <h1>Add user</h1>
-      <a href="${pageContext.servletContext.contextPath}/user/authorization">Authorize</a>
+      <a href="${pageContext.servletContext.contextPath}/authorization">Authorize</a>
     </div>
     <div>
       <h1>Add address</h1>
@@ -46,15 +46,7 @@
     </div>
     <div>
       <h1>Registration</h1>
-      <a href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
+      <a href="${pageContext.servletContext.contextPath}/registration">Registration</a>
     </div>
   </div>
 </common:layout>
-
-
-<%--<div>
-        <a href="${pageContext.servletContext.contextPath}/category">Category</a>
-        <a href="${pageContext.servletContext.contextPath}/parameters">Parameters</a>
-        &lt;%&ndash;<a href="${pageContext.servletContext.contextPath}/product/add">Add product</a>&ndash;%&gt;
-        <a href="${pageContext.servletContext.contextPath}/catalog">Catalog</a>
-    </div>--%>

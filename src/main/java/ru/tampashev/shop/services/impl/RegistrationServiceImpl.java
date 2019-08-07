@@ -13,10 +13,8 @@ import ru.tampashev.shop.services.UserService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {

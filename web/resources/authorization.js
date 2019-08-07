@@ -35,39 +35,3 @@ function authorize(){
             alert(error);
         });
 }
-
-
-/*let responseTransfer = {authorized: false};
-
-let form = document.querySelector('#authorizeForm');
-
-function authorize(){
-    let formData = new FormData(form);
-    let user = {};
-    user.mailAddress = formData.get('mailAddress');
-    user.password = formData.get('password');
-
-    fetch('http://www.mocky.io/v2/5d4ad0f83300006b310f6017', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-    })
-        .then(response => response.json())
-        .then(result => alert(showAnswer(result)));
-}
-
-function showAnswer(jsonString) {
-    responseTransfer = JSON.parse(jsonString);
-    return responseTransfer.authorized;
-}*/
-
-/*function authorized(jsonString) {
-    responseTransfer = JSON.parse(jsonString);
-    if (responseTransfer.authorized){
-        $(location).attr('href', '/');
-    } else {
-        alert('Your login or password are not correct');
-    }
-}*/

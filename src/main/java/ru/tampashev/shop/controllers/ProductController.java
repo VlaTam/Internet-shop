@@ -1,6 +1,8 @@
 package ru.tampashev.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,19 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/add")
+    public String openAddProductPage(){
+        return "employee/product/add_product";
+    }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public ResponseTransfer addProduct(@RequestBody Product product){
+        System.out.println(product.getName());
+        System.out.println(product.getPrice());
+        return new ResponseTransfer("Product is created");
+    }
+
+    /*@GetMapping("/add")
     public String addProduct(Model model){
         model.addAttribute("product", new Product());
 
@@ -36,9 +51,9 @@ public class ProductController {
         Collection<Parameters> parameters = parametersService.findAll();
         model.addAttribute("parameters", parameters);
         return "employee/product/add_product";
-    }
+    }*/
 
-    @GetMapping("/{id}")
+   /* @GetMapping("/{id}")
     public String openProduct(@PathVariable("id") Integer id, Model model){
         Product product = productService.findById(id);
         model.addAttribute("product", product);
@@ -58,5 +73,5 @@ public class ProductController {
 
         productService.create(product);
         return "index";
-    }
+    }*/
 }
