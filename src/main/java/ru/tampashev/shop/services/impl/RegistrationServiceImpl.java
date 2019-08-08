@@ -13,10 +13,8 @@ import ru.tampashev.shop.services.UserService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -36,16 +34,19 @@ public class RegistrationServiceImpl implements RegistrationService {
         Address address = createAddressWithId(registrationForm);
         try {
             User user = createUser(registrationForm, address);
-            userService.create(user);
-            return true;
-        } catch (ParseException e) {
-            return false;
+            if (!isExistedUser(user)) {
+                userService.create(user);
+                return true;
+            }
+        } catch (ParseException ignore) { //TODO: make correct behavior
+
         }
+        return false;
     }
 
-    private Address createAddressWithId(RegistrationForm registrationForm){
+    private Address createAddressWithId(RegistrationForm registrationForm) {
         Address address = createAddress(registrationForm);
-        Address addressInDatabase = isExistAddress(address);
+        Address addressInDatabase = isExistedAddress(address);
 
         if (addressInDatabase == null) {
             Integer addressId = addressService.create(address);
@@ -66,7 +67,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         return address;
     }
 
-    private Address isExistAddress(Address address){
+    private Address isExistedAddress(Address address){
         List<Address> addresses = (List<Address>)addressService.findAll();
         int positionInList = addresses.indexOf(address);
 
@@ -75,7 +76,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         return null;
     }
-
 
     private User createUser(RegistrationForm registrationForm, Address address) throws ParseException {
         User user = new User();
@@ -97,5 +97,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     private Date convertToDate(String stringDate) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.parse(stringDate);
+    }
+
+    private boolean isExistedUser(User user){
+        User findedUser = userService.findByMailAddress(user.getMailAddress());
+        return findedUser.getId() != null;
     }
 }

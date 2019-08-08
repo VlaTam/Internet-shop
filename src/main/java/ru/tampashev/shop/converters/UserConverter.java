@@ -25,18 +25,21 @@ public class UserConverter implements Converter<UserEntity, User> {
     @Override
     public User convertToDto(UserEntity userEntity) {
         User user = new User();
-        user.setId(userEntity.getId());
-        user.setFirstName(userEntity.getFirstName());
-        user.setLastName(userEntity.getLastName());
-        user.setBirthday(userEntity.getBirthday());
-        user.setMailAddress(userEntity.getMailAddress());
-        user.setPassword(userEntity.getPassword());
 
-        Role role = roleConverter.convertToDto(userEntity.getRoleEntity());
-        user.setRole(role);
+        if (userEntity != null){
+            user.setId(userEntity.getId());
+            user.setFirstName(userEntity.getFirstName());
+            user.setLastName(userEntity.getLastName());
+            user.setBirthday(userEntity.getBirthday());
+            user.setMailAddress(userEntity.getMailAddress());
+            user.setPassword(userEntity.getPassword());
 
-        Address address = addressConverter.convertToDto(userEntity.getAddressEntity());
-        user.setAddress(address);
+            Role role = roleConverter.convertToDto(userEntity.getRoleEntity());
+            user.setRole(role);
+
+            Address address = addressConverter.convertToDto(userEntity.getAddressEntity());
+            user.setAddress(address);
+        }
         return user;
     }
 
