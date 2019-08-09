@@ -9,7 +9,10 @@ import java.util.Objects;
 @Table(name = "category", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "category-find-all",
-                query = "FROM CategoryEntity")
+                    query = "FROM CategoryEntity"),
+        @NamedQuery(name = "category-find",
+                    query = "FROM CategoryEntity category " +
+                            "WHERE category = :category")
 })
 //@SuppressWarnings(value = "unused")
 public class CategoryEntity implements Serializable {

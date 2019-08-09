@@ -44,4 +44,10 @@ public class AddressServiceImpl extends AbstractGenericService<AddressEntity, Ad
         }
         return addresses;
     }
+
+    @Override
+    public Integer find(Address address) {
+        AddressEntity addressEntity = addressConverter.convertToEntity(address);
+        return addressDao.findAddress(addressEntity);
+    }
 }

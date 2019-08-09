@@ -9,6 +9,7 @@ public interface GenericDao <E extends Serializable> {
 
     Integer create(E entity);
     E findById(Integer id);
+    Integer find(E entity);
     void update(E entity);
     void delete(E entity);
 }

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.address
     `id` INT NOT NULL AUTO_INCREMENT,
     `country` VARCHAR(50) NULL,
     `city` VARCHAR(50) NULL,
-    `postal_code` INT NULL,
+    `postal_code` VARCHAR(50) NULL,
     `street` VARCHAR(50) NULL,
     `house_number` INT NULL,
     `flat_number` INT NULL,

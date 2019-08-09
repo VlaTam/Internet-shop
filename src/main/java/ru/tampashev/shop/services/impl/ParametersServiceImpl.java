@@ -46,4 +46,9 @@ public class ParametersServiceImpl extends AbstractGenericService<ParametersEnti
         }
         return categories;
     }
+
+    @Override
+    public Integer find(Parameters object) {
+        return null;
+    }
 }

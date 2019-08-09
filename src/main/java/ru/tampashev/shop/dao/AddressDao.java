@@ -7,4 +7,6 @@ import java.util.Collection;
 public interface AddressDao extends GenericDao<AddressEntity> {
 
     Collection<AddressEntity> findAll();
+
+    Integer findAddress(AddressEntity addressEntity);
 }

@@ -3,6 +3,7 @@ package ru.tampashev.shop.dao.impl;
 import org.springframework.stereotype.Repository;
 import ru.tampashev.shop.dao.AddressDao;
 import ru.tampashev.shop.entities.AddressEntity;
+import ru.tampashev.shop.entities.UserEntity;
 
 import java.util.Collection;
 
@@ -16,5 +17,19 @@ public class AddressDaoImpl extends AbstractGenericDao<AddressEntity> implements
     @Override
     public Collection<AddressEntity> findAll() {
         return getSession().createNamedQuery("address-find-all", type).getResultList();
+    }
+
+    @Override
+    public Integer findAddress(AddressEntity addressEntity) {
+        AddressEntity existedAddress = getSession().createNamedQuery("address-find-unique", type)
+                                                    .setParameter("country", addressEntity.getCountry())
+                                                    .setParameter("city", addressEntity.getCity())
+                                                    .setParameter("street", addressEntity.getStreet())
+                                                    .setParameter("postalCode", addressEntity.getPostalCode())
+                                                    .setParameter("houseNumber", addressEntity.getHouseNumber())
+                                                    .setParameter("flatNumber", addressEntity.getFlatNumber())
+                                                    .uniqueResult();
+
+        return (existedAddress == null) ? -1 : existedAddress.getId();
     }
 }

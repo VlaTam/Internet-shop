@@ -8,6 +8,7 @@ import ru.tampashev.shop.dao.CategoryDao;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.entities.CategoryEntity;
+import ru.tampashev.shop.exceptions.NoSuchCategoryException;
 import ru.tampashev.shop.services.CategoryService;
 
 import javax.transaction.Transactional;
@@ -45,5 +46,11 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
     @Override
     protected GenericDao<CategoryEntity> getDao() {
         return categoryDao;
+    }
+
+
+    public Integer find(Category category) {
+        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
+        return categoryDao.find(categoryEntity);
     }
 }

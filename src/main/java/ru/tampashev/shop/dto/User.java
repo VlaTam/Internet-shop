@@ -1,5 +1,7 @@
 package ru.tampashev.shop.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,6 +10,8 @@ public class User {
     private Integer id;
     private String lastName;
     private String firstName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String mailAddress;
     private String password;

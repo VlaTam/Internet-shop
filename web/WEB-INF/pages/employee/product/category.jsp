@@ -17,13 +17,23 @@
     <div>
         <div>
             <ul>
-                <c:forEach var="category" items="${categories}">
-                    <li>
-                            ${category.name}
-                        <a href="${pageContext.servletContext.contextPath}/category/edit/${category.id}"> Edit</a>
-                        <a href="${pageContext.servletContext.contextPath}/category/delete/${category.id}"> Delete</a>
-                    </li>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${categories.size() > 0}">
+                        <p>Created categories:</p>
+                        <c:forEach var="category" items="${categories}">
+                            <li>
+                                    ${category.name}
+                                <a href="${pageContext.servletContext.contextPath}/category/edit/${category.id}"> Edit</a>
+                                <a href="${pageContext.servletContext.contextPath}/category/delete/${category.id}"> Delete</a>
+                            </li>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <div>
+                            <p>There are not categories</p>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>

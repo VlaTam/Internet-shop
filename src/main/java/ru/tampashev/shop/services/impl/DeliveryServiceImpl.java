@@ -29,4 +29,9 @@ public class DeliveryServiceImpl extends AbstractGenericService<DeliveryEntity, 
     protected GenericDao<DeliveryEntity> getDao() {
         return deliveryDao;
     }
+
+    @Override
+    public Integer find(Delivery object) {
+        return null;
+    }
 }
