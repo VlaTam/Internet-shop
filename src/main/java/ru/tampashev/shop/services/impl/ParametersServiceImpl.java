@@ -46,4 +46,10 @@ public class ParametersServiceImpl extends AbstractGenericService<ParametersEnti
         }
         return categories;
     }
+
+    @Override
+    public Integer find(Parameters parameters) {
+        ParametersEntity parametersEntity = parametersConverter.convertToEntity(parameters);
+        return parametersDao.find(parametersEntity);
+    }
 }

@@ -12,8 +12,12 @@ public class RoleDaoImpl extends AbstractGenericDao<RoleEntity> implements RoleD
     }
 
     @Override
-    public RoleEntity findByName(String name) {
-        return  getSession().createNamedQuery("role-find-by-name", type)
-                .setParameter("name", name).getSingleResult();
+    public Integer find(RoleEntity roleEntity) {
+        RoleEntity existedRole = getSession()
+                                    .createNamedQuery("role-find-by-name", type)
+                                    .setParameter("name", roleEntity.getName())
+                                    .uniqueResult();
+
+        return existedRole != null ? existedRole.getId() : -1;
     }
 }

@@ -7,6 +7,14 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "payment", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "payment-find-all",
+                query = "FROM PaymentEntity"),
+        @NamedQuery(name = "payment-find",
+                query = "FROM PaymentEntity payment " +
+                        "WHERE payment.method = :method " +
+                        "AND payment.paymentStatus = :paymentStatus")
+})
 public class PaymentEntity implements Serializable {
 
     @Id
@@ -14,7 +22,7 @@ public class PaymentEntity implements Serializable {
     @Column(insertable = false, updatable = false, nullable = false)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String method;
 
     @Column(nullable = false)
@@ -28,14 +36,13 @@ public class PaymentEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof PaymentEntity)) return false;
         PaymentEntity that = (PaymentEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(method, that.method) &&
+        return Objects.equals(method, that.method) &&
                 Objects.equals(paymentStatus, that.paymentStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, method, paymentStatus);
+        return Objects.hash(method, paymentStatus);
     }
 
     public Integer getId() {

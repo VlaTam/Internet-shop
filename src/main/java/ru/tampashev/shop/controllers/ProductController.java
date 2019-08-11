@@ -29,13 +29,14 @@ public class ProductController {
     @GetMapping("/add")
     public String addProduct(Model model){
         model.addAttribute("product", new Product());
+        model.addAttribute("parameters", new Parameters());
+        model.addAttribute("categories", categoryService.findAll());
+        return "employee/product/add";
+    }
 
-        Collection<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);
-
-        Collection<Parameters> parameters = parametersService.findAll();
-        model.addAttribute("parameters", parameters);
-        return "employee/product/add_product";
+    @PostMapping("/add")
+    public String saveProduct(@ModelAttribute("product") Product product){
+        return productService.create(product) > 0 ? "index" : "errors/product";
     }
 
     @GetMapping("/{id}")
@@ -43,20 +44,5 @@ public class ProductController {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         return "customer/product";
-    }
-
-    //TODO: there are a lot of logic, move statements into service
-    @PostMapping("/add")
-    public String saveProduct(@ModelAttribute("product") Product product){
-        Integer categoryId = product.getCategory().getId();
-        Category category = categoryService.findById(categoryId);
-        product.setCategory(category);
-
-        Integer parametersId = product.getParameters().getId();
-        Parameters parameters = parametersService.findById(parametersId);
-        product.setParameters(parameters);
-
-        productService.create(product);
-        return "index";
     }
 }

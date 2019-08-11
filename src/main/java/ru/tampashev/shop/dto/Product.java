@@ -10,8 +10,8 @@ public class Product {
     private BigDecimal price;
     private Category category;
     private Parameters parameters;
-    private Integer weight ;
-    private Integer volume;
+    private BigDecimal weight ;
+    private BigDecimal volume;
     private Integer quantityInStock;
     private Collection<Order> orders;
 
@@ -35,11 +35,11 @@ public class Product {
         return parameters;
     }
 
-    public Integer getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public Integer getVolume() {
+    public BigDecimal getVolume() {
         return volume;
     }
 
@@ -71,11 +71,11 @@ public class Product {
         this.parameters = parameters;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
-    public void setVolume(Integer volume) {
+    public void setVolume(BigDecimal volume) {
         this.volume = volume;
     }
 

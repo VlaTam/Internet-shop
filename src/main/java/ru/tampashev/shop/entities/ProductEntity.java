@@ -11,7 +11,14 @@ import java.util.Objects;
 @Table(name = "product", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "product-find-all",
-                query = "FROM ProductEntity")
+                query = "FROM ProductEntity"),
+        @NamedQuery(name = "product-find",
+                query = "FROM ProductEntity product " +
+                        "WHERE product.name = :name " +
+                        "AND product.parameters.brand = :brand " +
+                        "AND product.parameters.width = :width " +
+                        "AND product.parameters.height = :height " +
+                        "AND product.parameters.radius = :radius")
 })
 public class ProductEntity implements Serializable {
 
@@ -35,10 +42,10 @@ public class ProductEntity implements Serializable {
     private ParametersEntity parameters;
 
     @Column(nullable = false)
-    private Integer weight;
+    private BigDecimal weight;
 
     @Column(nullable = false)
-    private Integer volume;
+    private BigDecimal volume;
 
     @Column(name = "quantity_in_stock", nullable = false)
     private Integer quantityInStock;
@@ -89,11 +96,11 @@ public class ProductEntity implements Serializable {
         return parameters;
     }
 
-    public Integer getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public Integer getVolume() {
+    public BigDecimal getVolume() {
         return volume;
     }
 
@@ -121,11 +128,11 @@ public class ProductEntity implements Serializable {
         this.parameters = parameters;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
-    public void setVolume(Integer volume) {
+    public void setVolume(BigDecimal volume) {
         this.volume = volume;
     }
 

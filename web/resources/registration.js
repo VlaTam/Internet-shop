@@ -1,13 +1,8 @@
-let form = document.querySelector('form');
+let form = document.querySelector('#registrationForm');
+let address = {};
+let user = {};
 
-let address = {
-};
-
-let user = {
-
-};
-
-function submitInfo(){
+function saveUser() {
     let formData = new FormData(form);
     address.country = formData.get('country');
     address.city = formData.get('city');
@@ -22,15 +17,51 @@ function submitInfo(){
     user.mailAddress = formData.get('mailAddress');
     user.password = formData.get('password');
     user.address = address;
+}
 
-    //let formData = new FormData(form);
-    let response = fetch('/user/registration', {
+let responseTransfer = {registration: false};
+
+function addMessage(){
+    let message;
+    if (responseTransfer.registration)
+        message = document.createTextNode('You are registered');
+    else
+        message = document.createTextNode('You are NOT registered');
+
+    alert(message);
+}
+
+let status = function (response) {
+    if (response.status >= 400) {
+        return Promise.reject(new Error(response.statusText))
+    }
+    return Promise.resolve(response)
+};
+
+let json = function (response) {
+    return response.json()
+};
+
+function register(object) {
+    fetch('/user/registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(user)
-    });
-    let result = response.text();
-    alert(result.message);
+        body: JSON.stringify(object)
+    })
+        .then(status)
+        .then(json)
+        .then(function (data) {
+            responseTransfer.registration = data.registration;
+            addMessage();
+        })
+        .catch(function (error) {
+            document.location.href = "/";
+        });
+}
+
+function createUser(){
+   saveUser();
+   register(user);
 }

@@ -3,17 +3,24 @@ package ru.tampashev.shop.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "order", schema = "internet_shop")
+
 public class OrderEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Integer id;
+
+    @Column(nullable = false)
+    private Date date;
+
+    @Column(nullable = false)
+    private BigDecimal orderPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -27,17 +34,11 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "delivery_id", nullable = false)
     private DeliveryEntity delivery;
 
-    @Column(nullable = false)
-    private Date date;
-
-    @Column(nullable = false)
-    private BigDecimal orderPrice;
-
     @ManyToMany
     @JoinTable( name = "order_product",
                 joinColumns = @JoinColumn(name = "order_id"),
                 inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Collection<ProductEntity> products;
+    private List<ProductEntity> products;
 
     public Integer getId() {
         return id;
@@ -63,6 +64,10 @@ public class OrderEntity implements Serializable {
         return orderPrice;
     }
 
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -85,5 +90,9 @@ public class OrderEntity implements Serializable {
 
     public void setOrderPrice(BigDecimal orderPrice) {
         this.orderPrice = orderPrice;
+    }
+
+    public void setProducts(List<ProductEntity> products) {
+        this.products = products;
     }
 }

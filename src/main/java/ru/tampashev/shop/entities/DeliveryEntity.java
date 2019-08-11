@@ -7,6 +7,14 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "delivery", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "delivery-find-all",
+                query = "FROM DeliveryEntity"),
+        @NamedQuery(name = "delivery-find",
+                query = "FROM DeliveryEntity delivery " +
+                        "WHERE delivery.method = :method " +
+                        "AND delivery.deliveryStatus = :deliveryStatus")
+})
 public class DeliveryEntity implements Serializable {
 
     @Id
@@ -14,7 +22,7 @@ public class DeliveryEntity implements Serializable {
     @Column(insertable = false, updatable = false, nullable = false)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String method;
 
     @Column(nullable = false)
@@ -28,14 +36,13 @@ public class DeliveryEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof DeliveryEntity)) return false;
         DeliveryEntity that = (DeliveryEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(method, that.method) &&
+        return Objects.equals(method, that.method) &&
                 Objects.equals(deliveryStatus, that.deliveryStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, method, deliveryStatus);
+        return Objects.hash(method, deliveryStatus);
     }
 
     public Integer getId() {

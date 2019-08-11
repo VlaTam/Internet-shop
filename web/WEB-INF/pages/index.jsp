@@ -29,9 +29,6 @@
         <a href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
       </div>
       <div>
-        <a href="${pageContext.servletContext.contextPath}/parameters">Add parameters of product</a>
-      </div>
-      <div>
         <a href="${pageContext.servletContext.contextPath}/category">Category control</a>
       </div>
     </div>
@@ -47,6 +44,10 @@
     <div>
       <h1>Registration</h1>
       <a href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
+    </div>
+    <div>
+      <h1>Profile</h1>
+      <a href="${pageContext.servletContext.contextPath}/user/1">Edit profile</a>
     </div>
   </div>
 </common:layout>

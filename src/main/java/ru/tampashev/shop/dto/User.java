@@ -1,19 +1,24 @@
 package ru.tampashev.shop.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
     private Integer id;
     private String lastName;
     private String firstName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String mailAddress;
     private String password;
     private Role role = new Role();
     private Address address;
-    private Collection<Order> orders;
+    private List<Order> orders;
 
     public Integer getId() {
         return id;
@@ -47,7 +52,7 @@ public class User {
         return address;
     }
 
-    public Collection<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
@@ -83,7 +88,7 @@ public class User {
         this.address = address;
     }
 
-    public void setOrders(Collection<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 }

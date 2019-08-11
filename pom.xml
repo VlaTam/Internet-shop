@@ -12,7 +12,6 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jackson.version>2.9.8</jackson.version>
     </properties>
 
     <build>
@@ -125,8 +124,6 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>5.1.5.RELEASE</version>
         </dependency>
-
-
 
     </dependencies>
 </project>

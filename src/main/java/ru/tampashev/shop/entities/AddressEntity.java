@@ -8,7 +8,16 @@ import java.util.Objects;
 @Table(name = "address", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "address-find-all",
-                    query = "FROM AddressEntity")
+                    query = "FROM AddressEntity"),
+        @NamedQuery(name = "address-find-unique",
+                query = "FROM AddressEntity address " +
+                        "WHERE   address.country = :country " +
+                                "AND address.city = :city " +
+                                "AND address.street = :street " +
+                                "AND address.postalCode = :postalCode " +
+                                "AND address.houseNumber = :houseNumber " +
+                                "AND address.flatNumber = :flatNumber")
+
 })
 public class AddressEntity implements Serializable {
 
@@ -24,7 +33,7 @@ public class AddressEntity implements Serializable {
     private String city;
 
     @Column(name = "postal_code")
-    private Integer postalCode;
+    private String postalCode;
 
     @Column
     private String street;
@@ -66,7 +75,7 @@ public class AddressEntity implements Serializable {
         return city;
     }
 
-    public Integer getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
@@ -94,7 +103,7 @@ public class AddressEntity implements Serializable {
         this.city = city;
     }
 
-    public void setPostalCode(Integer postal_code) {
+    public void setPostalCode(String postal_code) {
         this.postalCode = postal_code;
     }
 

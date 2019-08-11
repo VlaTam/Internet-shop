@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.tampashev.shop.dto.Category;
+import ru.tampashev.shop.exceptions.ObjectAlreadyExistException;
 import ru.tampashev.shop.services.CategoryService;
 
 @Controller
@@ -21,17 +22,17 @@ public class CategoryController {
         return "employee/product/category";
     }
 
+    @PostMapping
+    public String addCategory(@ModelAttribute("category") Category category) throws ObjectAlreadyExistException {
+        categoryService.create(category);
+        return "employee/product/category";
+    }
+
     @GetMapping("/edit/{id}")
     public String openEditPage(@PathVariable("id") Integer categoryId, Model model){
         Category category = categoryService.findById(categoryId);
         model.addAttribute("category", category);
         return "employee/product/edit_category";
-    }
-
-    @PostMapping
-    public String addCategory(@ModelAttribute("category") Category category) {
-        categoryService.create(category);
-        return "index";
     }
 
     @PostMapping("/edit")

@@ -6,13 +6,17 @@ import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dao.ProductDao;
+import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.entities.ProductEntity;
+import ru.tampashev.shop.services.CategoryService;
+import ru.tampashev.shop.services.ParametersService;
 import ru.tampashev.shop.services.ProductService;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,6 +28,12 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     @Autowired
     @Qualifier("productConverter")
     private Converter<ProductEntity, Product> productConverter;
+
+    @Autowired
+    private ParametersService parametersService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     protected Converter<ProductEntity, Product> getConverter() {
@@ -37,13 +47,31 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
 
     @Override
     public Collection<Product> findAll() {
-        Collection<ProductEntity> productEntities = productDao.findAll();
-        Collection<Product> products = new HashSet<>(productEntities.size());
+        List<ProductEntity> productEntities = productDao.findAll();
+        return productConverter.convertToDtoList(productEntities);
+    }
 
-        for (ProductEntity productEntity : productEntities) {
-            Product product = productConverter.convertToDto(productEntity);
-            products.add(product);
+    @Override
+    public Integer find(Product product) {
+        ProductEntity productEntity = productConverter.convertToEntity(product);
+        return productDao.find(productEntity);
+    }
+
+    @Override
+    public Integer create(Product product) {
+        Integer userId = -1;
+        System.out.println(product.getCategory());
+        Category category = categoryService.findById(product.getCategory().getId());
+
+        if (find(product) < 0 & category.getName() != null){
+            product.setCategory(category);
+            Integer parametersId = parametersService.create(product.getParameters());
+            product.getParameters().setId(parametersId);
+
+            ProductEntity productEntity = productConverter.convertToEntity(product);
+            userId = productDao.create(productEntity);
         }
-        return products;
+
+        return userId;
     }
 }

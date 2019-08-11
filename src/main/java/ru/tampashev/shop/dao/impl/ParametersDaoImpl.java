@@ -17,4 +17,17 @@ public class ParametersDaoImpl extends AbstractGenericDao<ParametersEntity> impl
     public Collection<ParametersEntity> findAll() {
         return getSession().createNamedQuery("parameters-find-all", type).getResultList();
     }
+
+    @Override
+    public Integer find(ParametersEntity parametersEntity) {
+        ParametersEntity existedEntity = getSession()
+                .createNamedQuery("parameters-find", type)
+                .setParameter("brand", parametersEntity.getBrand())
+                .setParameter("width", parametersEntity.getWidth())
+                .setParameter("height", parametersEntity.getHeight())
+                .setParameter("radius", parametersEntity.getRadius())
+                .uniqueResult();
+
+        return existedEntity != null ? existedEntity.getId() : -1;
+    }
 }

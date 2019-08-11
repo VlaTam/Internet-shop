@@ -10,4 +10,15 @@ public class DeliveryDaoImpl extends AbstractGenericDao<DeliveryEntity> implemen
     public DeliveryDaoImpl() {
         type = DeliveryEntity.class;
     }
+
+    @Override
+    public Integer find(DeliveryEntity deliveryEntity) {
+        DeliveryEntity existedDelivery = getSession()
+                                            .createNamedQuery("delivery-find", type)
+                                            .setParameter("method", deliveryEntity.getMethod())
+                                            .setParameter("deliveryStatus", deliveryEntity.getDeliveryStatus())
+                                            .uniqueResult();
+
+        return existedDelivery != null ? existedDelivery.getId() : -1;
+    }
 }

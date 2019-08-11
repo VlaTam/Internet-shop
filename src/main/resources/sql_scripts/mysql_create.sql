@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.address
     `id` INT NOT NULL AUTO_INCREMENT,
     `country` VARCHAR(50) NULL,
     `city` VARCHAR(50) NULL,
-    `postal_code` INT NULL,
+    `postal_code` VARCHAR(50) NULL,
     `street` VARCHAR(50) NULL,
     `house_number` INT NULL,
     `flat_number` INT NULL,
@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS internet_shop.product (
     `price` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( price > 0 ),
     `category_id` INT NOT NULL,
     `parameter_id` INT NOT NULL,
-    `weight` INT NOT NULL DEFAULT 1 CHECK ( weight > 0 ),
-    `volume` INT NOT NULL DEFAULT 1 CHECK ( volume > 0 ),
+    `weight` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( weight > 0 ),
+    `volume` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( volume > 0 ),
     `quantity_in_stock` INT NOT NULL DEFAULT 0 CHECK ( quantity_in_stock >= 0 ),
     PRIMARY KEY (`id`),
     INDEX `fk_product_category_id_idx` (`category_id` ASC),
@@ -106,8 +106,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.payment
     `id` INT NOT NULL AUTO_INCREMENT,
     `method` VARCHAR(50) NOT NULL,
     `payment_status` VARCHAR(50) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `method_UNIQUE` (`method` ASC)
+    PRIMARY KEY (`id`)
 );
 
 /*DeliveryEntity table*/
@@ -116,8 +115,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.delivery
     `id` INT NOT NULL AUTO_INCREMENT,
     `method` VARCHAR(50) NOT NULL,
     `delivery_status` VARCHAR(50) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `method_UNIQUE` (`method` ASC)
+    PRIMARY KEY (`id`)
 );
 
 /*OrderEntity table*/
@@ -153,19 +151,19 @@ CREATE TABLE IF NOT EXISTS internet_shop.order
 /*The table provides connection between tables Order and Product*/
 CREATE TABLE IF NOT EXISTS internet_shop.order_product
 (
-    `order_id` INT NOT NULL,
-    `product_id` INT NOT NULL,
-    `number_of_product` INT NOT NULL,
-    PRIMARY KEY (`order_id`, `product_id`),
-    INDEX `fk_order_product_id_idx` (`product_id` ASC),
-    CONSTRAINT `fk_product_order_id`
-       FOREIGN KEY (`order_id`)
-           REFERENCES `internet_shop`.`order` (`id`)
-           ON DELETE RESTRICT
-           ON UPDATE CASCADE,
-    CONSTRAINT `fk_order_product_id`
-       FOREIGN KEY (`product_id`)
-           REFERENCES `internet_shop`.`product` (`id`)
-           ON DELETE RESTRICT
-           ON UPDATE CASCADE
-)
+  `order_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `quantity_of_product` INT NOT NULL,
+  PRIMARY KEY (`order_id`, `product_id`),
+  INDEX `fk_order_product_id_idx` (`product_id` ASC),
+  CONSTRAINT `fk_product_order_id`
+    FOREIGN KEY (`order_id`)
+      REFERENCES `internet_shop`.`order` (`id`)
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+  CONSTRAINT `fk_order_product_id`
+    FOREIGN KEY (`product_id`)
+      REFERENCES `internet_shop`.`product` (`id`)
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE
+);

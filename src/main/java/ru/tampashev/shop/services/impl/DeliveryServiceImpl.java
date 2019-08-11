@@ -15,18 +15,24 @@ public class DeliveryServiceImpl extends AbstractGenericService<DeliveryEntity, 
 
     @Autowired
     @Qualifier("deliveryConverter")
-    private Converter<DeliveryEntity, Delivery> converter;
+    private Converter<DeliveryEntity, Delivery> deliveryConverter;
 
     @Autowired
     private DeliveryDao deliveryDao;
 
     @Override
     protected Converter<DeliveryEntity, Delivery> getConverter() {
-        return converter;
+        return deliveryConverter;
     }
 
     @Override
     protected GenericDao<DeliveryEntity> getDao() {
         return deliveryDao;
+    }
+
+    @Override
+    public Integer find(Delivery delivery) {
+        DeliveryEntity deliveryEntity = deliveryConverter.convertToEntity(delivery);
+        return deliveryDao.find(deliveryEntity);
     }
 }

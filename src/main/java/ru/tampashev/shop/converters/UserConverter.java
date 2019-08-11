@@ -37,6 +37,7 @@ public class UserConverter implements Converter<UserEntity, User> {
 
         Address address = addressConverter.convertToDto(userEntity.getAddressEntity());
         user.setAddress(address);
+
         return user;
     }
 

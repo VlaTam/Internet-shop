@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.entities.ProductEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @SuppressWarnings("all")
 public class ProductConverter implements Converter<ProductEntity, Product> {
@@ -41,5 +44,29 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
         productEntity.setPrice(product.getPrice());
         productEntity.setQuantityInStock(product.getQuantityInStock());
         return productEntity;
+    }
+
+    @Override
+    public List<Product> convertToDtoList(List<ProductEntity> productEntities) {
+        List<Product> products = new ArrayList<>(productEntities.size());
+
+        for (ProductEntity productEntity : productEntities) {
+            Product product = convertToDto(productEntity);
+            products.add(product);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<ProductEntity> convertToEntityList(List<Product> products) {
+        List<ProductEntity> productEntities = new ArrayList<>(products.size());
+
+        for (Product product : products){
+            ProductEntity productEntity = convertToEntity(product);
+            productEntities.add(productEntity);
+        }
+
+        return productEntities;
     }
 }

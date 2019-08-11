@@ -9,7 +9,13 @@ import java.util.Objects;
 @Table(name = "parameters", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "parameters-find-all",
-                query = "FROM ParametersEntity")
+                    query = "FROM ParametersEntity"),
+        @NamedQuery(name = "parameters-find",
+                    query = "FROM ParametersEntity parameters " +
+                            "WHERE parameters.brand = :brand " +
+                                    "AND parameters.width = :width " +
+                                    "AND parameters.height = :height " +
+                                    "AND parameters.radius = :radius")
 })
 //@SuppressWarnings(value = "unused")
 public class ParametersEntity implements Serializable {

@@ -2,9 +2,8 @@ package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "internet_shop")
@@ -45,7 +44,7 @@ public class UserEntity implements Serializable {
     private AddressEntity addressEntity;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)
-    private Collection<OrderEntity> orderEntity;
+    private List<OrderEntity> orderEntity;
 
     public Integer getId() {
         return id;
@@ -79,6 +78,10 @@ public class UserEntity implements Serializable {
         return addressEntity;
     }
 
+    public List<OrderEntity> getOrderEntity() {
+        return orderEntity;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -109,5 +112,9 @@ public class UserEntity implements Serializable {
 
     public void setAddressEntity(AddressEntity addressEntity) {
         this.addressEntity = addressEntity;
+    }
+
+    public void setOrderEntity(List<OrderEntity> orderEntity) {
+        this.orderEntity = orderEntity;
     }
 }

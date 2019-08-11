@@ -1,8 +1,8 @@
 package ru.tampashev.shop.dto;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 
@@ -12,7 +12,7 @@ public class Order {
     private Delivery delivery;
     private Date date;
     private BigDecimal orderPrice;
-    private Collection<Product> products;
+    private List<Product> products;
 
     public Integer getId() {
         return id;
@@ -38,7 +38,7 @@ public class Order {
         return orderPrice;
     }
 
-    public Collection<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
@@ -66,7 +66,7 @@ public class Order {
         this.orderPrice = orderPrice;
     }
 
-    public void setProducts(Collection<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 }

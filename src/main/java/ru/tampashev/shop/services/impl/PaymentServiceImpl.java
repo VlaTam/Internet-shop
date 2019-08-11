@@ -15,18 +15,24 @@ public class PaymentServiceImpl extends AbstractGenericService<PaymentEntity, Pa
 
     @Autowired
     @Qualifier("paymentConverter")
-    private Converter<PaymentEntity, Payment> converter;
+    private Converter<PaymentEntity, Payment> paymentConverter;
 
     @Autowired
     private PaymentDao paymentDao;
 
     @Override
     protected Converter<PaymentEntity, Payment> getConverter() {
-        return converter;
+        return paymentConverter;
     }
 
     @Override
     protected GenericDao<PaymentEntity> getDao() {
         return paymentDao;
+    }
+
+    @Override
+    public Integer find(Payment payment) {
+        PaymentEntity paymentEntity = paymentConverter.convertToEntity(payment);
+        return paymentDao.find(paymentEntity);
     }
 }

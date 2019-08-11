@@ -20,10 +20,13 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
     @Override
     public Category convertToDto(CategoryEntity categoryEntity) {
         Category category = new Category();
-        category.setId(categoryEntity.getId());
-        category.setName(categoryEntity.getName());
+        if (categoryEntity != null){
+            category.setId(categoryEntity.getId());
+            category.setName(categoryEntity.getName());
+        }
 
-        Collection<ProductEntity> productEntities = categoryEntity.getProductEntities();
+
+       /* Collection<ProductEntity> productEntities = categoryEntity.getProductEntities();
 
         if (productEntities != null) {
             Set<Product> products = new HashSet<>(productEntities.size());
@@ -32,17 +35,19 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
                 products.add(converter.convertToDto(productEntity));
 
             category.setProducts(products);
-        }
+        }*/
         return category;
     }
 
     @Override
     public CategoryEntity convertToEntity(Category category) {
         CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(category.getId());
-        categoryEntity.setName(category.getName());
+        if (category != null){
+            categoryEntity.setId(category.getId());
+            categoryEntity.setName(category.getName());
+        }
 
-        Collection<Product> products = category.getProducts();
+        /*Collection<Product> products = category.getProducts();
 
         if (products != null) {
             Set<ProductEntity> productEntities = new HashSet<>(products.size());
@@ -51,7 +56,7 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
                 productEntities.add(converter.convertToEntity(product));
 
             categoryEntity.setProductEntities(productEntities);
-        }
+        }*/
         return categoryEntity;
     }
 }
