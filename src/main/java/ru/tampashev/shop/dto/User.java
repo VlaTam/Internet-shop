@@ -2,7 +2,6 @@ package ru.tampashev.shop.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,7 @@ public class User {
     private Date birthday;
     private String mailAddress;
     private String password;
+    private String confirmation;
     private Role role = new Role();
     private Address address;
     private List<Order> orders;
@@ -90,5 +90,13 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public String getConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(String confirmation) {
+        this.confirmation = confirmation;
     }
 }

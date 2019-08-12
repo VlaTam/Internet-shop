@@ -10,7 +10,10 @@ import ru.tampashev.shop.dto.Delivery;
 import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.services.DeliveryService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class DeliveryServiceImpl extends AbstractGenericService<DeliveryEntity, Delivery> implements DeliveryService {
 
     @Autowired
@@ -21,7 +24,7 @@ public class DeliveryServiceImpl extends AbstractGenericService<DeliveryEntity, 
     private DeliveryDao deliveryDao;
 
     @Override
-    protected Converter<DeliveryEntity, Delivery> getConverter() {
+    protected Converter<DeliveryEntity, Delivery> getUserConverter() {
         return deliveryConverter;
     }
 

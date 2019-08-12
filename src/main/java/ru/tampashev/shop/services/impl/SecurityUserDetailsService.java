@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import ru.tampashev.shop.dto.User;
 import ru.tampashev.shop.services.UserService;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 
 @Service
+@Transactional
 public class SecurityUserDetailsService implements UserDetailsService {
 
     @Autowired

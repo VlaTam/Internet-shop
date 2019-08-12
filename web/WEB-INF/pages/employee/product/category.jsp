@@ -8,7 +8,7 @@
     <sf:form action="${pageContext.servletContext.contextPath}/category" method="POST" modelAttribute="category">
         <div>
             <label for = "category_name_id">Название категории</label>
-            <sf:input id="category_name_id" path="name"/>
+            <sf:input id="category_name_id" path="name" required="true" autofocus="true" autocomplete="off"/>
         </div>
         <div>
             <sf:button>Add category</sf:button>

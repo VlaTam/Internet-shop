@@ -9,7 +9,10 @@ import ru.tampashev.shop.dto.Role;
 import ru.tampashev.shop.entities.RoleEntity;
 import ru.tampashev.shop.services.RoleService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class RoleServiceImpl extends AbstractGenericService<RoleEntity, Role> implements RoleService {
 
     @Autowired
@@ -19,7 +22,7 @@ public class RoleServiceImpl extends AbstractGenericService<RoleEntity, Role> im
     private RoleDao roleDao;
 
     @Override
-    protected Converter<RoleEntity, Role> getConverter() {
+    protected Converter<RoleEntity, Role> getUserConverter() {
         return roleConverter;
     }
 

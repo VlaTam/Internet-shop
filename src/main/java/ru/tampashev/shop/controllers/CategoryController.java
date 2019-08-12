@@ -25,7 +25,7 @@ public class CategoryController {
     @PostMapping
     public String addCategory(@ModelAttribute("category") Category category) throws ObjectAlreadyExistException {
         categoryService.create(category);
-        return "employee/product/category";
+        return "redirect:/category";
     }
 
     @GetMapping("/edit/{id}")

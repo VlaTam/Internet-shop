@@ -12,13 +12,16 @@ import ru.tampashev.shop.services.AddressService;
 import ru.tampashev.shop.services.RoleService;
 import ru.tampashev.shop.services.UserService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserServiceImpl extends AbstractGenericService<UserEntity, User> implements UserService {
 
     private final String roleCustomer = "customer";
 
     @Autowired
-    private Converter<UserEntity, User> converter;
+    private Converter<UserEntity, User> userConverter;
 
     @Autowired
     private UserDao userDao;
@@ -30,8 +33,8 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
     private RoleService roleService;
 
     @Override
-    protected Converter<UserEntity, User> getConverter() {
-        return converter;
+    protected Converter<UserEntity, User> getUserConverter() {
+        return userConverter;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
 
     @Override
     public Integer find(User user) {
-        UserEntity userEntity = converter.convertToEntity(user);
+        UserEntity userEntity = userConverter.convertToEntity(user);
         return userDao.find(userEntity);
     }
 
@@ -52,7 +55,7 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
 
         setValidAddress(user);
         setValidRole(user);
-        UserEntity userEntity = converter.convertToEntity(user);
+        UserEntity userEntity = userConverter.convertToEntity(user);
 
         return userDao.create(userEntity);
     }
@@ -68,5 +71,16 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
         Integer roleId = roleService.create(role);
         role.setId(roleId);
         user.setRole(role);
+    }
+
+    @Override
+    public void update(User user) {
+        String password = user.getPassword();
+        String confirmation = user.getConfirmation();
+        if (password.equals(confirmation)){
+            UserEntity userEntity = userConverter.convertToEntity(user);
+            userDao.update(userEntity);
+            addressService.update(user.getAddress());
+        }
     }
 }

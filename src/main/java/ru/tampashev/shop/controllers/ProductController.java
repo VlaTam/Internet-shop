@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.dto.Parameters;
 import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.services.CategoryService;
 import ru.tampashev.shop.services.ParametersService;
 import ru.tampashev.shop.services.ProductService;
-
-import java.util.Collection;
 
 @Controller
 @RequestMapping("/product")
@@ -43,6 +40,6 @@ public class ProductController {
     public String openProduct(@PathVariable("id") Integer id, Model model){
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "customer/product";
+        return "user/product";
     }
 }

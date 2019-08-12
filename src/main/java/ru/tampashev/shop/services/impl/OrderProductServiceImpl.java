@@ -1,6 +1,7 @@
 package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dao.OrderProductDao;
@@ -8,8 +9,11 @@ import ru.tampashev.shop.dto.OrderProduct;
 import ru.tampashev.shop.entities.OrderProductEntity;
 import ru.tampashev.shop.services.OrderProductService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Service
+@Transactional
 public class OrderProductServiceImpl extends AbstractGenericService<OrderProductEntity, OrderProduct>
                                     implements OrderProductService {
 
@@ -20,7 +24,7 @@ public class OrderProductServiceImpl extends AbstractGenericService<OrderProduct
     private OrderProductDao orderProductDao;
 
     @Override
-    protected Converter<OrderProductEntity, OrderProduct> getConverter() {
+    protected Converter<OrderProductEntity, OrderProduct> getUserConverter() {
         return orderProductConverter;
     }
 

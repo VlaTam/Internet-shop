@@ -39,7 +39,7 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
     }
 
     @Override
-    protected Converter<CategoryEntity, Category> getConverter() {
+    protected Converter<CategoryEntity, Category> getUserConverter() {
         return categoryConverter;
     }
 

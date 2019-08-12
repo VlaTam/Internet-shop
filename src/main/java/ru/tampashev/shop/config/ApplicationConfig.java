@@ -2,9 +2,13 @@ package ru.tampashev.shop.config;
 
 import org.springframework.context.annotation.Import;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
 
 @Import({DatabaseConfig.class, WebSecurityConfig.class})
 public class ApplicationConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -28,7 +32,11 @@ public class ApplicationConfig extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Filter[] getServletFilters() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter("UTF-8", true);
-        return new Filter[] {filter};
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter("UTF-8", true);
+        MultipartFilter multipartFilter = new MultipartFilter();
+        //multipartFilter.setMultipartResolverBeanName(MultipartFilter.DEFAULT_MULTIPART_RESOLVER_BEAN_NAME);
+        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
+        hiddenHttpMethodFilter.setMethodParam(HiddenHttpMethodFilter.DEFAULT_METHOD_PARAM);
+        return new Filter[] {characterEncodingFilter, multipartFilter, hiddenHttpMethodFilter};
     }
 }

@@ -64,6 +64,12 @@ CREATE TABLE IF NOT EXISTS internet_shop.category
     UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 );
 
+/*Categories*/
+INSERT INTO internet_shop.category (name)
+VALUES ('winter tires'),
+       ('summer tires'),
+       ('all-season tires');
+
 /*ParametersEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.parameters
 (

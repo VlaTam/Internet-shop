@@ -10,7 +10,10 @@ import ru.tampashev.shop.dto.Payment;
 import ru.tampashev.shop.entities.PaymentEntity;
 import ru.tampashev.shop.services.PaymentService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class PaymentServiceImpl extends AbstractGenericService<PaymentEntity, Payment> implements PaymentService {
 
     @Autowired
@@ -21,7 +24,7 @@ public class PaymentServiceImpl extends AbstractGenericService<PaymentEntity, Pa
     private PaymentDao paymentDao;
 
     @Override
-    protected Converter<PaymentEntity, Payment> getConverter() {
+    protected Converter<PaymentEntity, Payment> getUserConverter() {
         return paymentConverter;
     }
 

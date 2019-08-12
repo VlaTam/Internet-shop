@@ -24,7 +24,7 @@ public class UserController {
     @PutMapping
     public String editProfile(@ModelAttribute("user") User user){
         userService.update(user);
-        return "index";
+        return "redirect:/";
     }
 
     /*@GetMapping("/authorization")
