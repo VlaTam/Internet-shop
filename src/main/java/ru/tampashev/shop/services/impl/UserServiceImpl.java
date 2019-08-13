@@ -33,7 +33,7 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
     private RoleService roleService;
 
     @Override
-    protected Converter<UserEntity, User> getUserConverter() {
+    protected Converter<UserEntity, User> getConverter() {
         return userConverter;
     }
 

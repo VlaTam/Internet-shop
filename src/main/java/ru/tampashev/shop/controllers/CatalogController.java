@@ -32,7 +32,7 @@ public class CatalogController {
     public String openFilteredCatalog(@ModelAttribute("parameters") Parameters parameters, Model model){
         model.addAttribute("products", productService.findByParameters(parameters));
         model.addAttribute("parametersList", parametersService.findAll());
-        model.addAttribute("parameters", new Parameters());
+        model.addAttribute("parameters", parameters);
         return "catalog";
     }
 }

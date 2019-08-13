@@ -26,7 +26,7 @@ public class ParametersServiceImpl extends AbstractGenericService<ParametersEnti
     private Converter<ParametersEntity, Parameters> parametersConverter;
 
     @Override
-    protected Converter<ParametersEntity, Parameters> getUserConverter() {
+    protected Converter<ParametersEntity, Parameters> getConverter() {
         return parametersConverter;
     }
 

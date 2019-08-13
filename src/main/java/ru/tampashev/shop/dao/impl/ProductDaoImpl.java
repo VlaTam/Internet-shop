@@ -41,34 +41,28 @@ public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements
         Root<ProductEntity> productEntityRoot = query.from(ProductEntity.class);
         query.select(productEntityRoot);
 
-        //List<Predicate> predicateList = new ArrayList<>();
-
-        Predicate[] predicateArray = new Predicate[4];
-
-        if (parametersEntity.getBrand() != null){
-            predicateArray[0] = criteriaBuilder.equal(productEntityRoot.get("parameters").get("brand"), parametersEntity.getBrand());
-            //predicateList.add(predicate);
+        Predicate predicateBrand = criteriaBuilder.and();
+        if (parametersEntity.getBrand() != null && !parametersEntity.getBrand().isEmpty()){
+            predicateBrand = criteriaBuilder.equal(productEntityRoot.get("parameters").get("brand"), parametersEntity.getBrand());
         }
 
+        Predicate predicateWidth = criteriaBuilder.and();
         if (parametersEntity.getWidth() != null){
-            predicateArray[1] = criteriaBuilder.equal(productEntityRoot.get("parameters").get("width"), parametersEntity.getWidth());
-            //predicateList.add(predicate);
+            predicateWidth = criteriaBuilder.equal(productEntityRoot.get("parameters").get("width"), parametersEntity.getWidth());
         }
 
+        Predicate predicateHeight = criteriaBuilder.and();
         if (parametersEntity.getHeight() != null){
-            predicateArray[2] = criteriaBuilder.equal(productEntityRoot.get("parameters").get("height"), parametersEntity.getHeight());
-            //predicateList.add(predicate);
+            predicateHeight = criteriaBuilder.equal(productEntityRoot.get("parameters").get("height"), parametersEntity.getHeight());
         }
 
+        Predicate predicateRadius = criteriaBuilder.and();
         if (parametersEntity.getRadius() != null){
-            predicateArray[3] = criteriaBuilder.equal(productEntityRoot.get("parameters").get("radius"), parametersEntity.getRadius());
-            //predicateList.add(predicate);
+            predicateRadius = criteriaBuilder.equal(productEntityRoot.get("parameters").get("radius"), parametersEntity.getRadius());
         }
 
-        //Predicate[] predicateArray = new Predicate[predicateList.size()];
-        //Predicate predicate = criteriaBuilder.and( predicateList.toArray(predicateArray));
-
-        //query.where(predicateArray);
+        Predicate predicate = criteriaBuilder.and(predicateBrand, predicateHeight, predicateWidth, predicateRadius);
+        query.where(predicate);
         return getSession().createQuery(query).getResultList();
     }
 }

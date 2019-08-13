@@ -20,11 +20,8 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
     @Override
     public Category convertToDto(CategoryEntity categoryEntity) {
         Category category = new Category();
-        if (categoryEntity != null){
-            category.setId(categoryEntity.getId());
-            category.setName(categoryEntity.getName());
-        }
-
+        category.setId(categoryEntity.getId());
+        category.setName(categoryEntity.getName());
 
        /* Collection<ProductEntity> productEntities = categoryEntity.getProductEntities();
 
@@ -42,10 +39,9 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
     @Override
     public CategoryEntity convertToEntity(Category category) {
         CategoryEntity categoryEntity = new CategoryEntity();
-        if (category != null){
-            categoryEntity.setId(category.getId());
-            categoryEntity.setName(category.getName());
-        }
+        categoryEntity.setId(category.getId());
+        categoryEntity.setName(category.getName());
+
 
         /*Collection<Product> products = category.getProducts();
 

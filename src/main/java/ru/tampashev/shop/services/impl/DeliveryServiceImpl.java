@@ -24,7 +24,7 @@ public class DeliveryServiceImpl extends AbstractGenericService<DeliveryEntity, 
     private DeliveryDao deliveryDao;
 
     @Override
-    protected Converter<DeliveryEntity, Delivery> getUserConverter() {
+    protected Converter<DeliveryEntity, Delivery> getConverter() {
         return deliveryConverter;
     }
 

@@ -24,7 +24,7 @@ public class PaymentServiceImpl extends AbstractGenericService<PaymentEntity, Pa
     private PaymentDao paymentDao;
 
     @Override
-    protected Converter<PaymentEntity, Payment> getUserConverter() {
+    protected Converter<PaymentEntity, Payment> getConverter() {
         return paymentConverter;
     }
 

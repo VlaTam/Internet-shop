@@ -24,7 +24,7 @@ public class OrderProductServiceImpl extends AbstractGenericService<OrderProduct
     private OrderProductDao orderProductDao;
 
     @Override
-    protected Converter<OrderProductEntity, OrderProduct> getUserConverter() {
+    protected Converter<OrderProductEntity, OrderProduct> getConverter() {
         return orderProductConverter;
     }
 

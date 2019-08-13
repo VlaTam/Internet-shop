@@ -22,7 +22,7 @@ public class RoleServiceImpl extends AbstractGenericService<RoleEntity, Role> im
     private RoleDao roleDao;
 
     @Override
-    protected Converter<RoleEntity, Role> getUserConverter() {
+    protected Converter<RoleEntity, Role> getConverter() {
         return roleConverter;
     }
 

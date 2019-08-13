@@ -25,7 +25,7 @@ public class ParametersEntity implements Serializable {
     @Column(updatable = false, nullable = false)
     private Integer id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String brand;
 
     @Column(nullable = false)

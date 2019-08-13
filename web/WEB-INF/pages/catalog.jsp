@@ -4,40 +4,49 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <common:layout title="Catalog">
+    <jsp:useBean id="parametersSet" class="java.util.HashSet"/>
     <sf:form action="${pageContext.servletContext.contextPath}/catalog/filtered" method="GET" modelAttribute="parameters">
         <div>
             <label for="brand_id">Brand</label>
             <sf:select path="brand" id="brand_id">
-                <sf:option value="${null}"/>
+                <sf:option value="${null}">${parameters.brand}</sf:option>
                 <c:forEach var="parameter" items="${parametersList}">
-                    <sf:option value="${parameter.brand}">${parameter.brand}</sf:option>
+                    <c:if test="${parametersSet.add(parameter.brand)}">
+                        <sf:option value="${parameter.brand}">${parameter.brand}</sf:option>
+                    </c:if>
                 </c:forEach>
             </sf:select>
         </div>
         <div>
             <label for="width_id">Width</label>
             <sf:select path="width" id="width_id">
-                <sf:option value="${null}"/>
+                <sf:option value="${null}">${parameters.width}</sf:option>
                 <c:forEach var="parameter" items="${parametersList}">
-                    <sf:option value="${parameter.width}">${parameter.width}</sf:option>
+                    <c:if test="${parametersSet.add(parameter.width)}">
+                        <sf:option value="${parameter.width}">${parameter.width}</sf:option>
+                    </c:if>
                 </c:forEach>
             </sf:select>
         </div>
         <div>
             <label for="height_id">Height</label>
             <sf:select path="height" id="height_id">
-                <sf:option value="${null}"/>
+                <sf:option value="${null}">${parameters.height}</sf:option>
                 <c:forEach var="parameter" items="${parametersList}">
-                    <sf:option value="${parameter.height}">${parameter.height}</sf:option>
+                    <c:if test="${parametersSet.add(parameter.height)}">
+                        <sf:option value="${parameter.height}">${parameter.height}</sf:option>
+                    </c:if>
                 </c:forEach>
             </sf:select>
         </div>
         <div>
             <label for="radius_id">Radius</label>
             <sf:select path="radius" id="radius_id">
-                <sf:option value="${null}"/>
+                <sf:option value="${null}">${parameters.radius}</sf:option>
                 <c:forEach var="parameter" items="${parametersList}">
+                    <c:if test="${parametersSet.add(parameter.radius)}">
                         <sf:option value="${parameter.radius}">${parameter.radius}</sf:option>
+                    </c:if>
                 </c:forEach>
             </sf:select>
         </div>

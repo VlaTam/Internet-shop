@@ -23,24 +23,24 @@ public class CategoryController {
     }
 
     @PostMapping
-    public String addCategory(@ModelAttribute("category") Category category) throws ObjectAlreadyExistException {
+    public String addCategory(@ModelAttribute("category") Category category) {
         categoryService.create(category);
         return "redirect:/category";
     }
 
     @GetMapping("/edit/{id}")
-    public String openEditPage(@PathVariable("id") Integer categoryId, Model model){
-        Category category = categoryService.findById(categoryId);
+    public String openEditPage(@PathVariable("id") Integer id, Model model){
+        Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "employee/product/edit_category";
     }
 
-    @PostMapping("/edit")
-    public String updateCategory(@ModelAttribute("category") Category category, Model model){
+    @PutMapping("/edit")
+    public String updateCategory(@ModelAttribute("category") Category category){
         categoryService.update(category);
-        Category newCategory = categoryService.findById(category.getId());
-        model.addAttribute("category", newCategory);
-        return "employee/product/updated_category";
+        //Category newCategory = categoryService.findById(category.getId());
+        //model.addAttribute("category", newCategory);
+        return "redirect:/category";
     }
 
     @GetMapping("/delete/{id}")

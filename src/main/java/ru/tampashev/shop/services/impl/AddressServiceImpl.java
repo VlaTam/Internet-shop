@@ -24,7 +24,7 @@ public class AddressServiceImpl extends AbstractGenericService<AddressEntity, Ad
     private AddressDao addressDao;
 
     @Override
-    protected Converter<AddressEntity, Address> getUserConverter() {
+    protected Converter<AddressEntity, Address> getConverter() {
         return addressConverter;
     }
 

@@ -11,7 +11,7 @@ public abstract class AbstractGenericService <E extends Serializable, T> impleme
 
     @Override
     public Integer create(T object) {
-        E entity = getUserConverter().convertToEntity(object);
+        E entity = getConverter().convertToEntity(object);
 
         Integer entityId = getDao().find(entity);
         if (entityId > 0)
@@ -22,23 +22,22 @@ public abstract class AbstractGenericService <E extends Serializable, T> impleme
 
     @Override
     public void update(T object) {
-
-        E entity = getUserConverter().convertToEntity(object);
+        E entity = getConverter().convertToEntity(object);
         getDao().update(entity);
     }
 
     @Override
     public T findById(Integer id) {
         E entity = getDao().findById(id);
-        return getUserConverter().convertToDto(entity);
+        return getConverter().convertToDto(entity);
     }
 
     @Override
     public void delete(T object) {
-        E entity = getUserConverter().convertToEntity(object);
+        E entity = getConverter().convertToEntity(object);
         getDao().delete(entity);
     }
 
-    protected abstract Converter<E, T> getUserConverter();
+    protected abstract Converter<E, T> getConverter();
     protected abstract GenericDao<E> getDao();
 }

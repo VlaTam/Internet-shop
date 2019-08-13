@@ -42,7 +42,7 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     private CategoryService categoryService;
 
     @Override
-    protected Converter<ProductEntity, Product> getUserConverter() {
+    protected Converter<ProductEntity, Product> getConverter() {
         return productConverter;
     }
 

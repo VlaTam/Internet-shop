@@ -22,7 +22,7 @@ public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order>
     private OrderDao orderDao;
 
     @Override
-    protected Converter<OrderEntity, Order> getUserConverter() {
+    protected Converter<OrderEntity, Order> getConverter() {
         return orderConverter;
     }
 
