@@ -7,13 +7,16 @@ import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dao.ProductDao;
 import ru.tampashev.shop.dto.Category;
+import ru.tampashev.shop.dto.Parameters;
 import ru.tampashev.shop.dto.Product;
+import ru.tampashev.shop.entities.ParametersEntity;
 import ru.tampashev.shop.entities.ProductEntity;
 import ru.tampashev.shop.services.CategoryService;
 import ru.tampashev.shop.services.ParametersService;
 import ru.tampashev.shop.services.ProductService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +36,9 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     private ParametersService parametersService;
 
     @Autowired
+    private Converter<ParametersEntity, Parameters> parametersConverter;
+
+    @Autowired
     private CategoryService categoryService;
 
     @Override
@@ -46,7 +52,7 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     }
 
     @Override
-    public Collection<Product> findAll() {
+    public List<Product> findAll() {
         List<ProductEntity> productEntities = productDao.findAll();
         return productConverter.convertToDtoList(productEntities);
     }
@@ -55,6 +61,13 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     public Integer find(Product product) {
         ProductEntity productEntity = productConverter.convertToEntity(product);
         return productDao.find(productEntity);
+    }
+
+    @Override
+    public List<Product> findByParameters(Parameters parameters) {
+        ParametersEntity parametersEntity = parametersConverter.convertToEntity(parameters);
+        List<ProductEntity> productEntities = productDao.findByParameters(parametersEntity);
+        return productConverter.convertToDtoList(productEntities);
     }
 
     @Override

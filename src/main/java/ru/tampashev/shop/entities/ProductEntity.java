@@ -11,14 +11,20 @@ import java.util.Objects;
 @Table(name = "product", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "product-find-all",
-                query = "FROM ProductEntity"),
+                    query = "FROM ProductEntity"),
         @NamedQuery(name = "product-find",
-                query = "FROM ProductEntity product " +
-                        "WHERE product.name = :name " +
-                        "AND product.parameters.brand = :brand " +
-                        "AND product.parameters.width = :width " +
-                        "AND product.parameters.height = :height " +
-                        "AND product.parameters.radius = :radius")
+                    query = "FROM ProductEntity product " +
+                            "WHERE product.name = :name " +
+                            "AND product.parameters.brand = :brand " +
+                            "AND product.parameters.width = :width " +
+                            "AND product.parameters.height = :height " +
+                            "AND product.parameters.radius = :radius"),
+        @NamedQuery(name = "product-find-by-parameters",
+                    query = "FROM ProductEntity product " +
+                            "WHERE product.parameters.brand = :brand " +
+                            "AND product.parameters.width = :width " +
+                            "AND product.parameters.height = :height " +
+                            "AND product.parameters.radius = :radius")
 })
 public class ProductEntity implements Serializable {
 

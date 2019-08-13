@@ -1,10 +1,13 @@
 package ru.tampashev.shop.services;
 
+import ru.tampashev.shop.dto.Parameters;
 import ru.tampashev.shop.dto.Product;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface ProductService extends GenericService<Product> {
 
-    Collection<Product> findAll();
+    List<Product> findAll();
+
+    List<Product> findByParameters(Parameters parameters);
 }
