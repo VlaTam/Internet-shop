@@ -1,12 +1,14 @@
 package ru.tampashev.shop.services.impl;
 
+
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.services.GenericService;
 
 import java.io.Serializable;
+import javax.transaction.Transactional;
 
-//@Transactional
+@Transactional
 public abstract class AbstractGenericService <E extends Serializable, T> implements GenericService<T> {
 
     @Override

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.tampashev.shop.dto.Category;
-import ru.tampashev.shop.exceptions.ObjectAlreadyExistException;
 import ru.tampashev.shop.services.CategoryService;
 
 @Controller
@@ -38,15 +37,19 @@ public class CategoryController {
     @PutMapping("/edit")
     public String updateCategory(@ModelAttribute("category") Category category){
         categoryService.update(category);
-        //Category newCategory = categoryService.findById(category.getId());
-        //model.addAttribute("category", newCategory);
         return "redirect:/category";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Integer id){
+    public String openDeletePage(@PathVariable("id") Integer id, Model model){
         Category category = categoryService.findById(id);
-        categoryService.delete(category);
+        model.addAttribute("category", category);
         return "employee/product/delete_category";
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteCategory(@ModelAttribute("category") Category category){
+        categoryService.delete(category);
+        return "redirect:/category";
     }
 }

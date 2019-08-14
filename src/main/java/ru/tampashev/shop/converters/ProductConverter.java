@@ -2,6 +2,7 @@ package ru.tampashev.shop.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.entities.ProductEntity;
 
@@ -22,7 +23,12 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
     public Product convertToDto(ProductEntity productEntity) {
         Product product = new Product();
         product.setId(productEntity.getId());
-        product.setCategory(categoryConverter.convertToDto(productEntity.getCategory()));
+
+        if (productEntity.getCategory() == null) {
+            product.setCategory(getNotDefinedCategory());
+        } else
+            product.setCategory(categoryConverter.convertToDto(productEntity.getCategory()));
+
         product.setName(productEntity.getName());
         product.setParameters(parametersConverter.convertToDto(productEntity.getParameters()));
         product.setVolume(productEntity.getVolume());
@@ -30,6 +36,12 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
         product.setPrice(productEntity.getPrice());
         product.setQuantityInStock(productEntity.getQuantityInStock());
         return product;
+    }
+
+    private Category getNotDefinedCategory(){
+        Category category = new Category();
+        category.setName("not defined");
+        return category;
     }
 
     @Override

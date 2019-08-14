@@ -1,14 +1,12 @@
 package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.CategoryDao;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dto.Category;
 import ru.tampashev.shop.entities.CategoryEntity;
-import ru.tampashev.shop.exceptions.NoSuchCategoryException;
 import ru.tampashev.shop.services.CategoryService;
 
 import javax.transaction.Transactional;
@@ -23,7 +21,6 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
     private CategoryDao categoryDao;
 
     @Autowired
-    @Qualifier("categoryConverter")
     private Converter<CategoryEntity, Category> categoryConverter;
 
     @Override
@@ -48,7 +45,7 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
         return categoryDao;
     }
 
-
+    @Override
     public Integer find(Category category) {
         CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
         return categoryDao.find(categoryEntity);

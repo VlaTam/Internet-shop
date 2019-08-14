@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.product (
     CONSTRAINT `fk_product_parameters_id`
        FOREIGN KEY (`parameter_id`)
          REFERENCES `internet_shop`.`parameters` (`id`)
-         ON DELETE RESTRICT
+         ON DELETE SET NULL
          ON UPDATE CASCADE
 );
 

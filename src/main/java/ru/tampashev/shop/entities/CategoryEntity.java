@@ -25,7 +25,7 @@ public class CategoryEntity implements Serializable {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = CascadeType.MERGE)
+    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Collection<ProductEntity> productEntities;
 
     @Override
@@ -33,13 +33,12 @@ public class CategoryEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof CategoryEntity)) return false;
         CategoryEntity that = (CategoryEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name);
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name);
     }
 
     public Integer getId() {

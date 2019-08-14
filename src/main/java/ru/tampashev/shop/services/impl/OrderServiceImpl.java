@@ -6,6 +6,7 @@ import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dao.OrderDao;
 import ru.tampashev.shop.dto.Order;
+import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.entities.OrderEntity;
 import ru.tampashev.shop.services.OrderService;
 
