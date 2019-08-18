@@ -1,6 +1,7 @@
 package ru.tampashev.shop.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @GetMapping
-    public String showHomePage(){
+    public String showHomePage(@CookieValue(value = "bin", required = false) String purchases){
         return "index";
     }
 }

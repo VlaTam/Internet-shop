@@ -4,47 +4,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.tampashev.shop.dto.Address;
 import ru.tampashev.shop.dto.User;
 import ru.tampashev.shop.services.UserService;
 
 @Controller
 @RequestMapping("user")
+//@SessionAttributes(names = "user", types = User.class)
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/{id}")
-    public String openProfile(@PathVariable Integer id, Model model){
-        model.addAttribute("user", userService.findById(id));
+    @GetMapping//(value = "/{id}")
+    public String openProfile(/*@PathVariable Integer id, Model model*/){
+        /*model.addAttribute("user", userService.findById(id));*/
         return "user/profile";
     }
 
     @PutMapping
-    public String editProfile(@ModelAttribute("user") User user){
+    public String editProfile(/*@ModelAttribute("user")*/ User user){
         userService.update(user);
         return "redirect:/";
     }
 
-    /*@GetMapping("/authorization")
-    public String openPage(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "/user/authorization";
+    @GetMapping("/login")
+    public String openLogin() {
+        return "user/login";
     }
 
-    @PostMapping("/authorization")
-    public String addUser(@ModelAttribute("user") User user){
-        if (userService.authorize(user))
-            return "/index";
-        return "/user/authorization";
-    }*/
+    @GetMapping("/logout")
+    public String openLogout() {
+        return "redirect:/";
+    }
 
     @GetMapping("/registration")
     public String openRegistration(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("address", new Address());
         return "registration";
     }
 

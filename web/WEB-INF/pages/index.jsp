@@ -1,57 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/common" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <common:layout title="Tyres shop">
-    <div>
-      <div>
-        <div>
-          <h1>Orders control</h1>
-        </div>
-        <div>
-          <a href="${pageContext.servletContext.contextPath}/employee/orders">Orders</a> <%--View of all orders--%>
-        </div>
+  <section class="container">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+      <div class="row">
+        <nav class="nav">
+          <a class="nav-link" href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
+          <a class="nav-link" href="${pageContext.servletContext.contextPath}/category">Edit categories</a>
+        </nav>
       </div>
+    </sec:authorize>
 
-      <div>
-        <div>
-          <h1>Statistic</h1>
-        </div>
-        <div>
-          <a href="${pageContext.servletContext.contextPath}/employee/statistic">Statistic</a>
-        </div>
+    <sec:authorize access="!isAuthenticated()">
+      <div class="row">
+        <a href="<c:url value="/user/login" />" role="button">Sign in</a>
       </div>
-
-      <div>
-        <div>
-          <h1>Product control</h1>
-        </div>
-        <div>
-          <a href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
-        </div>
-        <div>
-          <a href="${pageContext.servletContext.contextPath}/category">Category control</a>
-        </div>
-      </div>
-
-      <div>
-        <h1>Add user</h1>
-        <a href="${pageContext.servletContext.contextPath}/user/authorization">Authorize</a>
-      </div>
-      <div>
-        <h1>Add address</h1>
-        <a href="${pageContext.servletContext.contextPath}/address/add">Add address</a>
-      </div>
-      <div>
-        <h1>Registration</h1>
+      <div class="row">
         <a href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
       </div>
-      <div>
-        <h1>Profile</h1>
-        <a href="${pageContext.servletContext.contextPath}/user/1">Edit profile</a>
+    </sec:authorize>
+
+    <sec:authorize access="isAuthenticated()">
+      <div class="row">
+        <p>Ваш логин: <sec:authentication property="principal.username" /></p>
       </div>
-      <div>
-        <h1>Catalog</h1>
-        <a href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
+      <div class="row">
+        <a href="<c:url value="/user/logout" />" role="button">Sign out</a>
       </div>
+    </sec:authorize>
+
+    <div class="row">
+      <a class="btn btn-secondary" href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
     </div>
+  </section>
 </common:layout>

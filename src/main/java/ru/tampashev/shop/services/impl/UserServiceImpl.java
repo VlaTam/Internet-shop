@@ -1,6 +1,7 @@
 package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
@@ -43,6 +44,12 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
     }
 
     @Override
+    public User findByEmail(String email) {
+        UserEntity userEntity = userDao.findByMailAddress(email);
+        return userEntity != null ? userConverter.convertToDto(userEntity) : null;
+    }
+
+    @Override
     public Integer find(User user) {
         UserEntity userEntity = userConverter.convertToEntity(user);
         return userDao.find(userEntity);
@@ -50,13 +57,15 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
 
     @Override
     public Integer create(User user) {
+        setValidAddress(user);
+        setValidRole(user);
+
         if (find(user) > 0)
             return -1;
 
-        setValidAddress(user);
-        setValidRole(user);
-        UserEntity userEntity = userConverter.convertToEntity(user);
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
+        UserEntity userEntity = userConverter.convertToEntity(user);
         return userDao.create(userEntity);
     }
 

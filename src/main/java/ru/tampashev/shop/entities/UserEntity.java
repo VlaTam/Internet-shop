@@ -9,9 +9,10 @@ import java.util.List;
 @Table(name = "user", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "user-find-all",
-                query = "FROM UserEntity"),
+                    query = "FROM UserEntity"),
         @NamedQuery(name = "user-find-by-email",
-                query = "FROM UserEntity user WHERE user.mailAddress = :mailAddress")
+                    query = "FROM UserEntity user " +
+                            "WHERE user.mailAddress = :mailAddress")
 })
 public class UserEntity implements Serializable {
 

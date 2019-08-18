@@ -11,18 +11,13 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserD
         type = UserEntity.class;
     }
 
-    /*@Override
+    @Override
     public UserEntity findByMailAddress(String mailAddress) {
-        return getSession().createNamedQuery("user-find-by-email", type)
-                                .setParameter("mailAddress", mailAddress).uniqueResult();
-    }*/
-
-    /*@Override
-    public Integer find(UserEntity userEntity) {
-        UserEntity existedUser = findByMailAddress(userEntity.getMailAddress());
-
-        return existedUser != null ? existedUser.getId() : -1;
-    }*/
+        return getSession()
+                    .createNamedQuery("user-find-by-email", type)
+                    .setParameter("mailAddress", mailAddress)
+                    .uniqueResult();
+    }
 
     @Override
     public Integer find(UserEntity userEntity) {

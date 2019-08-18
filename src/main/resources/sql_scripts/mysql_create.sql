@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS internet_shop.roles
 
 /*Main roles*/
 INSERT INTO internet_shop.roles (name)
-VALUES ('admin'),
-       ('customer');
+VALUES ('ROLE_ADMIN'),
+       ('ROLE_CUSTOMER');
 
 /*AddressEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.address
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.user
   `first_name` VARCHAR(50) NOT NULL,
   `birthday` DATE NOT NULL,
   `mail_address` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   `role_id` INT NOT NULL,
   `address_id` INT NOT NULL,
   PRIMARY KEY (`id`),

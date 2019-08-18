@@ -12,20 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("bin")
 public class BinController {
 
-    @GetMapping("/add")
-    public String addProduct(HttpServletRequest request, HttpServletResponse response){
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + "     " + cookie.getValue());
-            /*if (cookie.getName().equals("product")) {
-                System.out.println(cookie.getName() + " " + cookie.getValue());
-            }
-            if (cookie.getName().equals("quantity")){
-                System.out.println(cookie.getName() + " " + cookie.getValue());
-            }*/
-        }
+    private int i = 0;
 
-        //response.addCookie(new Cookie());
+    @GetMapping("/add")
+    public String addProduct(HttpServletResponse response){
+        i++;
+        Cookie cookie = new Cookie("bin", "Nokian_wheel " + i);
+        cookie.setPath("/");
+        cookie.setMaxAge(86400);
+        response.addCookie(cookie);
+        response.setContentType("text/plain");
+        response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/catalog";
     }
 }
