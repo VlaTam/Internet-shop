@@ -81,6 +81,12 @@ CREATE TABLE IF NOT EXISTS internet_shop.parameters
     PRIMARY KEY (`id`)
 );
 
+/*Parameters*/
+INSERT INTO internet_shop.parameters (brand, width, height, radius)
+VALUES ('Michelin', 225, 60, 17),
+       ('Bridgestone', 225, 60, 17),
+       ('Continental', 225, 60, 17);
+
 /*ProductEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.product (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -105,6 +111,12 @@ CREATE TABLE IF NOT EXISTS internet_shop.product (
          ON DELETE SET NULL
          ON UPDATE CASCADE
 );
+
+/*Products*/
+INSERT INTO internet_shop.product (name, price, category_id, parameter_id, weight, volume, quantity_in_stock)
+VALUES ('Primacy 4', 10000, 12, 4, 5, 0.2, 100),
+       ('Dueler A/T 001', 8800, 12, 5, 4.5, 0.2, 60),
+       ('ContiPremiumContact 5 SUV', 9400, 12, 6, 5, 0.2, 24);
 
 /*PaymentEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.payment

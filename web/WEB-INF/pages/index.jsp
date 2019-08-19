@@ -15,24 +15,24 @@
     </sec:authorize>
 
     <sec:authorize access="!isAuthenticated()">
-      <div class="row">
-        <a href="<c:url value="/user/login" />" role="button">Sign in</a>
+      <div class="row mb-2" style="width: 200px;">
+        <a class="btn btn-info" href="<c:url value="/user/login" />" role="button">Sign in</a>
       </div>
-      <div class="row">
-        <a href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
+      <div class="row mb-2" style="width: 200px;">
+        <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
       </div>
     </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">
-      <div class="row">
+      <div class="row mb-2">
         <p>Ваш логин: <sec:authentication property="principal.username" /></p>
       </div>
-      <div class="row">
-        <a href="<c:url value="/user/logout" />" role="button">Sign out</a>
+      <div class="row mb-2">
+        <a class="btn btn-info" href="<c:url value="/user/logout" />" role="button">Sign out</a>
       </div>
     </sec:authorize>
 
-    <div class="row">
+    <div class="row mb-2">
       <a class="btn btn-secondary" href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
     </div>
   </section>

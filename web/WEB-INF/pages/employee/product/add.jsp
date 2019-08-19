@@ -8,11 +8,11 @@
         <section>
             <div>
                 <label for="product_name">Name</label>
-                <sf:input path="name" id="product_name" autofocus="true" required="true"/>
+                <sf:input path="name" id="product_name" autofocus="true" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="product_price">Price</label>
-                <sf:input path="price" id="product_price" required="true"/>
+                <sf:input path="price" id="product_price" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="product_category">Category</label>
@@ -24,15 +24,15 @@
             </div>
             <div>
                 <label for="product_weight">Weight</label>
-                <sf:input path="weight" id="product_weight" required="true"/>
+                <sf:input path="weight" id="product_weight" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="product_volume">Volume</label>
-                <sf:input path="volume" id="product_volume" required="true"/>
+                <sf:input path="volume" id="product_volume" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="product_quantityInStock">Quantity in stock</label>
-                <sf:input path="quantityInStock" id="product_quantityInStock" required="true"/>
+                <sf:input path="quantityInStock" id="product_quantityInStock" required="true" autocomplete="off"/>
             </div>
         </section>
 
@@ -42,23 +42,23 @@
             </div>
             <div>
                 <label for="brand">Brand</label>
-                <sf:input path="parameters.brand" id="brand" required="true"/>
+                <sf:input path="parameters.brand" id="brand" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="width">Width</label>
-                <sf:input path="parameters.width" id="width" required="true"/>
+                <sf:input path="parameters.width" id="width" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="height">Height</label>
-                <sf:input path="parameters.height" id="height" required="true"/>
+                <sf:input path="parameters.height" id="height" required="true" autocomplete="off"/>
             </div>
             <div>
                 <label for="radius">Radius</label>
-                <sf:input path="parameters.radius" id="radius" required="true"/>
+                <sf:input path="parameters.radius" id="radius" required="true" autocomplete="off"/>
             </div>
         </section>
         <div>
-            <sf:button>Save product</sf:button>
+            <sf:button class="btn btn-success">Save product</sf:button>
         </div>
     </sf:form>
 </common:layout>

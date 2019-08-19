@@ -9,8 +9,8 @@
         </title>
     </head>
     <body>
-        <header>
-            <div>
+        <header class="row w-100 mb-2">
+            <div class="col">
                 <a href="${pageContext.servletContext.contextPath}/">Go to main page</a>
             </div>
         </header>

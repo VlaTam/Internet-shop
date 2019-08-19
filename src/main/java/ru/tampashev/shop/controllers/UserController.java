@@ -15,14 +15,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping//(value = "/{id}")
-    public String openProfile(/*@PathVariable Integer id, Model model*/){
-        /*model.addAttribute("user", userService.findById(id));*/
+    @GetMapping(value = "/{id}")
+    public String openProfile(@PathVariable Integer id, Model model){
+        model.addAttribute("user", userService.findById(id));
         return "user/profile";
     }
 
     @PutMapping
-    public String editProfile(/*@ModelAttribute("user")*/ User user){
+    public String editProfile(@ModelAttribute("user") User user){
         userService.update(user);
         return "redirect:/";
     }
