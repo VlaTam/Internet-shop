@@ -8,6 +8,7 @@ import ru.tampashev.shop.entities.ProductEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @SuppressWarnings("all")
@@ -21,6 +22,8 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
 
     @Override
     public Product convertToDto(ProductEntity productEntity) {
+        /*ModelMapper mapper = new ModelMapper();
+        Product prod = mapper.map(productEntity, Product.class);*/
         Product product = new Product();
         product.setId(productEntity.getId());
 
@@ -61,6 +64,8 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
     @Override
     public List<Product> convertToDtoList(List<ProductEntity> productEntities) {
         List<Product> products = new ArrayList<>(productEntities.size());
+
+        //productEntities.stream().map(productEntity -> convertToDtoList(productEntity)).collect(Collectors.toList());
 
         for (ProductEntity productEntity : productEntities) {
             Product product = convertToDto(productEntity);

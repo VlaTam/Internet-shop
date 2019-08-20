@@ -1,6 +1,8 @@
 package ru.tampashev.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +52,7 @@ public class CategoryController {
     @DeleteMapping("/delete")
     public String deleteCategory(@ModelAttribute("category") Category category){
         categoryService.delete(category);
+        //UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return "redirect:/category";
     }
 }
