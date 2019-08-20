@@ -50,4 +50,10 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
         CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
         return categoryDao.find(categoryEntity);
     }
+
+    @Override
+    public void delete(Category category) {
+        category.setStatus("invalid");
+        update(category);
+    }
 }

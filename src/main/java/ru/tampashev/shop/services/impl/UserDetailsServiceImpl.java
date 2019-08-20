@@ -28,11 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (email == null)
             throw new UsernameNotFoundException("Email is null");
 
-        email = email.trim();
-        if (email.equals(adminEmail))
+        if (email.trim().equals(adminEmail))
             return getAdmin();
 
-        User user = userService.findByEmail(email);
+        User user = userService.findByEmail(email.trim());
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }

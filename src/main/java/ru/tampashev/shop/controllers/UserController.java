@@ -1,6 +1,8 @@
 package ru.tampashev.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +17,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/{id}")
-    public String openProfile(@PathVariable Integer id, Model model){
-        model.addAttribute("user", userService.findById(id));
+    @GetMapping
+    public String openProfile(Model model){
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", userService.findByEmail(principal.getUsername()));
         return "user/profile";
     }
 

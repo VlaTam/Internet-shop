@@ -10,7 +10,7 @@ import ru.tampashev.shop.exceptions.UserAlreadyExistException;
 @ControllerAdvice(assignableTypes = {UserController.class})
 public class AppExceptionHandler {
 
-    @ExceptionHandler(ObjectAlreadyExistException.class)
+    @ExceptionHandler(Exception.class)
     public String handConverterException(ObjectAlreadyExistException exception, Model model){
 
         return "/errors/error";

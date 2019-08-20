@@ -17,5 +17,6 @@
                 <button class="btn btn-lg btn-primary btn-block">Войти</button>
             </div>
         </sf:form>
+        <p class="mt-3 text-danger">${param.error}</p>
     </div>
 </common:layout>

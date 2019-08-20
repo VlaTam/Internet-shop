@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -32,16 +33,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
-                    .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/user/login").permitAll()
-                    .antMatchers("/user/registration").permitAll()
-                    .antMatchers("/resources/**").permitAll()
-                    .antMatchers("/catalog").permitAll()
-                    .antMatchers("/catalog/filtered").permitAll()
-                    .anyRequest().authenticated()
+            .csrf()
+            .disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/user/login").permitAll()
+                .antMatchers("/user/registration").anonymous()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/catalog").permitAll()
+                .antMatchers("/catalog/filtered").permitAll()
+                .antMatchers("/category").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/product/add").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/product/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                    .exceptionHandling().accessDeniedPage("/WEB-INF/pages/errors/access_denied.jsp")
                     .and()
                         .formLogin()
                         .usernameParameter("j_username")
@@ -49,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginPage("/user/login")
                         .loginProcessingUrl("/j_spring_security_check")
                         .defaultSuccessUrl("/")
-                        .failureUrl("/user/login?error=t")
+                        .failureUrl("/user/login?error=login or password are not valid")
                         .and()
                             .logout()
                             .logoutUrl("/user/logout")

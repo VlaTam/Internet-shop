@@ -15,7 +15,10 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity> implemen
 
     @Override
     public Collection<CategoryEntity> findAll() {
-        return getSession().createNamedQuery("category-find-all", type).getResultList();
+        return getSession()
+                .createNamedQuery("category-find-all", type)
+                .setParameter("status", "valid")
+                .getResultList();
     }
 
     @Override

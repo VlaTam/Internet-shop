@@ -22,6 +22,7 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
         Category category = new Category();
         category.setId(categoryEntity.getId());
         category.setName(categoryEntity.getName());
+        category.setStatus(categoryEntity.getStatus());
 
        /* Collection<ProductEntity> productEntities = categoryEntity.getProductEntities();
 
@@ -41,7 +42,7 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setId(category.getId());
         categoryEntity.setName(category.getName());
-
+        categoryEntity.setStatus(category.getStatus());
 
         /*Collection<Product> products = category.getProducts();
 

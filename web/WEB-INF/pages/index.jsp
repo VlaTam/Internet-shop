@@ -14,6 +14,14 @@
       </div>
     </sec:authorize>
 
+    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+      <div class="row">
+          <nav class="nav">
+              <a class="nav-link" href="${pageContext.servletContext.contextPath}/user">Add product</a>
+          </nav>
+      </div>
+    </sec:authorize>
+
     <sec:authorize access="!isAuthenticated()">
       <div class="row mb-2" style="width: 200px;">
         <a class="btn btn-info" href="<c:url value="/user/login" />" role="button">Sign in</a>

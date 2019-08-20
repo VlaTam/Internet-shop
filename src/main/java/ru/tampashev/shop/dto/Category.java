@@ -6,6 +6,7 @@ public class Category {
 
     private Integer id;
     private String name;
+    private String status;
     private Collection<Product> products;
 
     public void setName(String name) {
@@ -30,5 +31,13 @@ public class Category {
 
     public void setProducts(Collection<Product> products) {
         this.products = products;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

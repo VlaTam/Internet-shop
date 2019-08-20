@@ -37,7 +37,7 @@
                             <c:forEach var="category" items="${categories}">
                                 <div class="mb-2">
                                     <li>
-                                        ${category.name}
+                                            ${category.name}
                                         <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/category/edit/${category.id}"> Edit</a>
                                         <a class="btn btn-danger" href="${pageContext.servletContext.contextPath}/category/delete/${category.id}"> Delete</a>
                                     </li>

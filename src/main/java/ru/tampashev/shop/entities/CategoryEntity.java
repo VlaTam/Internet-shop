@@ -9,7 +9,8 @@ import java.util.Objects;
 @Table(name = "category", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "category-find-all",
-                    query = "FROM CategoryEntity"),
+                    query = "FROM CategoryEntity category " +
+                            "WHERE category.status = : status"),
         @NamedQuery(name = "category-find",
                     query = "FROM CategoryEntity category " +
                             "WHERE category.name = :name")
@@ -24,6 +25,9 @@ public class CategoryEntity implements Serializable {
 
     @Column(unique = true, nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String status;
 
     @OneToMany(targetEntity = ProductEntity.class, mappedBy = "category", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Collection<ProductEntity> productEntities;
@@ -63,5 +67,13 @@ public class CategoryEntity implements Serializable {
 
     public void setProductEntities(Collection<ProductEntity> productEntities) {
         this.productEntities = productEntities;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

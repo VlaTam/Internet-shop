@@ -1,8 +1,9 @@
 package ru.tampashev.shop.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
+
 }

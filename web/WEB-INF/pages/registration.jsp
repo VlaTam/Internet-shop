@@ -89,8 +89,8 @@
                 <div class="form-row">
                     <div class="mb-3 col-md-4">
                         <div class="float-right">
-                            <label for="House_number_id">House number</label>
-                            <sf:input path="address.houseNumber" id="House_number_id" autocomplete="off" required="true"/>
+                            <label for="house_number_id">House number</label>
+                            <sf:input path="address.houseNumber" id="house_number_id" autocomplete="off" required="true"/>
                         </div>
                     </div>
                 </div>

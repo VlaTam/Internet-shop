@@ -60,15 +60,16 @@ CREATE TABLE IF NOT EXISTS internet_shop.category
 (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
+    `status` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 );
 
 /*Categories*/
-INSERT INTO internet_shop.category (name)
-VALUES ('winter tires'),
-       ('summer tires'),
-       ('all-season tires');
+INSERT INTO internet_shop.category (name, status)
+VALUES ('winter tyres', 'valid'),
+       ('summer tyres', 'valid'),
+       ('all-season tyres', 'valid');
 
 /*ParametersEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.parameters
@@ -108,15 +109,15 @@ CREATE TABLE IF NOT EXISTS internet_shop.product (
     CONSTRAINT `fk_product_parameters_id`
        FOREIGN KEY (`parameter_id`)
          REFERENCES `internet_shop`.`parameters` (`id`)
-         ON DELETE SET NULL
+         ON DELETE RESTRICT
          ON UPDATE CASCADE
 );
 
 /*Products*/
 INSERT INTO internet_shop.product (name, price, category_id, parameter_id, weight, volume, quantity_in_stock)
-VALUES ('Primacy 4', 10000, 12, 4, 5, 0.2, 100),
-       ('Dueler A/T 001', 8800, 12, 5, 4.5, 0.2, 60),
-       ('ContiPremiumContact 5 SUV', 9400, 12, 6, 5, 0.2, 24);
+VALUES ('Primacy 4', 10000, 1, 1, 5, 0.2, 100),
+       ('Dueler A/T 001', 8800, 1, 2, 4.5, 0.2, 60),
+       ('ContiPremiumContact 5 SUV', 9400, 1, 3, 5, 0.2, 24);
 
 /*PaymentEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.payment
