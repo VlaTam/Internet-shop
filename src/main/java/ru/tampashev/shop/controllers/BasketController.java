@@ -5,21 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.tampashev.shop.services.BinService;
+import ru.tampashev.shop.services.BasketService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("bin")
-public class BinController {
+@RequestMapping("basket")
+public class BasketController {
 
     @Autowired
-    private BinService binService;
+    private BasketService binService;
 
     @GetMapping
     public String openBin(){
-        return "bin";
+        return "basket";
     }
 
     @PostMapping("/add")

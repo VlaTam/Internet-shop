@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@attribute name="title" required = "true"%>
 
 <!DOCTYPE html>
@@ -14,6 +15,21 @@
                 <a href="${pageContext.servletContext.contextPath}/">Go to main page</a>
             </div>
         </header>
+        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <section class="container">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="float-right">
+                            <a href="${pageContext.servletContext.contextPath}/basket">
+                                <img src="${pageContext.servletContext.contextPath}/resources/images/basket_icon.png" alt="Basket">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </sec:authorize>
         <jsp:doBody/>
     </body>
 </html>

@@ -2,33 +2,38 @@ package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.tampashev.shop.dto.Bin;
+import ru.tampashev.shop.dto.Purchase;
 import ru.tampashev.shop.dto.Product;
-import ru.tampashev.shop.services.BinService;
+import ru.tampashev.shop.services.BasketService;
 import ru.tampashev.shop.services.ProductService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+
 
 @Service
-public class BinServiceImpl implements BinService {
+//@SuppressWarnings("all")
+public class BasketServiceImpl implements BasketService {
 
     @Autowired
     private ProductService productService;
 
     @Override
     public boolean add(HttpSession session, HttpServletRequest request) {
-        Bin bin = (Bin)session.getAttribute("bin");
-        if (bin == null) {
-            bin = new Bin();
+        HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
+
+        if (purchaseSet == null) {
+            purchaseSet = new HashSet<>();
         }
         Integer productId = Integer.parseInt(request.getParameter("productId"));
         Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 
         Product product = productService.findById(productId);
-        bin.add(product, quantity);
+        Purchase purchase = new Purchase(product, quantity);
+        purchaseSet.add(purchase);
 
-        session.setAttribute("bin", bin);
+        session.setAttribute("purchaseSet", purchaseSet);
         return true;
     }
 }

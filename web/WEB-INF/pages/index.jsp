@@ -5,46 +5,75 @@
 
 <common:layout title="Tyres shop">
   <section class="container">
-    <sec:authorize access="hasRole('ROLE_ADMIN')">
-      <div class="row">
-        <nav class="nav">
-          <a class="nav-link" href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
-          <a class="nav-link" href="${pageContext.servletContext.contextPath}/category">Edit categories</a>
-        </nav>
-      </div>
-    </sec:authorize>
 
-    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
-      <div class="row">
-          <nav class="nav">
+    <div class="row mt-5">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+          <div class="row">
+            <nav class="nav">
+              <a class="nav-link" href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
+              <a class="nav-link" href="${pageContext.servletContext.contextPath}/category">Edit categories</a>
+            </nav>
+          </div>
+        </sec:authorize>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <%--<div class="row mt-5">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+          <div class="row">
+            <nav class="nav">
               <a class="nav-link" href="${pageContext.servletContext.contextPath}/user">Add product</a>
-          </nav>
+            </nav>
+          </div>
+        </sec:authorize>
       </div>
-    </sec:authorize>
+      <div class="col-md-4"></div>
+    </div>--%>
 
-    <sec:authorize access="!isAuthenticated()">
-      <div class="row mb-2" style="width: 200px;">
-        <a class="btn btn-info" href="<c:url value="/user/login" />" role="button">Sign in</a>
+    <div class="row mt-5">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <sec:authorize access="!isAuthenticated()">
+          <div class="row mb-2" style="width: 200px;">
+            <a class="btn btn-info" href="<c:url value="/user/login" />" role="button">Sign in</a>
+          </div>
+          <div class="row mb-2" style="width: 200px;">
+            <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
+          </div>
+        </sec:authorize>
       </div>
-      <div class="row mb-2" style="width: 200px;">
-        <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
-      </div>
-    </sec:authorize>
-
-    <sec:authorize access="isAuthenticated()">
-      <div class="row mb-2">
-        <p>Ваш логин: <sec:authentication property="principal.username" /></p>
-      </div>
-      <div class="row mb-2">
-        <a class="btn btn-info" href="<c:url value="/user/logout" />" role="button">Sign out</a>
-      </div>
-    </sec:authorize>
-
-    <div class="row mb-2">
-      <a class="btn btn-secondary" href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
+      <div class="col-md-4"></div>
     </div>
-    <div class="row mb-5">
-      <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/bin">Open the bin</a>
+
+    <div class="row mt-5">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <sec:authorize access="isAuthenticated()">
+          <div class="row mb-2">
+            <p>Ваш логин: <sec:authentication property="principal.username" /></p>
+          </div>
+          <div class="row mb-2">
+            <a class="btn btn-info" href="<c:url value="/user/logout" />" role="button">Sign out</a>
+          </div>
+        </sec:authorize>
+      </div>
+      <div class="col-md-4"></div>
     </div>
+
+    <div class="row mt-5">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="row mb-2">
+          <a class="btn btn-secondary" href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
   </section>
 </common:layout>

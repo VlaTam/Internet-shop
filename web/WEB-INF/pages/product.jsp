@@ -64,10 +64,10 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form action="${pageContext.servletContext.contextPath}/bin/add" method="POST">
+                <form action="${pageContext.servletContext.contextPath}/basket/add" method="POST">
                     <input name="productId" value="${product.id}" hidden/>
                     <input name="quantity" type="number" min="1" max="${product.quantityInStock}"/>
-                    <button>Add to bin</button>
+                    <button>Add to the basket</button>
                 </form>
             </div>
             <div class="col-md-4"></div>
