@@ -40,6 +40,6 @@ public class ProductController {
     public String openProduct(@PathVariable("id") Integer id, Model model){
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "user/product";
+        return "product";
     }
 }

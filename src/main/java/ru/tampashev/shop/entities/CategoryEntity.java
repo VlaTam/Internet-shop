@@ -10,10 +10,11 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "category-find-all",
                     query = "FROM CategoryEntity category " +
-                            "WHERE category.status = : status"),
+                            "WHERE category.status = 'valid'"),
         @NamedQuery(name = "category-find",
                     query = "FROM CategoryEntity category " +
-                            "WHERE category.name = :name")
+                            "WHERE category.name = :name " +
+                            "AND category.status = 'valid'")
 })
 //@SuppressWarnings(value = "unused")
 public class CategoryEntity implements Serializable {

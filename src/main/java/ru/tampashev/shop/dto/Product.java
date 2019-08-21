@@ -13,7 +13,16 @@ public class Product {
     private BigDecimal weight ;
     private BigDecimal volume;
     private Integer quantityInStock;
+    private String status;
     private Collection<Order> orders;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;

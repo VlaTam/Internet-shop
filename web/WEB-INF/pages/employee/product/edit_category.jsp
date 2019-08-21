@@ -5,6 +5,7 @@
 <common:layout title="Edit category">
     <sf:form action="${pageContext.servletContext.contextPath}/category/edit" method="PUT" modelAttribute="category">
         <sf:input path="id" value="${category.id}" hidden="true"/>
+        <sf:input path="status" value="${category.status}" hidden="true"/>
         <div>
             <label for = "category_name_id">New category name</label>
             <sf:input path="name" id="category_name_id"/>

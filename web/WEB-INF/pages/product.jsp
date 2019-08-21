@@ -64,13 +64,16 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form action="${pageContext.servletContext.contextPath}/bin/add">
-                    <input name="product" value="${product.id}" hidden/>
+                <form action="${pageContext.servletContext.contextPath}/bin/add" method="POST">
+                    <input name="productId" value="${product.id}" hidden/>
                     <input name="quantity" type="number" min="1" max="${product.quantityInStock}"/>
                     <button>Add to bin</button>
                 </form>
             </div>
             <div class="col-md-4"></div>
+        </div>
+        <div>
+            <p class="mt-3 text-danger">${param.message}</p>
         </div>
     </section>
 </common:layout>

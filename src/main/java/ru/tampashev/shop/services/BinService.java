@@ -1,8 +1,10 @@
 package ru.tampashev.shop.services;
 
-import ru.tampashev.shop.dto.Product;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public interface BinService {
 
-    boolean add(Product product, Integer quantity);
+    //boolean add(Integer productId, Integer quantity);
+    boolean add(HttpSession session, HttpServletRequest request);
 }

@@ -11,20 +11,23 @@ import java.util.Objects;
 @Table(name = "product", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "product-find-all",
-                    query = "FROM ProductEntity"),
+                    query = "FROM ProductEntity product " +
+                            "WHERE product.status = 'valid'"),
         @NamedQuery(name = "product-find",
                     query = "FROM ProductEntity product " +
                             "WHERE product.name = :name " +
                             "AND product.parameters.brand = :brand " +
                             "AND product.parameters.width = :width " +
                             "AND product.parameters.height = :height " +
-                            "AND product.parameters.radius = :radius"),
+                            "AND product.parameters.radius = :radius " +
+                            "AND product.status = 'valid'"),
         @NamedQuery(name = "product-find-by-parameters",
                     query = "FROM ProductEntity product " +
                             "WHERE product.parameters.brand = :brand " +
                             "AND product.parameters.width = :width " +
                             "AND product.parameters.height = :height " +
-                            "AND product.parameters.radius = :radius")
+                            "AND product.parameters.radius = :radius " +
+                            "AND product.status = 'valid'")
 })
 public class ProductEntity implements Serializable {
 
@@ -56,6 +59,9 @@ public class ProductEntity implements Serializable {
     @Column(name = "quantity_in_stock", nullable = false)
     private Integer quantityInStock;
 
+    @Column(nullable = false)
+    private String status;
+
     @ManyToMany
     @JoinTable( name = "order_product",
                 joinColumns = @JoinColumn(name = "product_id"),
@@ -67,19 +73,23 @@ public class ProductEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ProductEntity)) return false;
         ProductEntity that = (ProductEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
+        return Objects.equals(name, that.name) &&
                 Objects.equals(price, that.price) &&
                 Objects.equals(category, that.category) &&
-                Objects.equals(parameters, that.parameters) &&
-                Objects.equals(weight, that.weight) &&
-                Objects.equals(volume, that.volume) &&
-                Objects.equals(quantityInStock, that.quantityInStock);
+                Objects.equals(parameters, that.parameters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, category, parameters, weight, volume, quantityInStock);
+        return Objects.hash(name, price, category, parameters);
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Integer getId() {

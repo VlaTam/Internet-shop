@@ -43,5 +43,8 @@
     <div class="row mb-2">
       <a class="btn btn-secondary" href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
     </div>
+    <div class="row mb-5">
+      <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/bin">Open the bin</a>
+    </div>
   </section>
 </common:layout>

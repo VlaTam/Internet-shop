@@ -89,28 +89,30 @@ VALUES ('Michelin', 225, 60, 17),
        ('Continental', 225, 60, 17);
 
 /*ProductEntity table*/
-CREATE TABLE IF NOT EXISTS internet_shop.product (
+CREATE TABLE IF NOT EXISTS internet_shop.product
+(
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
-    `price` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( price > 0 ),
+    `price` DECIMAL(8,2) NOT NULL DEFAULT 1,
     `category_id` INT NOT NULL,
     `parameter_id` INT NOT NULL,
-    `weight` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( weight > 0 ),
-    `volume` DECIMAL(8, 2) NOT NULL DEFAULT 1 CHECK ( volume > 0 ),
-    `quantity_in_stock` INT NOT NULL DEFAULT 0 CHECK ( quantity_in_stock >= 0 ),
+    `weight` DECIMAL(8,2) NOT NULL DEFAULT 0,
+    `volume` DECIMAL(8,2) NOT NULL DEFAULT 0,
+    `quantity_in_stock` INT NOT NULL DEFAULT 0,
+    `status` VARCHAR(50) NOT NULL DEFAULT 'valid',
     PRIMARY KEY (`id`),
-    INDEX `fk_product_category_id_idx` (`category_id` ASC),
-    INDEX `fk_product_parameters_id_idx` (`parameter_id` ASC),
+    INDEX `fk_product_category_id_idx` (`category_id` ASC) VISIBLE,
+    INDEX `fk_product_parameters_id_idx` (`parameter_id` ASC) VISIBLE,
     CONSTRAINT `fk_product_category_id`
-       FOREIGN KEY (`category_id`)
-         REFERENCES `internet_shop`.`category` (`id`)
-         ON DELETE RESTRICT
-         ON UPDATE CASCADE,
+     FOREIGN KEY (`category_id`)
+       REFERENCES `internet_shop`.`category` (`id`)
+       ON DELETE RESTRICT
+       ON UPDATE CASCADE,
     CONSTRAINT `fk_product_parameters_id`
-       FOREIGN KEY (`parameter_id`)
-         REFERENCES `internet_shop`.`parameters` (`id`)
-         ON DELETE RESTRICT
-         ON UPDATE CASCADE
+     FOREIGN KEY (`parameter_id`)
+       REFERENCES `internet_shop`.`parameters` (`id`)
+       ON DELETE RESTRICT
+       ON UPDATE CASCADE
 );
 
 /*Products*/

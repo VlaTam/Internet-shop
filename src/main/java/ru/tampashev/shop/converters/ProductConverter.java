@@ -38,6 +38,7 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
         product.setWeight(productEntity.getWeight());
         product.setPrice(productEntity.getPrice());
         product.setQuantityInStock(productEntity.getQuantityInStock());
+        product.setStatus(productEntity.getStatus());
         return product;
     }
 
@@ -58,6 +59,7 @@ public class ProductConverter implements Converter<ProductEntity, Product> {
         productEntity.setWeight(product.getWeight());
         productEntity.setPrice(product.getPrice());
         productEntity.setQuantityInStock(product.getQuantityInStock());
+        productEntity.setStatus(product.getStatus());
         return productEntity;
     }
 

@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/category").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/product/add").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/product/**").permitAll()
+                .antMatchers("/bin/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .exceptionHandling().accessDeniedPage("/WEB-INF/pages/errors/access_denied.jsp")
