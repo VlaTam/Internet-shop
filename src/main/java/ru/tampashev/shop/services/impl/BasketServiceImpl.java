@@ -11,16 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 
-
 @Service
 //@SuppressWarnings("all")
 public class BasketServiceImpl implements BasketService {
 
     @Autowired
+    private HttpSession session;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
     private ProductService productService;
 
     @Override
-    public boolean add(HttpSession session, HttpServletRequest request) {
+    public boolean add() {
         HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
 
         if (purchaseSet == null) {
@@ -31,9 +36,23 @@ public class BasketServiceImpl implements BasketService {
 
         Product product = productService.findById(productId);
         Purchase purchase = new Purchase(product, quantity);
+
+        purchaseSet.remove(purchase);
         purchaseSet.add(purchase);
 
         session.setAttribute("purchaseSet", purchaseSet);
         return true;
+    }
+
+    @Override
+    public boolean delete(Product product) {
+        HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
+
+        Purchase purchase = new Purchase();
+        purchase.setProduct(product);
+        boolean result = purchaseSet.remove(purchase);
+
+        session.setAttribute("purchaseSet", purchaseSet);
+        return result;
     }
 }

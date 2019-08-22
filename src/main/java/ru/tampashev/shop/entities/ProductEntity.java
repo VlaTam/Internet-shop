@@ -74,14 +74,13 @@ public class ProductEntity implements Serializable {
         if (!(o instanceof ProductEntity)) return false;
         ProductEntity that = (ProductEntity) o;
         return Objects.equals(name, that.name) &&
-                Objects.equals(price, that.price) &&
                 Objects.equals(category, that.category) &&
                 Objects.equals(parameters, that.parameters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, category, parameters);
+        return Objects.hash(name, category, parameters);
     }
 
     public String getStatus() {

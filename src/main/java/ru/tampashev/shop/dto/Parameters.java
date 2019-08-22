@@ -1,6 +1,7 @@
 package ru.tampashev.shop.dto;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class Parameters {
 
@@ -10,6 +11,22 @@ public class Parameters {
     private Integer height;
     private Integer radius;
     private Collection<Product> products;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Parameters)) return false;
+        Parameters that = (Parameters) o;
+        return Objects.equals(brand, that.brand) &&
+                Objects.equals(width, that.width) &&
+                Objects.equals(height, that.height) &&
+                Objects.equals(radius, that.radius);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, width, height, radius);
+    }
 
     public Integer getId() {
         return id;

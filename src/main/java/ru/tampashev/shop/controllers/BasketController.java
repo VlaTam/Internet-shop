@@ -2,13 +2,10 @@ package ru.tampashev.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.services.BasketService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("basket")
@@ -18,13 +15,18 @@ public class BasketController {
     private BasketService binService;
 
     @GetMapping
-    public String openBin(){
+    public String openBin(Model model){
+        model.addAttribute("product", new Product());
         return "basket";
     }
 
     @PostMapping("/add")
-    public String addToBin(HttpSession session, HttpServletRequest request){
-        boolean result = binService.add(session, request);
-        return result ? "redirect:/catalog" : "redirect:/product?message=Product has not added into the bin";
+    public String addToBin(){
+        return binService.add() ? "redirect:/catalog" : "redirect:/product?message=Product has not added into the bin";
+    }
+
+    @DeleteMapping("/delete")
+    public String deletePurchase(@ModelAttribute("product") Product product){
+        return binService.delete(product) ? "redirect:/basket" : "redirect:/basket?message=Product has not deleted";
     }
 }

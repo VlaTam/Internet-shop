@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <common:layout title="Tyres shop">
-  <section class="container">
+  <%--<section class="container">--%>
 
     <div class="row mt-5">
       <div class="col-md-4"></div>
@@ -53,27 +53,23 @@
     <div class="row mt-5">
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <sec:authorize access="isAuthenticated()">
+        <c:if test="${user.lastName == null}">
+          Welcome, guest
+        </c:if>
+        <c:if test="${user.lastName != null}">
+          Welcome, ${user.lastName}
+        </c:if>
+        <%--<sec:authorize access="isAuthenticated()">
           <div class="row mb-2">
-            <p>Ваш логин: <sec:authentication property="principal.username" /></p>
+            <p>Hello, </p>
           </div>
           <div class="row mb-2">
             <a class="btn btn-info" href="<c:url value="/user/logout" />" role="button">Sign out</a>
           </div>
-        </sec:authorize>
+        </sec:authorize>--%>
       </div>
       <div class="col-md-4"></div>
     </div>
 
-    <div class="row mt-5">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <div class="row mb-2">
-          <a class="btn btn-secondary" href="${pageContext.servletContext.contextPath}/catalog">Open catalog</a>
-        </div>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-
-  </section>
+  <%--</section>--%>
 </common:layout>

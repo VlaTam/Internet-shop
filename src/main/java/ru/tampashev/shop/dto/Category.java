@@ -1,6 +1,7 @@
 package ru.tampashev.shop.dto;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class Category {
 
@@ -8,6 +9,20 @@ public class Category {
     private String name;
     private String status;
     private Collection<Product> products;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        return Objects.equals(name, category.name) &&
+                Objects.equals(status, category.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, status);
+    }
 
     public void setName(String name) {
         this.name = name;

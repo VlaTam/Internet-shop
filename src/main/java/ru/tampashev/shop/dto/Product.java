@@ -2,6 +2,7 @@ package ru.tampashev.shop.dto;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Objects;
 
 public class Product {
 
@@ -15,6 +16,21 @@ public class Product {
     private Integer quantityInStock;
     private String status;
     private Collection<Order> orders;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return Objects.equals(name, product.name) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(parameters, product.parameters);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category, parameters);
+    }
 
     public String getStatus() {
         return status;
