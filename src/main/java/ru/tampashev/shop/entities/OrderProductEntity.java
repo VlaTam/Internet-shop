@@ -2,6 +2,7 @@ package ru.tampashev.shop.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_product", schema = "internet_shop")
@@ -27,6 +28,9 @@ public class OrderProductEntity implements Serializable {
 
     @Column(name = "quantity_of_product", nullable = false)
     private Integer quantityOfProduct;
+
+    @Column(name = "fix_product_price", nullable = false)
+    private BigDecimal fixProductPrice;
 
     public Integer getId() {
         return id;
@@ -58,5 +62,13 @@ public class OrderProductEntity implements Serializable {
 
     public void setQuantityOfProduct(Integer quantityOfProduct) {
         this.quantityOfProduct = quantityOfProduct;
+    }
+
+    public BigDecimal getFixProductPrice() {
+        return fixProductPrice;
+    }
+
+    public void setFixProductPrice(BigDecimal fixPrice) {
+        this.fixProductPrice = fixPrice;
     }
 }

@@ -22,6 +22,9 @@ public class OrderEntity implements Serializable {
     @Column(nullable = false)
     private BigDecimal orderPrice;
 
+    @Column
+    private String comments;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
@@ -94,5 +97,13 @@ public class OrderEntity implements Serializable {
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

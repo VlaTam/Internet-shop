@@ -4,72 +4,61 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <common:layout title="Tyres shop">
-  <%--<section class="container">--%>
-
-    <div class="row mt-5">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-          <div class="row">
-            <nav class="nav">
-              <a class="nav-link" href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
-              <a class="nav-link" href="${pageContext.servletContext.contextPath}/category">Edit categories</a>
-            </nav>
-          </div>
-        </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+      <div class="row mt-5 justify-content-md-center align-items-center">
+        <div class="">
+          <p>Welcome, ${user.firstName}</p>
+        </div>
       </div>
-      <div class="col-md-4"></div>
-    </div>
-
-    <%--<div class="row mt-5">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <sec:authorize access="hasRole('ROLE_CUSTOMER')">
-          <div class="row">
-            <nav class="nav">
-              <a class="nav-link" href="${pageContext.servletContext.contextPath}/user">Add product</a>
-            </nav>
-          </div>
-        </sec:authorize>
+      <div class="row mt-2 justify-content-md-center align-items-center">
+        <div class="w-25">
+          <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/user">Edit profile</a>
+        </div>
       </div>
-      <div class="col-md-4"></div>
-    </div>--%>
-
-    <div class="row mt-5">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <sec:authorize access="!isAuthenticated()">
-          <div class="row mb-2" style="width: 200px;">
-            <a class="btn btn-info" href="<c:url value="/user/login" />" role="button">Sign in</a>
-          </div>
-          <div class="row mb-2" style="width: 200px;">
-            <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
-          </div>
-        </sec:authorize>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+      <div class="row mt-5 justify-content-md-center align-items-center">
+        <div class="">
+          <p>Hello, admin</p>
+        </div>
       </div>
-      <div class="col-md-4"></div>
-    </div>
-
-    <div class="row mt-5">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <c:if test="${user.lastName == null}">
-          Welcome, guest
-        </c:if>
-        <c:if test="${user.lastName != null}">
-          Welcome, ${user.lastName}
-        </c:if>
-        <%--<sec:authorize access="isAuthenticated()">
-          <div class="row mb-2">
-            <p>Hello, </p>
-          </div>
-          <div class="row mb-2">
-            <a class="btn btn-info" href="<c:url value="/user/logout" />" role="button">Sign out</a>
-          </div>
-        </sec:authorize>--%>
+        <div class="row mt-4 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/category">Edit categories</a>
+            </div>
+        </div>
+    </sec:authorize>
+    <sec:authorize access="isAnonymous()">
+      <div class="row mt-5 justify-content-md-center align-items-center">
+        <div class="">
+          <p>Welcome, guest</p>
+        </div>
       </div>
-      <div class="col-md-4"></div>
-    </div>
+    </sec:authorize>
 
-  <%--</section>--%>
+    <sec:authorize access="!isAuthenticated()">
+      <div class="row mt-2 justify-content-md-center align-items-center">
+        <div class="w-25">
+          <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/user/login">Sign in</a>
+        </div>
+      </div>
+      <div class="row mt-4 justify-content-md-center align-items-center">
+        <div class="w-25">
+          <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/user/registration">Registration</a>
+        </div>
+      </div>
+    </sec:authorize>
+
+    <sec:authorize access="isAuthenticated()">
+      <div class="row mt-4 justify-content-md-center align-items-center">
+        <div class="w-25">
+          <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/user/logout">Sign out</a>
+        </div>
+      </div>
+    </sec:authorize>
 </common:layout>

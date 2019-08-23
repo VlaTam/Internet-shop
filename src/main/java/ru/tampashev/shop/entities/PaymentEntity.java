@@ -9,11 +9,11 @@ import java.util.Objects;
 @Table(name = "payment", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "payment-find-all",
-                query = "FROM PaymentEntity"),
+                    query = "FROM PaymentEntity payment"),
         @NamedQuery(name = "payment-find",
-                query = "FROM PaymentEntity payment " +
-                        "WHERE payment.method = :method " +
-                        "AND payment.paymentStatus = :paymentStatus")
+                    query = "FROM PaymentEntity payment " +
+                            "WHERE payment.method = :method " +
+                            "AND payment.paymentStatus = :paymentStatus")
 })
 public class PaymentEntity implements Serializable {
 
@@ -25,7 +25,7 @@ public class PaymentEntity implements Serializable {
     @Column(nullable = false)
     private String method;
 
-    @Column(nullable = false)
+    @Column(name = "payment_status", nullable = false)
     private String paymentStatus;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "payment", cascade = CascadeType.MERGE)

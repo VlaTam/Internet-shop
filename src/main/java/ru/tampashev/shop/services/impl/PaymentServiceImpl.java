@@ -1,7 +1,6 @@
 package ru.tampashev.shop.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
@@ -11,13 +10,14 @@ import ru.tampashev.shop.entities.PaymentEntity;
 import ru.tampashev.shop.services.PaymentService;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 @Transactional
 public class PaymentServiceImpl extends AbstractGenericService<PaymentEntity, Payment> implements PaymentService {
 
     @Autowired
-    @Qualifier("paymentConverter")
     private Converter<PaymentEntity, Payment> paymentConverter;
 
     @Autowired
@@ -37,5 +37,12 @@ public class PaymentServiceImpl extends AbstractGenericService<PaymentEntity, Pa
     public Integer find(Payment payment) {
         PaymentEntity paymentEntity = paymentConverter.convertToEntity(payment);
         return paymentDao.find(paymentEntity);
+    }
+
+    @Override
+    public List<Payment> findAll() {
+        List<PaymentEntity> paymentEntities = paymentDao.findAll();
+        paymentEntities.sort(Comparator.comparing(PaymentEntity::getMethod));
+        return paymentConverter.convertToDtoList(paymentEntities);
     }
 }

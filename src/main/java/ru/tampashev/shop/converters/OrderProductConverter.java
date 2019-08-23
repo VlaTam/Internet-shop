@@ -18,6 +18,7 @@ public class OrderProductConverter implements Converter<OrderProductEntity, Orde
         orderProduct.setOrder(orderProductEntity.getOrder());
         orderProduct.setProduct(orderProductEntity.getProduct());
         orderProduct.setQuantityOfProduct(orderProductEntity.getQuantityOfProduct());
+        orderProduct.setFixProductPrice(orderProductEntity.getFixProductPrice());
         return orderProduct;
     }
 
@@ -28,6 +29,7 @@ public class OrderProductConverter implements Converter<OrderProductEntity, Orde
         orderProductEntity.setOrder(orderProduct.getOrder());
         orderProductEntity.setProduct(orderProduct.getProduct());
         orderProductEntity.setQuantityOfProduct(orderProduct.getQuantityOfProduct());
+        orderProductEntity.setFixProductPrice(orderProduct.getFixProductPrice());
         return orderProductEntity;
     }
 

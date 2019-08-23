@@ -16,13 +16,13 @@
                 <div class="col-md-2 d-flex align-items-md-center justify-content-md-end">
                     <div>
                         <a href="${pageContext.servletContext.contextPath}/">
-                            <img class="text-white img-fluid" src="${pageContext.servletContext.contextPath}/resources/images/logo.png" alt="Go to main page">
+                            <img class="text-white img-fluid" src="${pageContext.servletContext.contextPath}/resources/images/wheel.png" alt="Go to main page">
                         </a>
                     </div>
                 </div>
             </header>
 
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3 d-flex align-items-md-center justify-content-md-end">

@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserServiceImpl extends AbstractGenericService<UserEntity, User> implements UserService {
 
-    private final String roleCustomer = "customer";
+    private final String roleCustomer = "ROLE_CUSTOMER";
 
     @Autowired
     private Converter<UserEntity, User> userConverter;
@@ -87,6 +87,7 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
         String password = user.getPassword();
         String confirmation = user.getConfirmation();
         if (password.equals(confirmation)){
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             UserEntity userEntity = userConverter.convertToEntity(user);
             userDao.update(userEntity);
             addressService.update(user.getAddress());

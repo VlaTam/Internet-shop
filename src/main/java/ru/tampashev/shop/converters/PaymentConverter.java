@@ -4,6 +4,9 @@ import org.springframework.stereotype.Component;
 import ru.tampashev.shop.dto.Payment;
 import ru.tampashev.shop.entities.PaymentEntity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class PaymentConverter implements Converter<PaymentEntity, Payment> {
 
@@ -23,5 +26,10 @@ public class PaymentConverter implements Converter<PaymentEntity, Payment> {
         paymentEntity.setMethod(payment.getMethod());
         paymentEntity.setPaymentStatus(payment.getPaymentStatus());
         return paymentEntity;
+    }
+
+    @Override
+    public List<Payment> convertToDtoList(List<PaymentEntity> paymentEntities) {
+        return paymentEntities.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 }

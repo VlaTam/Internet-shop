@@ -16,7 +16,7 @@ public class HomeController {
 
     @GetMapping
     public String showHomePage(Model model) {
-        //model.addAttribute("user", commonService.getAuthorisedUser());
+        model.addAttribute("user", commonService.getAuthorisedUser());
         return "index";
     }
 }

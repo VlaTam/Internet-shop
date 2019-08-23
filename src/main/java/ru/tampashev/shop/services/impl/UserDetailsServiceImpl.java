@@ -17,8 +17,8 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final String adminEmail = "admin@admin";
-    private final String adminPassword = "sector578";
+    private final String adminEmail = "admin";
+    private final String adminPassword = "admin";
 
     @Autowired
     private UserService userService;

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 import ru.tampashev.shop.dao.PaymentDao;
 import ru.tampashev.shop.entities.PaymentEntity;
 
+import java.util.List;
+
 @Repository
 public class PaymentDaoImpl extends AbstractGenericDao<PaymentEntity> implements PaymentDao {
 
@@ -20,5 +22,10 @@ public class PaymentDaoImpl extends AbstractGenericDao<PaymentEntity> implements
                                             .uniqueResult();
 
         return existedPayment != null ? existedPayment.getId() : -1;
+    }
+
+    @Override
+    public List<PaymentEntity> findAll() {
+        return getSession().createNamedQuery("payment-find-all", type).getResultList();
     }
 }

@@ -8,8 +8,6 @@ import ru.tampashev.shop.dto.User;
 import ru.tampashev.shop.services.CommonService;
 import ru.tampashev.shop.services.UserService;
 
-import java.util.Collection;
-
 @Service
 public class CommonServiceImpl implements CommonService {
 
@@ -19,9 +17,8 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public User getAuthorisedUser() {
         User user = new User();
-        Collection authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
-        if (true){
+        if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")){
             UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             user = userService.findByEmail(principal.getUsername());
         }

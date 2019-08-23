@@ -11,6 +11,8 @@ import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.services.DeliveryService;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,5 +39,12 @@ public class DeliveryServiceImpl extends AbstractGenericService<DeliveryEntity, 
     public Integer find(Delivery delivery) {
         DeliveryEntity deliveryEntity = deliveryConverter.convertToEntity(delivery);
         return deliveryDao.find(deliveryEntity);
+    }
+
+    @Override
+    public List<Delivery> findAll() {
+        List<DeliveryEntity> deliveryEntities = deliveryDao.findAll();
+        deliveryEntities.sort(Comparator.comparing(DeliveryEntity::getMethod));
+        return deliveryConverter.convertToDtoList(deliveryEntities);
     }
 }

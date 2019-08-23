@@ -4,6 +4,9 @@ import org.springframework.stereotype.Component;
 import ru.tampashev.shop.dto.Delivery;
 import ru.tampashev.shop.entities.DeliveryEntity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class DeliveryConverter implements Converter<DeliveryEntity, Delivery> {
 
@@ -23,5 +26,10 @@ public class DeliveryConverter implements Converter<DeliveryEntity, Delivery> {
         deliveryEntity.setMethod(delivery.getMethod());
         deliveryEntity.setDeliveryStatus(delivery.getDeliveryStatus());
         return deliveryEntity;
+    }
+
+    @Override
+    public List<Delivery> convertToDtoList(List<DeliveryEntity> deliveryEntities) {
+        return deliveryEntities.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 }

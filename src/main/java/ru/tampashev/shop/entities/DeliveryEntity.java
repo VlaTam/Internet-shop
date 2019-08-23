@@ -25,7 +25,7 @@ public class DeliveryEntity implements Serializable {
     @Column(nullable = false)
     private String method;
 
-    @Column(nullable = false)
+    @Column(name = "delivery_status", nullable = false)
     private String deliveryStatus;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "delivery", cascade = CascadeType.MERGE)

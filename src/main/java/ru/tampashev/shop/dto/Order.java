@@ -12,6 +12,7 @@ public class Order {
     private Delivery delivery;
     private Date date;
     private BigDecimal orderPrice;
+    private String comments;
     private List<Product> products;
 
     public Integer getId() {
@@ -68,5 +69,13 @@ public class Order {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

@@ -28,6 +28,7 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         order.setId(orderEntity.getId());
         order.setDate(orderEntity.getDate());
         order.setOrderPrice(orderEntity.getOrderPrice());
+        order.setComments(orderEntity.getComments());
 
         Delivery delivery = deliveryConverter.convertToDto(orderEntity.getDelivery());
         order.setDelivery(delivery);
@@ -49,6 +50,7 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         orderEntity.setId(order.getId());
         orderEntity.setDate(order.getDate());
         orderEntity.setOrderPrice(order.getOrderPrice());
+        orderEntity.setComments(order.getComments());
 
         DeliveryEntity deliveryEntity = deliveryConverter.convertToEntity(order.getDelivery());
         orderEntity.setDelivery(deliveryEntity);

@@ -121,6 +121,10 @@ VALUES ('Primacy 4', 10000, 1, 1, 5, 0.2, 100),
        ('Dueler A/T 001', 8800, 1, 2, 4.5, 0.2, 60),
        ('ContiPremiumContact 5 SUV', 9400, 1, 3, 5, 0.2, 24);
 
+
+
+
+
 /*PaymentEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.payment
 (
@@ -129,6 +133,12 @@ CREATE TABLE IF NOT EXISTS internet_shop.payment
     `payment_status` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
+
+INSERT INTO internet_shop.payment (method, payment_status)
+VALUES ('cash', 'paid'),
+       ('cash', 'not paid'),
+       ('bank card', 'paid'),
+       ('bank card', 'not paid');
 
 /*DeliveryEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.delivery
@@ -139,6 +149,14 @@ CREATE TABLE IF NOT EXISTS internet_shop.delivery
     PRIMARY KEY (`id`)
 );
 
+INSERT INTO internet_shop.delivery (method, delivery_status)
+VALUES ('courier', 'delivered'),
+       ('courier', 'not delivered'),
+       ('mail', 'delivered'),
+       ('mail', 'not delivered'),
+       ('pickup', 'delivered'),
+       ('pickup', 'not delivered');
+
 /*OrderEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.order
 (
@@ -148,25 +166,26 @@ CREATE TABLE IF NOT EXISTS internet_shop.order
     `delivery_id` INT NOT NULL,
     `date` DATE NOT NULL,
     `order_price` DECIMAL(12,2) NOT NULL,
-    PRIMARY KEY (`id`),
-    INDEX `fk_order_payment_id_idx` (`payment_id` ASC),
-    INDEX `fk_order_delivery_id_idx` (`delivery_id` ASC),
-    INDEX `fk_order_user_id_idx` (`user_id` ASC),
-    CONSTRAINT `fk_order_payment_id`
-    FOREIGN KEY (`payment_id`)
-    REFERENCES `internet_shop`.`payment` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-    CONSTRAINT `fk_order_delivery_id`
-    FOREIGN KEY (`delivery_id`)
-    REFERENCES `internet_shop`.`delivery` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-    CONSTRAINT `fk_order_user_id`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `internet_shop`.`user` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE
+    `comments` VARCHAR(500) NOT NULL DEFAULT 'no comments',
+        PRIMARY KEY (`id`),
+        INDEX `fk_order_payment_id_idx` (`payment_id` ASC),
+        INDEX `fk_order_delivery_id_idx` (`delivery_id` ASC),
+        INDEX `fk_order_user_id_idx` (`user_id` ASC),
+        CONSTRAINT `fk_order_payment_id`
+            FOREIGN KEY (`payment_id`)
+            REFERENCES `internet_shop`.`payment` (`id`)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+        CONSTRAINT `fk_order_delivery_id`
+            FOREIGN KEY (`delivery_id`)
+            REFERENCES `internet_shop`.`delivery` (`id`)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+        CONSTRAINT `fk_order_user_id`
+            FOREIGN KEY (`user_id`)
+            REFERENCES `internet_shop`.`user` (`id`)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE
 );
 
 /*The table provides connection between tables Order and Product*/
@@ -175,6 +194,7 @@ CREATE TABLE IF NOT EXISTS internet_shop.order_product
   `order_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   `quantity_of_product` INT NOT NULL,
+  'fix_product_price' DECIMAL(8,2) NOT NULL,
   PRIMARY KEY (`order_id`, `product_id`),
   INDEX `fk_order_product_id_idx` (`product_id` ASC),
   CONSTRAINT `fk_product_order_id`
