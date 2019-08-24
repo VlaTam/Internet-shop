@@ -11,9 +11,9 @@ public class Order {
     private Payment payment;
     private Delivery delivery;
     private Date date;
-    private BigDecimal orderPrice;
     private String comments;
-    private List<Product> products;
+    private BigDecimal totalPrice;
+    private List<OrderProduct> orderProducts;
 
     public Integer getId() {
         return id;
@@ -35,12 +35,8 @@ public class Order {
         return date;
     }
 
-    public BigDecimal getOrderPrice() {
-        return orderPrice;
-    }
-
-    public List<Product> getProducts() {
-        return products;
+    public List<OrderProduct> getOrderProducts() {
+        return orderProducts;
     }
 
     public void setId(Integer id) {
@@ -63,12 +59,8 @@ public class Order {
         this.date = date;
     }
 
-    public void setOrderPrice(BigDecimal orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     public String getComments() {
@@ -77,5 +69,13 @@ public class Order {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

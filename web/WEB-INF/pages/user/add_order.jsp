@@ -36,6 +36,7 @@
             </div>
         </div>
     </section>
+
     <sf:form action="${pageContext.servletContext.contextPath}/order/add" method="POST" modelAttribute="order">
         <section class="row">
             <div>
@@ -60,6 +61,12 @@
                             </c:if>
                         </c:forEach>
                     </sf:select>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="comments">Your comments</label>
+                    <sf:textarea path="comments" id="comments" cols="50" rows="3"/>
                 </div>
             </div>
         </section>

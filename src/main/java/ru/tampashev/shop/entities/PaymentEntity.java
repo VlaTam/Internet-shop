@@ -28,8 +28,8 @@ public class PaymentEntity implements Serializable {
     @Column(name = "payment_status", nullable = false)
     private String paymentStatus;
 
-    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "payment", cascade = CascadeType.MERGE)
-    private Collection<OrderEntity> orders;
+    /*@OneToMany(targetEntity = OrderEntity.class, mappedBy = "payment", cascade = CascadeType.MERGE)
+    private Collection<OrderEntity> orders;*/
 
     @Override
     public boolean equals(Object o) {

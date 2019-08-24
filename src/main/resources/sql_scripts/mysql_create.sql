@@ -158,7 +158,7 @@ VALUES ('courier', 'delivered'),
        ('pickup', 'not delivered');
 
 /*OrderEntity table*/
-CREATE TABLE IF NOT EXISTS internet_shop.order
+CREATE TABLE IF NOT EXISTS internet_shop.order_in_store
 (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NOT NULL,
@@ -191,20 +191,21 @@ CREATE TABLE IF NOT EXISTS internet_shop.order
 /*The table provides connection between tables Order and Product*/
 CREATE TABLE IF NOT EXISTS internet_shop.order_product
 (
-  `order_id` INT NOT NULL,
-  `product_id` INT NOT NULL,
-  `quantity_of_product` INT NOT NULL,
-  'fix_product_price' DECIMAL(8,2) NOT NULL,
-  PRIMARY KEY (`order_id`, `product_id`),
-  INDEX `fk_order_product_id_idx` (`product_id` ASC),
-  CONSTRAINT `fk_product_order_id`
-    FOREIGN KEY (`order_id`)
-      REFERENCES `internet_shop`.`order` (`id`)
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE,
-  CONSTRAINT `fk_order_product_id`
-    FOREIGN KEY (`product_id`)
-      REFERENCES `internet_shop`.`product` (`id`)
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `order_id` INT NOT NULL,
+    `product_id` INT NOT NULL,
+    `quantity_of_product` INT NULL,
+    `fix_product_price` DECIMAL(8,2) NULL,
+    INDEX `fk_order_product_id_idx` (`product_id` ASC),
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_product_order_id`
+      FOREIGN KEY (`order_id`)
+        REFERENCES `internet_shop`.order_in_store (`id`)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    CONSTRAINT `fk_order_product_id`
+      FOREIGN KEY (`product_id`)
+        REFERENCES `internet_shop`.`product` (`id`)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );

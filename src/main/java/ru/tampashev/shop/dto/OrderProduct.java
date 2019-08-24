@@ -1,15 +1,12 @@
 package ru.tampashev.shop.dto;
 
-import ru.tampashev.shop.entities.OrderEntity;
-import ru.tampashev.shop.entities.ProductEntity;
-
 import java.math.BigDecimal;
 
 public class OrderProduct {
 
     private Integer id;
-    private OrderEntity order;
-    private ProductEntity product;
+    private Order order;
+    private Product product;
     private Integer quantityOfProduct;
     private BigDecimal fixProductPrice;
 
@@ -17,11 +14,11 @@ public class OrderProduct {
         return id;
     }
 
-    public OrderEntity getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public ProductEntity getProduct() {
+    public Product getProduct() {
         return product;
     }
 
@@ -33,11 +30,11 @@ public class OrderProduct {
         this.id = id;
     }
 
-    public void setOrder(OrderEntity order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
-    public void setProduct(ProductEntity product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
@@ -52,4 +49,5 @@ public class OrderProduct {
     public void setFixProductPrice(BigDecimal fixProductPrice) {
         this.fixProductPrice = fixProductPrice;
     }
+
 }

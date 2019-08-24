@@ -22,7 +22,7 @@
                 </div>
             </header>
 
-            <div class="row mt-3">
+            <div class="row mt-3 mb-3">
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3 d-flex align-items-md-center justify-content-md-end">

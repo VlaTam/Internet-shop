@@ -56,4 +56,10 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
         category.setStatus("invalid");
         update(category);
     }
+
+    @Override
+    public Integer create(Category category) {
+        category.setStatus("valid");
+        return super.create(category);
+    }
 }

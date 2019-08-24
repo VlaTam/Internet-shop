@@ -44,8 +44,8 @@ public class UserEntity implements Serializable {
     @JoinColumn(name = "address_id", nullable = false)
     private AddressEntity addressEntity;
 
-    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)
-    private List<OrderEntity> orderEntity;
+/*    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)
+    private List<OrderEntity> orderEntity;*/
 
     public Integer getId() {
         return id;
@@ -79,9 +79,9 @@ public class UserEntity implements Serializable {
         return addressEntity;
     }
 
-    public List<OrderEntity> getOrderEntity() {
+    /*public List<OrderEntity> getOrderEntity() {
         return orderEntity;
-    }
+    }*/
 
     public void setId(Integer id) {
         this.id = id;
@@ -115,7 +115,7 @@ public class UserEntity implements Serializable {
         this.addressEntity = addressEntity;
     }
 
-    public void setOrderEntity(List<OrderEntity> orderEntity) {
+    /*public void setOrderEntity(List<OrderEntity> orderEntity) {
         this.orderEntity = orderEntity;
-    }
+    }*/
 }

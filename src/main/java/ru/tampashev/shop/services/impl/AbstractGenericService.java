@@ -1,6 +1,5 @@
 package ru.tampashev.shop.services.impl;
 
-
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.services.GenericService;

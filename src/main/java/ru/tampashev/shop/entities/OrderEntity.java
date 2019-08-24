@@ -7,8 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "order", schema = "internet_shop")
-
+@Table(name = "order_in_store", schema = "internet_shop")
+@NamedQueries({
+        @NamedQuery(name = "order-find-history-of-user",
+                query = "FROM OrderEntity order " +
+                        "WHERE order.user.id = :userId")
+})
 public class OrderEntity implements Serializable {
 
     @Id
@@ -16,14 +20,14 @@ public class OrderEntity implements Serializable {
     @Column(updatable = false, nullable = false)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(nullable = false)
-    private BigDecimal orderPrice;
-
-    @Column
+    @Column(name = "comments")
     private String comments;
+
+    @Column(name = "order_price", nullable = false)
+    private BigDecimal totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -37,11 +41,8 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "delivery_id", nullable = false)
     private DeliveryEntity delivery;
 
-    @ManyToMany
-    @JoinTable( name = "order_product",
-                joinColumns = @JoinColumn(name = "order_id"),
-                inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<ProductEntity> products;
+    @OneToMany(targetEntity = OrderProductEntity.class, mappedBy = "order", cascade = CascadeType.MERGE)
+    private List<OrderProductEntity> orderProductEntityList;
 
     public Integer getId() {
         return id;
@@ -61,14 +62,6 @@ public class OrderEntity implements Serializable {
 
     public Date getDate() {
         return date;
-    }
-
-    public BigDecimal getOrderPrice() {
-        return orderPrice;
-    }
-
-    public List<ProductEntity> getProducts() {
-        return products;
     }
 
     public void setId(Integer id) {
@@ -91,19 +84,27 @@ public class OrderEntity implements Serializable {
         this.date = date;
     }
 
-    public void setOrderPrice(BigDecimal orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public void setProducts(List<ProductEntity> products) {
-        this.products = products;
-    }
-
     public String getComments() {
         return comments;
     }
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public List<OrderProductEntity> getOrderProductEntityList() {
+        return orderProductEntityList;
+    }
+
+    public void setOrderProductEntityList(List<OrderProductEntity> orderProductEntityList) {
+        this.orderProductEntityList = orderProductEntityList;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

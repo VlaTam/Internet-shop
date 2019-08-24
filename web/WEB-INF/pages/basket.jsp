@@ -70,7 +70,7 @@
                 </c:forEach>
                 <div class="row mb-3 mt-3">
                     <div class="mx-auto" style="width: 200px;">
-                        <a href="${pageContext.servletContext.contextPath}/order/add" class="btn btn-success">Make purchase</a>
+                        <a href="${pageContext.servletContext.contextPath}/order/add" class="btn btn-success">Buy</a>
                     </div>
                 </div>
             </c:otherwise>

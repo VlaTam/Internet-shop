@@ -32,7 +32,7 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
             for (ProductEntity productEntity : productEntities)
                 products.add(converter.convertToDto(productEntity));
 
-            category.setProducts(products);
+            category.setOrderProducts(products);
         }*/
         return category;
     }
@@ -44,7 +44,7 @@ public class CategoryConverter implements Converter<CategoryEntity, Category> {
         categoryEntity.setName(category.getName());
         categoryEntity.setStatus(category.getStatus());
 
-        /*Collection<Product> products = category.getProducts();
+        /*Collection<Product> products = category.getOrderProducts();
 
         if (products != null) {
             Set<ProductEntity> productEntities = new HashSet<>(products.size());

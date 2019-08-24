@@ -6,6 +6,7 @@ import ru.tampashev.shop.dto.*;
 import ru.tampashev.shop.entities.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderConverter implements Converter<OrderEntity, Order> {
@@ -20,15 +21,15 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
     private Converter<PaymentEntity, Payment> paymentConverter;
 
     @Autowired
-    private Converter<ProductEntity, Product> productConverter;
+    private OrderProductConverter orderProductConverter;
 
     @Override
     public Order convertToDto(OrderEntity orderEntity) {
         Order order = new Order();
         order.setId(orderEntity.getId());
         order.setDate(orderEntity.getDate());
-        order.setOrderPrice(orderEntity.getOrderPrice());
         order.setComments(orderEntity.getComments());
+        order.setTotalPrice(orderEntity.getTotalPrice());
 
         Delivery delivery = deliveryConverter.convertToDto(orderEntity.getDelivery());
         order.setDelivery(delivery);
@@ -39,8 +40,12 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         User user = userConverter.convertToDto(orderEntity.getUser());
         order.setUser(user);
 
-        List<Product> products = productConverter.convertToDtoList(orderEntity.getProducts());
-        order.setProducts(products);
+        List<OrderProduct> orderProductList = orderEntity.getOrderProductEntityList()
+                .stream()
+                .map(orderProductConverter::convertToDto)
+                .collect(Collectors.toList());
+
+        order.setOrderProducts(orderProductList);
         return order;
     }
 
@@ -49,8 +54,8 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setId(order.getId());
         orderEntity.setDate(order.getDate());
-        orderEntity.setOrderPrice(order.getOrderPrice());
         orderEntity.setComments(order.getComments());
+        orderEntity.setTotalPrice(order.getTotalPrice());
 
         DeliveryEntity deliveryEntity = deliveryConverter.convertToEntity(order.getDelivery());
         orderEntity.setDelivery(deliveryEntity);
@@ -61,8 +66,12 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         UserEntity userEntity = userConverter.convertToEntity(order.getUser());
         orderEntity.setUser(userEntity);
 
-        List<ProductEntity> productEntities = productConverter.convertToEntityList(order.getProducts());
-        orderEntity.setProducts(productEntities);
+        List<OrderProductEntity> orderProductEntityList = order.getOrderProducts()
+                .stream()
+                .map(orderProductConverter::convertToEntity)
+                .collect(Collectors.toList());
+
+        orderEntity.setOrderProductEntityList(orderProductEntityList);
         return orderEntity;
     }
 }

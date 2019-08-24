@@ -77,6 +77,7 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
         Category category = categoryService.findById(product.getCategory().getId());
 
         if (find(product) < 0 & category.getName() != null){
+            product.setStatus("valid");
             product.setCategory(category);
             Integer parametersId = parametersService.create(product.getParameters());
             product.getParameters().setId(parametersId);

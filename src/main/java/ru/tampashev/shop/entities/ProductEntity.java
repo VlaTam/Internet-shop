@@ -62,11 +62,11 @@ public class ProductEntity implements Serializable {
     @Column(nullable = false)
     private String status;
 
-    @ManyToMany
+   /* @ManyToMany
     @JoinTable( name = "order_product",
                 joinColumns = @JoinColumn(name = "product_id"),
                 inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private Collection<OrderEntity> orders;
+    private Collection<OrderEntity> orders;*/
 
     @Override
     public boolean equals(Object o) {

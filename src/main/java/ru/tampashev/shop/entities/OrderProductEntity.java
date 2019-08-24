@@ -26,10 +26,10 @@ public class OrderProductEntity implements Serializable {
     @JoinColumn(name = "product_id", nullable = false)
     private ProductEntity product;
 
-    @Column(name = "quantity_of_product", nullable = false)
+    @Column(name = "quantity_of_product")
     private Integer quantityOfProduct;
 
-    @Column(name = "fix_product_price", nullable = false)
+    @Column(name = "fix_product_price")
     private BigDecimal fixProductPrice;
 
     public Integer getId() {

@@ -61,7 +61,7 @@
 
     <section class="container">
         <c:choose>
-            <c:when test="${products.size() == 0}">
+            <c:when test="${orderProducts.size() == 0}">
                 <p>Catalog is empty.</p>
             </c:when>
             <c:otherwise>
@@ -73,7 +73,7 @@
                     <div class="col">Height</div>
                     <div class="col">Buy</div>
                 </div>
-                <c:forEach var="product" items="${products}">
+                <c:forEach var="product" items="${orderProducts}">
                     <div class="row mb-1">
                         <div class="col">
                             ${product.parameters.brand}
