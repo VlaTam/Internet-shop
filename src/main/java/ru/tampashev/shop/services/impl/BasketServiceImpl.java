@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 //@SuppressWarnings("all")
@@ -29,13 +28,14 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public boolean add() {
+
         HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
         BigDecimal totalPrice = new BigDecimal("0");
 
         if (purchaseSet == null) {
             purchaseSet = new HashSet<>();
         } else {
-            totalPrice = new BigDecimal((String) session.getAttribute("totalPrice"));
+            totalPrice = (BigDecimal) session.getAttribute("totalPrice");
         }
 
         Integer productId = Integer.parseInt(request.getParameter("productId"));
@@ -67,7 +67,7 @@ public class BasketServiceImpl implements BasketService {
         session.setAttribute("purchaseSet", purchaseSet);
 
         Integer quantityOfDeletedProduct = quantityOfProducts - getQuantityOfProducts(purchaseSet);
-        BigDecimal totalPrice = new BigDecimal((String) session.getAttribute("totalPrice"));
+        BigDecimal totalPrice = (BigDecimal) session.getAttribute("totalPrice");
         totalPrice = totalPrice.subtract(product.getPrice().multiply(new BigDecimal(quantityOfDeletedProduct)));
         session.setAttribute("totalPrice", totalPrice);
 

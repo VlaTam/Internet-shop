@@ -3,14 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <common:layout title="Order history">
-    <section class="row">
-        <div>
-            <div>
-                <p>Your orders</p>
-            </div>
-        </div>
-    </section>
-
     <c:if test="${orderList.size() == 0}">
         <section class="row">
             <div>
@@ -21,6 +13,13 @@
         </section>
     </c:if>
     <c:if test="${orderList.size() > 0}">
+        <section class="row">
+            <div>
+                <div>
+                    <p>Your orders</p>
+                </div>
+            </div>
+        </section>
         <c:forEach var="order" items="${orderList}">
             <section class="container mb-3">
                 <div class="row">

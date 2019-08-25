@@ -105,7 +105,7 @@
             </fieldset>
             <div class="row justify-content-center">
                 <div class="col-4">
-                    <sf:button class="btn btn-success">Sign up</sf:button>
+                    <sf:button class="btn btn-success">Register</sf:button>
                 </div>
             </div>
         </sf:form>

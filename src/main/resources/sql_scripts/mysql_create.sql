@@ -151,11 +151,13 @@ CREATE TABLE IF NOT EXISTS internet_shop.delivery
 
 INSERT INTO internet_shop.delivery (method, delivery_status)
 VALUES ('courier', 'delivered'),
-       ('courier', 'not delivered'),
+       ('courier', 'awaiting shipment'),
+       ('courier', 'shipped'),
        ('mail', 'delivered'),
-       ('mail', 'not delivered'),
-       ('pickup', 'delivered'),
-       ('pickup', 'not delivered');
+       ('mail', 'awaiting shipment'),
+       ('mail', 'shipped'),
+       ('pickup', 'shipped'),
+       ('pickup', 'awaiting shipment');
 
 /*OrderEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.order_in_store

@@ -5,26 +5,36 @@
 
 <common:layout title="Tyres shop">
     <sec:authorize access="hasRole('ROLE_CUSTOMER')">
-      <div class="row mt-5 justify-content-md-center align-items-center">
-        <div class="">
-          <p>Welcome, ${user.firstName}</p>
+        <div class="row mt-5 justify-content-md-center align-items-center">
+            <div class="">
+              <p>Welcome, ${user.firstName}</p>
+            </div>
         </div>
-      </div>
-      <div class="row mt-2 justify-content-md-center align-items-center">
-        <div class="w-25">
-          <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/user">Edit profile</a>
+        <div class="row mt-2 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/order/history">Your orders</a>
+            </div>
         </div>
-      </div>
+        <div class="row mt-2 justify-content-md-center align-items-center">
+            <div class="w-25">
+              <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/user">Edit profile</a>
+            </div>
+        </div>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-      <div class="row mt-5 justify-content-md-center align-items-center">
-        <div class="">
-          <p>Hello, admin</p>
+        <div class="row mt-5 justify-content-md-center align-items-center">
+            <div class="">
+                <p>Hello, admin</p>
+            </div>
         </div>
-      </div>
         <div class="row mt-4 justify-content-md-center align-items-center">
             <div class="w-25">
                 <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/product/add">Add product</a>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/order/manage">Order management</a>
             </div>
         </div>
         <div class="row mt-4 justify-content-md-center align-items-center">

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.tampashev.shop.dto.*;
 import ru.tampashev.shop.entities.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         User user = userConverter.convertToDto(orderEntity.getUser());
         order.setUser(user);
 
-        List<OrderProduct> orderProductList = orderEntity.getOrderProductEntityList()
+        Collection<OrderProduct> orderProductList = orderEntity.getOrderProductEntityList()
                 .stream()
                 .map(orderProductConverter::convertToDto)
                 .collect(Collectors.toList());
@@ -66,12 +67,17 @@ public class OrderConverter implements Converter<OrderEntity, Order> {
         UserEntity userEntity = userConverter.convertToEntity(order.getUser());
         orderEntity.setUser(userEntity);
 
-        List<OrderProductEntity> orderProductEntityList = order.getOrderProducts()
+        Collection<OrderProductEntity> orderProductEntityList = order.getOrderProducts()
                 .stream()
                 .map(orderProductConverter::convertToEntity)
                 .collect(Collectors.toList());
 
         orderEntity.setOrderProductEntityList(orderProductEntityList);
         return orderEntity;
+    }
+
+    @Override
+    public List<Order> convertToDtoList(List<OrderEntity> orderEntityList) {
+        return orderEntityList.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 }

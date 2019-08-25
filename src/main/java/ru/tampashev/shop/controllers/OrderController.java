@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.tampashev.shop.dto.Order;
+import ru.tampashev.shop.dto.OrderStatus;
 import ru.tampashev.shop.services.CommonService;
 import ru.tampashev.shop.services.DeliveryService;
 import ru.tampashev.shop.services.OrderService;
@@ -48,5 +49,23 @@ public class OrderController {
     public String openOrderHistory(Model model){
         model.addAttribute("orderList", orderService.findUsersOrders());
         return "user/order_history";
+    }
+
+    @GetMapping("/manage")
+    public String openActiveOrders(Model model){
+        model.addAttribute("paymentList", paymentService.findAll());
+        model.addAttribute("deliveryList", deliveryService.findAll());
+        model.addAttribute("activeOrders", orderService.findActiveOrders());
+        model.addAttribute("orderStatus", new OrderStatus());
+        return "employee/order/show_orders";
+    }
+
+    @GetMapping("/filtered")
+    public String openFilteredOrders(@ModelAttribute("orderStatus") OrderStatus orderStatus, Model model){
+        model.addAttribute("paymentList", paymentService.findAll());
+        model.addAttribute("deliveryList", deliveryService.findAll());
+        model.addAttribute("activeOrders", orderService.findByStatus(orderStatus));
+        model.addAttribute("orderStatus", new OrderStatus());
+        return "employee/order/show_orders";
     }
 }

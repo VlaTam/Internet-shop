@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -44,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/catalog/filtered").permitAll()
                 .antMatchers("/category").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/product/add").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/order/show").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/order/add").hasAuthority("ROLE_CUSTOMER")
                 .antMatchers("/product/**").permitAll()
                 .antMatchers("/basket/**").hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ANONYMOUS")

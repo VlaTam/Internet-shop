@@ -53,7 +53,7 @@
                     </sf:select>
                 </div>
                 <div class="col">
-                    <sf:button>Show</sf:button>
+                    <sf:button class="btn btn-info">Show</sf:button>
                 </div>
             </div>
         </section>
@@ -61,7 +61,7 @@
 
     <section class="container">
         <c:choose>
-            <c:when test="${orderProducts.size() == 0}">
+            <c:when test="${products.size() == 0}">
                 <p>Catalog is empty.</p>
             </c:when>
             <c:otherwise>
@@ -71,9 +71,9 @@
                     <div class="col">Radius</div>
                     <div class="col">Width</div>
                     <div class="col">Height</div>
-                    <div class="col">Buy</div>
+                    <div class="col"></div>
                 </div>
-                <c:forEach var="product" items="${orderProducts}">
+                <c:forEach var="product" items="${products}">
                     <div class="row mb-1">
                         <div class="col">
                             ${product.parameters.brand}

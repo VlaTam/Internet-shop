@@ -3,15 +3,19 @@ package ru.tampashev.shop.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "order_in_store", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "order-find-history-of-user",
+                    query = "FROM OrderEntity order " +
+                            "WHERE order.user.id = :userId"),
+        @NamedQuery(name = "order-find-active",
                 query = "FROM OrderEntity order " +
-                        "WHERE order.user.id = :userId")
+                        "WHERE order.payment.paymentStatus = 'not paid' " +
+                        "AND order.delivery.deliveryStatus = 'awaiting shipment'")
 })
 public class OrderEntity implements Serializable {
 
@@ -42,7 +46,7 @@ public class OrderEntity implements Serializable {
     private DeliveryEntity delivery;
 
     @OneToMany(targetEntity = OrderProductEntity.class, mappedBy = "order", cascade = CascadeType.MERGE)
-    private List<OrderProductEntity> orderProductEntityList;
+    private Collection<OrderProductEntity> orderProductEntityList;
 
     public Integer getId() {
         return id;
@@ -92,11 +96,11 @@ public class OrderEntity implements Serializable {
         this.comments = comments;
     }
 
-    public List<OrderProductEntity> getOrderProductEntityList() {
+    public Collection<OrderProductEntity> getOrderProductEntityList() {
         return orderProductEntityList;
     }
 
-    public void setOrderProductEntityList(List<OrderProductEntity> orderProductEntityList) {
+    public void setOrderProductEntityList(Collection<OrderProductEntity> orderProductEntityList) {
         this.orderProductEntityList = orderProductEntityList;
     }
 

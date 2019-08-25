@@ -56,7 +56,7 @@
                     <label for="delivery">Delivery</label>
                     <sf:select path="delivery.id" id="delivery">
                         <c:forEach var="currentDelivery" items="${deliveryList}">
-                            <c:if test="${currentDelivery.deliveryStatus == 'not delivered'}">
+                            <c:if test="${currentDelivery.deliveryStatus == 'awaiting shipment'}">
                                 <sf:option value="${currentDelivery.id}">${currentDelivery.method}</sf:option>
                             </c:if>
                         </c:forEach>
