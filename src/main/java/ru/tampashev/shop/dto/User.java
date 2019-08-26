@@ -16,7 +16,7 @@ public class User {
     private String mailAddress;
     private String password;
     private String confirmation;
-    private Role role;// = new Role();
+    private Role role;
     private Address address;
     private List<Order> orders;
 

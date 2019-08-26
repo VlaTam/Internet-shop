@@ -68,6 +68,11 @@
                         </div>
                     </div>
                 </c:forEach>
+                <div class="row mb-2">
+                    <div class="ml-3">
+                        <b>Total price:</b> ${sessionScope.totalPrice}
+                    </div>
+                </div>
                 <div class="row mb-3 mt-3">
                     <div class="mx-auto" style="width: 200px;">
                         <a href="${pageContext.servletContext.contextPath}/order/add" class="btn btn-success">Buy</a>

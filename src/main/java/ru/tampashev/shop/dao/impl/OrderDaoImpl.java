@@ -61,6 +61,6 @@ public class OrderDaoImpl extends AbstractGenericDao<OrderEntity> implements Ord
 
     @Override
     public List<OrderEntity> findActiveOrders() {
-        return getSession().createNamedQuery("order-find-active", type).getResultList();
+        return getSession().createNamedQuery("order-find-all", type).getResultList();
     }
 }

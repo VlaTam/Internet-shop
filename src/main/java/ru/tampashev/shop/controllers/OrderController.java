@@ -3,16 +3,17 @@ package ru.tampashev.shop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.tampashev.shop.dto.Delivery;
 import ru.tampashev.shop.dto.Order;
 import ru.tampashev.shop.dto.OrderStatus;
+import ru.tampashev.shop.dto.Payment;
 import ru.tampashev.shop.services.CommonService;
 import ru.tampashev.shop.services.DeliveryService;
 import ru.tampashev.shop.services.OrderService;
 import ru.tampashev.shop.services.PaymentService;
+
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/order")
@@ -29,6 +30,36 @@ public class OrderController {
 
     @Autowired
     private DeliveryService deliveryService;
+
+    @GetMapping("/edit/{id}")
+    public String openOrder(@PathVariable("id") Integer id, Model model){
+        model.addAttribute("paymentList", paymentService.findAll());
+        model.addAttribute("deliveryList", deliveryService.findAll());
+        model.addAttribute(orderService.findById(id));
+        return "employee/order/order_status";
+    }
+
+    @PutMapping("/edit")
+    public String changeOrderStatus(@ModelAttribute("order") Order order){
+        Order existedOrder = orderService.findById(order.getId());
+
+        Payment payment = new Payment();
+        payment.setMethod(order.getPayment().getMethod());
+        payment.setPaymentStatus(order.getPayment().getPaymentStatus());
+        payment.setId(paymentService.find(payment));
+
+        Delivery delivery = new Delivery();
+        delivery.setMethod(order.getDelivery().getMethod());
+        delivery.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
+        delivery.setId(deliveryService.find(delivery));
+
+        existedOrder.setPayment(payment);
+        existedOrder.setDelivery(delivery);
+        existedOrder.setOrderProducts(new HashSet<>());
+
+        orderService.update(existedOrder);
+        return "redirect:/order/edit/" + order.getId();
+    }
 
     @GetMapping("/add")
     public String openAddOrder(Model model){

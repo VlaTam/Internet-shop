@@ -12,10 +12,8 @@ import java.util.Date;
         @NamedQuery(name = "order-find-history-of-user",
                     query = "FROM OrderEntity order " +
                             "WHERE order.user.id = :userId"),
-        @NamedQuery(name = "order-find-active",
-                query = "FROM OrderEntity order " +
-                        "WHERE order.payment.paymentStatus = 'not paid' " +
-                        "AND order.delivery.deliveryStatus = 'awaiting shipment'")
+        @NamedQuery(name = "order-find-all",
+                    query = "FROM OrderEntity")
 })
 public class OrderEntity implements Serializable {
 

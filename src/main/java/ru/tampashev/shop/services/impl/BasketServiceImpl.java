@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.Set;
 
 @Service
 //@SuppressWarnings("all")
@@ -28,37 +27,29 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public boolean add() {
-
         HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
-        BigDecimal totalPrice = new BigDecimal("0");
 
         if (purchaseSet == null) {
             purchaseSet = new HashSet<>();
-        } else {
-            totalPrice = (BigDecimal) session.getAttribute("totalPrice");
         }
 
         Integer productId = Integer.parseInt(request.getParameter("productId"));
-        Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
 
         Product product = productService.findById(productId);
         Purchase purchase = new Purchase(product, quantity);
 
-        BigDecimal purchasePrice = product.getPrice().multiply(new BigDecimal(quantity));
-        totalPrice = totalPrice.add(purchasePrice);
-
         purchaseSet.remove(purchase);
-        purchaseSet.add(purchase);
+        boolean result = purchaseSet.add(purchase);
 
         session.setAttribute("purchaseSet", purchaseSet);
-        session.setAttribute("totalPrice", totalPrice);
-        return true;
+        session.setAttribute("totalPrice", getTotalPrice());
+        return result;
     }
 
     @Override
     public boolean delete(Product product) {
         HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
-        Integer quantityOfProducts = getQuantityOfProducts(purchaseSet);
 
         Purchase purchase = new Purchase();
         purchase.setProduct(product);
@@ -66,19 +57,16 @@ public class BasketServiceImpl implements BasketService {
         boolean result = purchaseSet.remove(purchase);
         session.setAttribute("purchaseSet", purchaseSet);
 
-        Integer quantityOfDeletedProduct = quantityOfProducts - getQuantityOfProducts(purchaseSet);
-        BigDecimal totalPrice = (BigDecimal) session.getAttribute("totalPrice");
-        totalPrice = totalPrice.subtract(product.getPrice().multiply(new BigDecimal(quantityOfDeletedProduct)));
-        session.setAttribute("totalPrice", totalPrice);
-
+        session.setAttribute("totalPrice", getTotalPrice());
         return result;
     }
 
-    private Integer getQuantityOfProducts(Set<Purchase> bin){
-        Integer quantity = 0;
-        for (Purchase purchase : bin){
-            quantity += purchase.getQuantity();
+    private BigDecimal getTotalPrice(){
+        BigDecimal totalPrice = new BigDecimal(0);
+        HashSet<Purchase> purchaseSet = (HashSet<Purchase>) session.getAttribute("purchaseSet");
+        for (Purchase purchase : purchaseSet){
+            totalPrice = totalPrice.add(purchase.getTotalCost());
         }
-        return quantity;
+        return totalPrice;
     }
 }

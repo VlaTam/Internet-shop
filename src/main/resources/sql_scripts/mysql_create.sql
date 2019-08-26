@@ -157,7 +157,8 @@ VALUES ('courier', 'delivered'),
        ('mail', 'awaiting shipment'),
        ('mail', 'shipped'),
        ('pickup', 'shipped'),
-       ('pickup', 'awaiting shipment');
+       ('pickup', 'awaiting shipment'),
+       ('pickup', 'delivered');
 
 /*OrderEntity table*/
 CREATE TABLE IF NOT EXISTS internet_shop.order_in_store

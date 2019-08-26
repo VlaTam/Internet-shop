@@ -83,7 +83,7 @@
                                 ${order.date}
                         </div>
                         <div class="col">
-                            <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/order/${order.id}">
+                            <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/order/edit/${order.id}">
                                 Change status
                             </a>
                         </div>
