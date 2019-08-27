@@ -4,6 +4,9 @@ import org.springframework.stereotype.Repository;
 import ru.tampashev.shop.dao.UserDao;
 import ru.tampashev.shop.entities.UserEntity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserDao {
 
@@ -27,5 +30,17 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserD
                                     .uniqueResult();
 
         return existedUser != null ? existedUser.getId() : -1;
+    }
+
+
+    @Override
+    public List<UserEntity> getTopTenUsers() {
+        String query =  "SELECT orderEntity.user, SUM(orderEntity.totalPrice) AS totalSum " +
+                        "FROM OrderEntity orderEntity " +
+                        "GROUP BY orderEntity.user " +
+                        "ORDER BY totalSum DESC";
+
+        List<Object[]> result = getSession().createQuery(query).setMaxResults(10).list();
+        return result.stream().map(objects -> (UserEntity)objects[0]).collect(Collectors.toList());
     }
 }

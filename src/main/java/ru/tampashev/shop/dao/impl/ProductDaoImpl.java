@@ -7,8 +7,10 @@ import ru.tampashev.shop.entities.ProductEntity;
 
 import javax.persistence.criteria.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
+@SuppressWarnings("all")
 public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements ProductDao {
 
     public ProductDaoImpl() {
@@ -64,5 +66,17 @@ public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements
         Predicate predicate = criteriaBuilder.and(predicateBrand, predicateHeight, predicateWidth, predicateRadius);
         query.where(predicate);
         return getSession().createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<ProductEntity> getTopTenProducts() {
+        String query =  "SELECT orderProduct.product, SUM(orderProduct.quantityOfProduct) AS totalQuantity " +
+                        "FROM OrderProductEntity orderProduct " +
+                        "GROUP BY orderProduct.product " +
+                        "ORDER BY totalQuantity DESC";
+
+        List<Object[]> result = getSession().createQuery(query).setMaxResults(10).list();
+
+        return result.stream().map(objects -> (ProductEntity)objects[0]).collect(Collectors.toList());
     }
 }

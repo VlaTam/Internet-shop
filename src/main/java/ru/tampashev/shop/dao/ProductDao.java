@@ -10,4 +10,6 @@ public interface ProductDao extends GenericDao<ProductEntity> {
     List<ProductEntity> findAll();
 
     List<ProductEntity> findByParameters(ParametersEntity parametersEntity);
+
+    List<ProductEntity> getTopTenProducts();
 }

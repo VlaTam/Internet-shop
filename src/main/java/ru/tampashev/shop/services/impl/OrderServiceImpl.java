@@ -11,6 +11,7 @@ import ru.tampashev.shop.dto.*;
 import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.entities.OrderEntity;
 import ru.tampashev.shop.entities.PaymentEntity;
+import ru.tampashev.shop.entities.UserEntity;
 import ru.tampashev.shop.services.*;
 
 import javax.servlet.http.HttpSession;

@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 @Table(name = "order_product", schema = "internet_shop")
 @NamedQueries({
         @NamedQuery(name = "orderProduct-find-by-orderId",
-                query = "FROM OrderProductEntity orderProduct " +
-                        "WHERE orderProduct.order.id = :orderId ")
+                    query = "FROM OrderProductEntity orderProduct " +
+                            "WHERE orderProduct.order.id = :orderId ")
 })
 public class OrderProductEntity implements Serializable {
 

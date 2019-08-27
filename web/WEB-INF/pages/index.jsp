@@ -42,6 +42,21 @@
                 <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/category">Edit categories</a>
             </div>
         </div>
+        <div class="row mt-4 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/products">Top products</a>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/users">Top customers</a>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-md-center align-items-center">
+            <div class="w-25">
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/profit">Profit</a>
+            </div>
+        </div>
     </sec:authorize>
     <sec:authorize access="isAnonymous()">
       <div class="row mt-5 justify-content-md-center align-items-center">

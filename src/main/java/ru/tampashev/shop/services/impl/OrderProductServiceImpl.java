@@ -3,10 +3,13 @@ package ru.tampashev.shop.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
+import ru.tampashev.shop.converters.ProductConverter;
 import ru.tampashev.shop.dao.GenericDao;
 import ru.tampashev.shop.dao.OrderProductDao;
 import ru.tampashev.shop.dto.OrderProduct;
+import ru.tampashev.shop.dto.Product;
 import ru.tampashev.shop.entities.OrderProductEntity;
+import ru.tampashev.shop.entities.ProductEntity;
 import ru.tampashev.shop.services.OrderProductService;
 
 import javax.transaction.Transactional;
@@ -16,6 +19,9 @@ import java.util.List;
 @Transactional
 public class OrderProductServiceImpl extends AbstractGenericService<OrderProductEntity, OrderProduct>
                                     implements OrderProductService {
+
+    @Autowired
+    private ProductConverter productConverter;
 
     @Autowired
     private Converter<OrderProductEntity, OrderProduct> orderProductConverter;

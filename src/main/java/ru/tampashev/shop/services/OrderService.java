@@ -2,6 +2,7 @@ package ru.tampashev.shop.services;
 
 import ru.tampashev.shop.dto.Order;
 import ru.tampashev.shop.dto.OrderStatus;
+import ru.tampashev.shop.dto.User;
 
 import java.util.List;
 

@@ -10,6 +10,9 @@ import ru.tampashev.shop.entities.AddressEntity;
 import ru.tampashev.shop.entities.RoleEntity;
 import ru.tampashev.shop.entities.UserEntity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @SuppressWarnings("all")
 public class UserConverter implements Converter<UserEntity, User> {
@@ -57,5 +60,10 @@ public class UserConverter implements Converter<UserEntity, User> {
         AddressEntity addressEntity = addressConverter.convertToEntity(user.getAddress());
         userEntity.setAddressEntity(addressEntity);
         return userEntity;
+    }
+
+    @Override
+    public List<User> convertToDtoList(List<UserEntity> userEntityList) {
+        return userEntityList.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 }

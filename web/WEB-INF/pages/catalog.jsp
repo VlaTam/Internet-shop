@@ -73,25 +73,25 @@
                     <div class="col">Height</div>
                     <div class="col"></div>
                 </div>
-                <c:forEach var="product" items="${products}">
+                <c:forEach var="user" items="${products}">
                     <div class="row mb-1">
                         <div class="col">
-                            ${product.parameters.brand}
+                            ${user.parameters.brand}
                         </div>
                         <div class="col">
-                            ${product.name}
+                            ${user.name}
                         </div>
                         <div class="col">
-                            ${product.parameters.radius}
+                            ${user.parameters.radius}
                         </div>
                         <div class="col">
-                            ${product.parameters.width}
+                            ${user.parameters.width}
                         </div>
                         <div class="col">
-                            ${product.parameters.height}
+                            ${user.parameters.height}
                         </div>
                         <div class="col">
-                            <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/product/${product.id}">Buy</a>
+                            <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/product/${user.id}">Buy</a>
                         </div>
                     </div>
                 </c:forEach>

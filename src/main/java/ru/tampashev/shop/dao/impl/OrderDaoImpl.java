@@ -5,12 +5,14 @@ import ru.tampashev.shop.dao.OrderDao;
 import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.entities.OrderEntity;
 import ru.tampashev.shop.entities.PaymentEntity;
+import ru.tampashev.shop.entities.UserEntity;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class OrderDaoImpl extends AbstractGenericDao<OrderEntity> implements OrderDao {

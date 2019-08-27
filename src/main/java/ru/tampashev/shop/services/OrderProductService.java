@@ -1,6 +1,7 @@
 package ru.tampashev.shop.services;
 
 import ru.tampashev.shop.dto.OrderProduct;
+import ru.tampashev.shop.dto.Product;
 
 import java.util.List;
 
