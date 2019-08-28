@@ -28,6 +28,8 @@ public class StatisticsController {
 
     @GetMapping("/profit")
     public String openProfit(Model model){
+        model.addAttribute("profitForWeek", statisticsService.getProfitLastWeek());
+        model.addAttribute("profitForMonth", statisticsService.getProfitLastMonth());
         return "employee/statistics/profit";
     }
 }

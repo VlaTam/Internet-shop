@@ -5,14 +5,17 @@ import ru.tampashev.shop.dao.OrderDao;
 import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.entities.OrderEntity;
 import ru.tampashev.shop.entities.PaymentEntity;
-import ru.tampashev.shop.entities.UserEntity;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 @Repository
 public class OrderDaoImpl extends AbstractGenericDao<OrderEntity> implements OrderDao {
@@ -64,5 +67,14 @@ public class OrderDaoImpl extends AbstractGenericDao<OrderEntity> implements Ord
     @Override
     public List<OrderEntity> findActiveOrders() {
         return getSession().createNamedQuery("order-find-all", type).getResultList();
+    }
+
+    @Override
+    public BigDecimal getProfit(Date startOfPeriod, Date endOfPeriod) {
+        return  getSession()
+                .createNamedQuery("order-find-profit", BigDecimal.class)
+                .setParameter("startOfPeriod", startOfPeriod)
+                .setParameter("endOfPeriod", endOfPeriod)
+                .uniqueResult();
     }
 }

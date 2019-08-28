@@ -32,7 +32,6 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserD
         return existedUser != null ? existedUser.getId() : -1;
     }
 
-
     @Override
     public List<UserEntity> getTopTenUsers() {
         String query =  "SELECT orderEntity.user, SUM(orderEntity.totalPrice) AS totalSum " +

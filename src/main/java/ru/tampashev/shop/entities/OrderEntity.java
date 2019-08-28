@@ -13,7 +13,11 @@ import java.util.Date;
                     query = "FROM OrderEntity order " +
                             "WHERE order.user.id = :userId"),
         @NamedQuery(name = "order-find-all",
-                    query = "FROM OrderEntity")
+                    query = "FROM OrderEntity"),
+        @NamedQuery(name = "order-find-profit",
+                    query = "SELECT SUM(orderEntity.totalPrice) " +
+                            "FROM OrderEntity orderEntity " +
+                            "WHERE orderEntity.date BETWEEN :startOfPeriod AND :endOfPeriod")
 })
 public class OrderEntity implements Serializable {
 
