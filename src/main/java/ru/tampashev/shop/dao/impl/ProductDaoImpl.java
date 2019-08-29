@@ -70,13 +70,6 @@ public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements
 
     @Override
     public List<ProductEntity> getTopTenProducts() {
-        String query =  "SELECT orderProduct.product, SUM(orderProduct.quantityOfProduct) AS totalQuantity " +
-                        "FROM OrderProductEntity orderProduct " +
-                        "GROUP BY orderProduct.product " +
-                        "ORDER BY totalQuantity DESC";
-
-        List<Object[]> result = getSession().createQuery(query).setMaxResults(10).list();
-
-        return result.stream().map(objects -> (ProductEntity)objects[0]).collect(Collectors.toList());
+        return getSession().createNamedQuery("find-top-products", type).setMaxResults(10).getResultList();
     }
 }

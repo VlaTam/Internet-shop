@@ -12,7 +12,12 @@ import java.util.List;
                     query = "FROM UserEntity"),
         @NamedQuery(name = "user-find-by-email",
                     query = "FROM UserEntity user " +
-                            "WHERE user.mailAddress = :mailAddress")
+                            "WHERE user.mailAddress = :mailAddress"),
+        @NamedQuery(name = "find-top-users",
+                    query = "SELECT orderEntity.user " +
+                            "FROM OrderEntity orderEntity " +
+                            "GROUP BY orderEntity.user " +
+                            "ORDER BY SUM(orderEntity.totalPrice) DESC")
 })
 public class UserEntity implements Serializable {
 
@@ -43,9 +48,6 @@ public class UserEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
     private AddressEntity addressEntity;
-
-/*    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "user", cascade = CascadeType.MERGE)
-    private List<OrderEntity> orderEntity;*/
 
     public Integer getId() {
         return id;
@@ -79,10 +81,6 @@ public class UserEntity implements Serializable {
         return addressEntity;
     }
 
-    /*public List<OrderEntity> getOrderEntity() {
-        return orderEntity;
-    }*/
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -114,8 +112,4 @@ public class UserEntity implements Serializable {
     public void setAddressEntity(AddressEntity addressEntity) {
         this.addressEntity = addressEntity;
     }
-
-    /*public void setOrderEntity(List<OrderEntity> orderEntity) {
-        this.orderEntity = orderEntity;
-    }*/
 }

@@ -44,12 +44,12 @@
         </div>
         <div class="row mt-4 justify-content-md-center align-items-center">
             <div class="w-25">
-                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/products">Top products</a>
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/products">Top ten products</a>
             </div>
         </div>
         <div class="row mt-4 justify-content-md-center align-items-center">
             <div class="w-25">
-                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/users">Top customers</a>
+                <a class="btn btn-secondary btn-lg btn-block" href="${pageContext.servletContext.contextPath}/statistics/users">Top ten customers</a>
             </div>
         </div>
         <div class="row mt-4 justify-content-md-center align-items-center">

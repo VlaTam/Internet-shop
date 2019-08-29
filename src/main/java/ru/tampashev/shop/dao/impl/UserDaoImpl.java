@@ -34,12 +34,6 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserD
 
     @Override
     public List<UserEntity> getTopTenUsers() {
-        String query =  "SELECT orderEntity.user, SUM(orderEntity.totalPrice) AS totalSum " +
-                        "FROM OrderEntity orderEntity " +
-                        "GROUP BY orderEntity.user " +
-                        "ORDER BY totalSum DESC";
-
-        List<Object[]> result = getSession().createQuery(query).setMaxResults(10).list();
-        return result.stream().map(objects -> (UserEntity)objects[0]).collect(Collectors.toList());
+        return getSession().createNamedQuery("find-top-users", type).setMaxResults(10).getResultList();
     }
 }

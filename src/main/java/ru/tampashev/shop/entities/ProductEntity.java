@@ -3,7 +3,6 @@ package ru.tampashev.shop.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Objects;
 
 //@SuppressWarnings(value = "unused")
@@ -27,7 +26,12 @@ import java.util.Objects;
                             "AND product.parameters.width = :width " +
                             "AND product.parameters.height = :height " +
                             "AND product.parameters.radius = :radius " +
-                            "AND product.status = 'valid'")
+                            "AND product.status = 'valid'"),
+        @NamedQuery(name = "find-top-products",
+                    query = "SELECT orderProduct.product " +
+                            "FROM OrderProductEntity orderProduct " +
+                            "GROUP BY orderProduct.product " +
+                            "ORDER BY SUM(orderProduct.quantityOfProduct) DESC")
 })
 public class ProductEntity implements Serializable {
 

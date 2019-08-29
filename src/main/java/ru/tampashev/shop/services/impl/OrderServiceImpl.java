@@ -11,7 +11,6 @@ import ru.tampashev.shop.dto.*;
 import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.entities.OrderEntity;
 import ru.tampashev.shop.entities.PaymentEntity;
-import ru.tampashev.shop.entities.UserEntity;
 import ru.tampashev.shop.services.*;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +22,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@SuppressWarnings("all")
 public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order> implements OrderService {
 
     @Autowired
@@ -135,5 +135,27 @@ public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order>
     public List<Order> findActiveOrders() {
         List<OrderEntity> orderEntityList = orderDao.findActiveOrders();
         return orderConverter.convertToDtoList(orderEntityList);
+    }
+
+    @Override
+    public Integer changeStatus(Order order) {
+        Order existedOrder = findById(order.getId());
+
+        Payment payment = new Payment();
+        payment.setMethod(order.getPayment().getMethod());
+        payment.setPaymentStatus(order.getPayment().getPaymentStatus());
+        payment.setId(paymentService.find(payment));
+
+        Delivery delivery = new Delivery();
+        delivery.setMethod(order.getDelivery().getMethod());
+        delivery.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
+        delivery.setId(deliveryService.find(delivery));
+
+        existedOrder.setPayment(payment);
+        existedOrder.setDelivery(delivery);
+        existedOrder.setOrderProducts(new HashSet<>());
+
+        update(existedOrder);
+        return order.getId();
     }
 }
