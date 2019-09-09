@@ -1,15 +1,21 @@
 package ru.tampashev.shop.dto;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Collection;
 import java.util.Objects;
 
+@JsonAutoDetect
 public class Parameters {
 
+    @JsonIgnore
     private Integer id;
     private String brand;
     private Integer width;
     private Integer height;
     private Integer radius;
+    @JsonIgnore
     private Collection<Product> products;
 
     @Override

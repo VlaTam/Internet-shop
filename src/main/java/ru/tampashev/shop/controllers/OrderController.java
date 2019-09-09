@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.tampashev.shop.dto.Order;
 import ru.tampashev.shop.dto.OrderStatus;
 
-import ru.tampashev.shop.services.CommonService;
-import ru.tampashev.shop.services.DeliveryService;
-import ru.tampashev.shop.services.OrderService;
-import ru.tampashev.shop.services.PaymentService;
+import ru.tampashev.shop.services.*;
 
 @Controller
 @RequestMapping("/order")
@@ -27,6 +24,9 @@ public class OrderController {
 
     @Autowired
     private DeliveryService deliveryService;
+
+    @Autowired
+    private JmsService jmsService;
 
     @GetMapping("/edit/{id}")
     public String openOrder(@PathVariable("id") Integer id, Model model){
@@ -53,6 +53,7 @@ public class OrderController {
     @PostMapping("/add")
     public String addOrder(@ModelAttribute("order") Order order){
         orderService.create(order);
+        jmsService.sendMessage();
         return "redirect:/";
     }
 

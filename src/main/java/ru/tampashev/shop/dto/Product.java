@@ -1,20 +1,31 @@
 package ru.tampashev.shop.dto;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
 
+@JsonAutoDetect
 public class Product {
 
+    @JsonIgnore
     private Integer id;
     private String name;
     private BigDecimal price;
+    @JsonIgnore
     private Category category;
     private Parameters parameters;
+    @JsonIgnore
     private BigDecimal weight ;
+    @JsonIgnore
     private BigDecimal volume;
+    @JsonIgnore
     private Integer quantityInStock;
+    @JsonIgnore
     private String status;
+    @JsonIgnore
     private Collection<Order> orders;
 
     @Override
