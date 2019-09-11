@@ -43,6 +43,9 @@ public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements
         Root<ProductEntity> productEntityRoot = query.from(ProductEntity.class);
         query.select(productEntityRoot);
 
+        Predicate predicateStatus = criteriaBuilder.and();
+        predicateStatus = criteriaBuilder.equal(productEntityRoot.get("status"), "valid");
+
         Predicate predicateBrand = criteriaBuilder.and();
         if (parametersEntity.getBrand() != null && !parametersEntity.getBrand().isEmpty()){
             predicateBrand = criteriaBuilder.equal(productEntityRoot.get("parameters").get("brand"), parametersEntity.getBrand());
@@ -63,7 +66,7 @@ public class ProductDaoImpl extends AbstractGenericDao<ProductEntity> implements
             predicateRadius = criteriaBuilder.equal(productEntityRoot.get("parameters").get("radius"), parametersEntity.getRadius());
         }
 
-        Predicate predicate = criteriaBuilder.and(predicateBrand, predicateHeight, predicateWidth, predicateRadius);
+        Predicate predicate = criteriaBuilder.and(predicateStatus, predicateBrand, predicateHeight, predicateWidth, predicateRadius);
         query.where(predicate);
         return getSession().createQuery(query).getResultList();
     }

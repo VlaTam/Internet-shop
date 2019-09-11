@@ -25,9 +25,6 @@ public class OrderController {
     @Autowired
     private DeliveryService deliveryService;
 
-    @Autowired
-    private JmsService jmsService;
-
     @GetMapping("/edit/{id}")
     public String openOrder(@PathVariable("id") Integer id, Model model){
         model.addAttribute("paymentList", paymentService.findAll());
@@ -38,7 +35,8 @@ public class OrderController {
 
     @PutMapping("/edit")
     public String changeOrderStatus(@ModelAttribute("order") Order order){
-        return "redirect:/order/edit/" + orderService.changeStatus(order);
+        orderService.changeStatus(order);
+        return "redirect:/order/manage";
     }
 
     @GetMapping("/add")
@@ -53,7 +51,6 @@ public class OrderController {
     @PostMapping("/add")
     public String addOrder(@ModelAttribute("order") Order order){
         orderService.create(order);
-        jmsService.sendMessage();
         return "redirect:/";
     }
 

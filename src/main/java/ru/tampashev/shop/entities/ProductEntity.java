@@ -30,6 +30,7 @@ import java.util.Objects;
         @NamedQuery(name = "find-top-products",
                     query = "SELECT orderProduct.product " +
                             "FROM OrderProductEntity orderProduct " +
+                            "WHERE orderProduct.product.status = 'valid'" +
                             "GROUP BY orderProduct.product " +
                             "ORDER BY SUM(orderProduct.quantityOfProduct) DESC")
 })
@@ -51,7 +52,7 @@ public class ProductEntity implements Serializable {
     private CategoryEntity category;
 
     @ManyToOne
-    @JoinColumn(name = "parameter_id", nullable = false)
+    @JoinColumn(name = "parameter_id")
     private ParametersEntity parameters;
 
     @Column(nullable = false)

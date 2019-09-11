@@ -16,9 +16,6 @@ import ru.tampashev.shop.services.ParametersService;
 import ru.tampashev.shop.services.ProductService;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -85,7 +82,24 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
             ProductEntity productEntity = productConverter.convertToEntity(product);
             userId = productDao.create(productEntity);
         }
-
         return userId;
+    }
+
+    @Override
+    public void update(Product product) {
+        Integer parametersId = parametersService.find(product.getParameters());
+        if (parametersId < 0) {
+            parametersId = parametersService.create(product.getParameters());
+            product.getParameters().setId(parametersId);
+        }
+        product.getParameters().setId(parametersId);
+        ProductEntity productEntity = productConverter.convertToEntity(product);
+        productDao.update(productEntity);
+    }
+
+    @Override
+    public void delete(Product product) {
+       product.setStatus("inValid");
+       update(product);
     }
 }

@@ -3,6 +3,10 @@ package ru.tampashev.shop.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -11,10 +15,25 @@ public class Parameters {
 
     @JsonIgnore
     private Integer id;
+
+    @NotBlank(message = "type brand")
     private String brand;
+
+    @NotNull(message = "type width")
+    @Min(value = 0, message = "width is not negative value")
+    @Max(value = 1000, message = "max value of width is 1000")
     private Integer width;
+
+    @NotNull(message = "type height")
+    @Min(value = 0, message = "height is not negative value")
+    @Max(value = 1000, message = "max value of height is 1000")
     private Integer height;
+
+    @NotNull(message = "type radius")
+    @Min(value = 0, message = "radius is not negative value")
+    @Max(value = 100, message = "max radius value is 100")
     private Integer radius;
+
     @JsonIgnore
     private Collection<Product> products;
 

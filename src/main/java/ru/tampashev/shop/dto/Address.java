@@ -1,17 +1,38 @@
 package ru.tampashev.shop.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
 public class Address {
 
     private Integer id;
+
+    @NotBlank(message = "country is empty")
     private String country;
+
+    @NotBlank(message = "city is empty")
     private String city;
+
+    @NotBlank(message = "postal code is empty")
     private String postalCode;
+
+    @NotBlank(message = "street is empty")
     private String street;
+
+    @NotNull(message = "type house number")
+    @Min(value = 1, message = "house number: min value is 1")
+    @Max(value = 500, message = "house number: max value is 500")
     private Integer houseNumber;
+
+    @NotNull(message = "type flat number")
+    @Min(value = 1, message = "flat number: min value is 1")
+    @Max(value = 2000, message = "flat number: max value is 2000")
     private Integer flatNumber;
+
     private Collection<User> users;
 
     @Override

@@ -2,6 +2,7 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/common" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <common:layout title="Catalog">
     <jsp:useBean id="parametersSet" class="java.util.HashSet"/>
@@ -71,27 +72,39 @@
                     <div class="col">Radius</div>
                     <div class="col">Width</div>
                     <div class="col">Height</div>
+                    <div class="col">Price, RUB</div>
                     <div class="col"></div>
                 </div>
-                <c:forEach var="user" items="${products}">
+                <c:forEach var="product" items="${products}">
                     <div class="row mb-1">
                         <div class="col">
-                            ${user.parameters.brand}
+                            ${product.parameters.brand}
                         </div>
                         <div class="col">
-                            ${user.name}
+                            ${product.name}
                         </div>
                         <div class="col">
-                            ${user.parameters.radius}
+                            ${product.parameters.radius}
                         </div>
                         <div class="col">
-                            ${user.parameters.width}
+                            ${product.parameters.width}
                         </div>
                         <div class="col">
-                            ${user.parameters.height}
+                            ${product.parameters.height}
                         </div>
                         <div class="col">
-                            <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/product/${user.id}">Buy</a>
+                            ${product.price}
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-between">
+                                <sec:authorize access="!hasRole('ROLE_ADMIN')">
+                                    <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/product/${product.id}">Buy</a>
+                                </sec:authorize>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                    <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/product/update/${product.id}">Update</a>
+                                    <a class="btn btn-danger" href="${pageContext.servletContext.contextPath}/product/delete/${product.id}">Delete</a>
+                                </sec:authorize>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>

@@ -34,12 +34,12 @@
                     <c:choose>
                         <c:when test="${categories.size() > 0}">
                             <h4 class="mb-3">Created categories:</h4>
-                            <c:forEach var="category" items="${categories}">
+                            <c:forEach var="currentCategory" items="${categories}">
                                 <div class="mb-2">
                                     <li>
-                                            ${category.name}
-                                        <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/category/edit/${category.id}"> Edit</a>
-                                        <a class="btn btn-danger" href="${pageContext.servletContext.contextPath}/category/delete/${category.id}"> Delete</a>
+                                            ${currentCategory.name}
+                                        <a class="btn btn-info" href="${pageContext.servletContext.contextPath}/category/edit/${currentCategory.id}"> Edit</a>
+                                        <a class="btn btn-danger" href="${pageContext.servletContext.contextPath}/category/delete/${currentCategory.id}"> Delete</a>
                                     </li>
                                 </div>
                             </c:forEach>

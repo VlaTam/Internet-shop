@@ -1,10 +1,15 @@
 package ru.tampashev.shop.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.tampashev.shop.dao.DeliveryDao;
 import ru.tampashev.shop.dao.OrderDao;
+import ru.tampashev.shop.dao.PaymentDao;
 import ru.tampashev.shop.entities.DeliveryEntity;
 import ru.tampashev.shop.entities.OrderEntity;
 import ru.tampashev.shop.entities.PaymentEntity;
+import ru.tampashev.shop.services.DeliveryService;
+import ru.tampashev.shop.services.PaymentService;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,6 +24,12 @@ import java.util.Locale;
 
 @Repository
 public class OrderDaoImpl extends AbstractGenericDao<OrderEntity> implements OrderDao {
+
+    @Autowired
+    private PaymentDao paymentDao;
+
+    @Autowired
+    private DeliveryDao deliveryDao;
 
     public OrderDaoImpl() {
         type = OrderEntity.class;
@@ -76,5 +87,13 @@ public class OrderDaoImpl extends AbstractGenericDao<OrderEntity> implements Ord
                 .setParameter("startOfPeriod", startOfPeriod)
                 .setParameter("endOfPeriod", endOfPeriod)
                 .uniqueResult();
+    }
+
+    @Override
+    public void update(OrderEntity orderEntity) {
+        OrderEntity existedOrderEntity = findById(orderEntity.getId());
+        existedOrderEntity.setPayment(paymentDao.findById(orderEntity.getPayment().getId()));
+        existedOrderEntity.setDelivery(deliveryDao.findById(orderEntity.getDelivery().getId()));
+        getSession().update(existedOrderEntity);
     }
 }

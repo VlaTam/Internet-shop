@@ -43,8 +43,9 @@ public class OrderProductConverter implements Converter<OrderProductEntity, Orde
         OrderProductEntity orderProductEntity = new OrderProductEntity();
         orderProductEntity.setId(orderProduct.getId());
 
-        OrderEntity orderEntity = orderConverter.convertToEntity(orderProduct.getOrder());
-        orderProductEntity.setOrder(orderEntity);
+        //!!!
+       /* OrderEntity orderEntity = orderConverter.convertToEntity(orderProduct.getOrder());
+        orderProductEntity.setOrder(orderEntity);*/
 
         ProductEntity productEntity = productConverter.convertToEntity(orderProduct.getProduct());
         orderProductEntity.setProduct(productEntity);

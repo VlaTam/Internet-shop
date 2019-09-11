@@ -59,7 +59,7 @@ public class CategoryServiceImpl extends AbstractGenericService<CategoryEntity, 
 
     @Override
     public Integer create(Category category) {
-        category.setStatus("valid");
-        return super.create(category);
+        CategoryEntity categoryEntity = categoryConverter.convertToEntity(category);
+        return categoryDao.create(categoryEntity);
     }
 }

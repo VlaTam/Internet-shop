@@ -5,9 +5,9 @@
 <common:layout title="Top users">
     <c:choose>
         <c:when test="${topTenUsers.size() > 0}">
-            <c:forEach var="user" items="${topTenUsers}">
+            <c:forEach var="product" items="${topTenUsers}">
                 <div>
-                    ${user.lastName} ${user.firstName} ${user.birthday} ${user.mailAddress}
+                    ${product.lastName} ${product.firstName} ${product.birthday} ${product.mailAddress}
                 </div>
             </c:forEach>
         </c:when>

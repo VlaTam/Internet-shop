@@ -3,6 +3,7 @@ package ru.tampashev.shop.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
@@ -12,17 +13,40 @@ public class Product {
 
     @JsonIgnore
     private Integer id;
+
+    @NotBlank(message = "email is empty")
     private String name;
+
+    @NotNull(message = "type price")
+    @DecimalMin(value = "0", message = "price is negative, correct it")
+    @DecimalMax(value = "1000000", message = "max price is 1000000")
     private BigDecimal price;
+
     @JsonIgnore
+    @NotNull(message = "choose category")
     private Category category;
+
+    @NotNull(message = "choose parameters")
     private Parameters parameters;
+
     @JsonIgnore
+    @NotNull(message = "type weight")
+    @DecimalMin(value = "0.1", message = "min weight is 0.1")
+    @DecimalMax(value = "1000", message = "max weight is 1000")
     private BigDecimal weight ;
+
     @JsonIgnore
+    @NotNull(message = "type volume")
+    @DecimalMin(value = "0.1", message = "min volume is 0.1")
+    @DecimalMax(value = "1000", message = "max volume is 1000")
     private BigDecimal volume;
+
     @JsonIgnore
+    @NotNull(message = "type quantity in stock")
+    @Min(value = 0, message = "quantity in stock: it is negative value")
+    @Max(value = Integer.MAX_VALUE, message = "quantity in stock: max value is " + Integer.MAX_VALUE)
     private Integer quantityInStock;
+
     @JsonIgnore
     private String status;
     @JsonIgnore

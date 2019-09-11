@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
 import ru.tampashev.shop.converters.ProductConverter;
 import ru.tampashev.shop.dao.GenericDao;
+import ru.tampashev.shop.dao.OrderDao;
 import ru.tampashev.shop.dao.OrderProductDao;
 import ru.tampashev.shop.dto.OrderProduct;
 import ru.tampashev.shop.dto.Product;
@@ -29,6 +30,9 @@ public class OrderProductServiceImpl extends AbstractGenericService<OrderProduct
     @Autowired
     private OrderProductDao orderProductDao;
 
+    @Autowired
+    private OrderDao orderDao;
+
     @Override
     protected Converter<OrderProductEntity, OrderProduct> getConverter() {
         return orderProductConverter;
@@ -43,5 +47,12 @@ public class OrderProductServiceImpl extends AbstractGenericService<OrderProduct
     public List<OrderProduct> findByOrderId(Integer orderId) {
         List<OrderProductEntity> orderProductEntities = orderProductDao.findByOrderId(orderId);
         return orderProductConverter.convertToDtoList(orderProductEntities);
+    }
+
+    @Override
+    public Integer create(OrderProduct orderProduct) {
+        OrderProductEntity orderProductEntity = orderProductConverter.convertToEntity(orderProduct);
+        orderProductEntity.setOrder(orderDao.findById(orderProduct.getOrder().getId()));
+        return orderProductDao.create(orderProductEntity);
     }
 }

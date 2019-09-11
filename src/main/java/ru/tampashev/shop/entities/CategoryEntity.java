@@ -13,8 +13,7 @@ import java.util.Objects;
                             "WHERE category.status = 'valid'"),
         @NamedQuery(name = "category-find",
                     query = "FROM CategoryEntity category " +
-                            "WHERE category.name = :name " +
-                            "AND category.status = 'valid'")
+                            "WHERE category.name = :name")
 })
 //@SuppressWarnings(value = "unused")
 public class CategoryEntity implements Serializable {

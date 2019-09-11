@@ -29,4 +29,21 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity> implemen
 
         return existedCategory != null ? existedCategory.getId() : -1;
     }
+
+    @Override
+    public Integer create(CategoryEntity categoryEntity) {
+        categoryEntity.setStatus("invalid");
+
+        Integer categoryId = find(categoryEntity);
+        if (categoryId > 0){
+            categoryEntity = findById(categoryId);
+            categoryEntity.setStatus("valid");
+            update(categoryEntity);
+        } else {
+            categoryEntity.setStatus("valid");
+            categoryId = (Integer) getSession().save(categoryEntity);
+            //categoryId = (Integer) getSession().save(null);
+        }
+        return categoryId;
+    }
 }

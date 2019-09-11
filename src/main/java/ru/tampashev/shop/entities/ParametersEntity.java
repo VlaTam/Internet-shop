@@ -37,7 +37,7 @@ public class ParametersEntity implements Serializable {
     @Column(nullable = false)
     private Integer radius;
 
-    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = CascadeType.MERGE)
+    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "parameters", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Collection<ProductEntity> productEntities;
 
     @Override

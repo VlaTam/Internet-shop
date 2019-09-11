@@ -141,19 +141,11 @@ public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order>
     public Integer changeStatus(Order order) {
         Order existedOrder = findById(order.getId());
 
-        Payment payment = new Payment();
-        payment.setMethod(order.getPayment().getMethod());
-        payment.setPaymentStatus(order.getPayment().getPaymentStatus());
-        payment.setId(paymentService.find(payment));
+        Integer paymentId = paymentService.find(order.getPayment());
+        existedOrder.setPayment(paymentService.findById(paymentId));
 
-        Delivery delivery = new Delivery();
-        delivery.setMethod(order.getDelivery().getMethod());
-        delivery.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
-        delivery.setId(deliveryService.find(delivery));
-
-        existedOrder.setPayment(payment);
-        existedOrder.setDelivery(delivery);
-        existedOrder.setOrderProducts(new HashSet<>());
+        Integer deliveryId = deliveryService.find(order.getDelivery());
+        existedOrder.setDelivery(deliveryService.findById(deliveryId));
 
         update(existedOrder);
         return order.getId();

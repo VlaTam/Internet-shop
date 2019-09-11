@@ -1,12 +1,18 @@
 package ru.tampashev.shop.dto;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Purchase {
 
+    //@NotNull(message = "product is null")
     private Product product;
+
+    //@NotNull(message = "quantity is null")
     private Integer quantity;
+
+    //@NotNull(message = "totalCost is null")
     private BigDecimal totalCost;
 
     public Purchase() {

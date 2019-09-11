@@ -64,23 +64,37 @@
             </c:when>
             <c:otherwise>
                 <div class="row mb-3">
-                    <div class="col">Brand</div>
-                    <div class="col">Name</div>
-                    <div class="col">Radius</div>
-                    <div class="col">Width</div>
-                    <div class="col">Height</div>
+                    <div class="col">First name</div>
+                    <div class="col">Last name</div>
+                    <div class="col">Date</div>
+                    <div class="col">Payment status</div>
+                    <div class="col">Payment method</div>
+                    <div class="col">Delivery status</div>
+                    <div class="col">Delivery method</div>
                     <div class="col"></div>
                 </div>
                 <c:forEach var="order" items="${activeOrders}">
                     <div class="row mb-1">
                         <div class="col">
-                                ${order.user.firstName}
+                            ${order.user.firstName}
                         </div>
                         <div class="col">
-                                ${order.user.lastName}
+                            ${order.user.lastName}
                         </div>
                         <div class="col">
-                                ${order.date}
+                            ${order.date}
+                        </div>
+                        <div class="col">
+                            ${order.payment.paymentStatus}
+                        </div>
+                        <div class="col">
+                            ${order.payment.method}
+                        </div>
+                        <div class="col">
+                            ${order.delivery.deliveryStatus}
+                        </div>
+                        <div class="col">
+                            ${order.delivery.method}
                         </div>
                         <div class="col">
                             <a class="btn btn-success" href="${pageContext.servletContext.contextPath}/order/edit/${order.id}">

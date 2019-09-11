@@ -5,9 +5,9 @@
 <common:layout title="Top products">
     <c:choose>
         <c:when test="${topTenProducts.size() > 0}">
-            <c:forEach var="user" items="${topTenProducts}">
+            <c:forEach var="product" items="${topTenProducts}">
                 <div>
-                    ${user.parameters.brand} ${user.name} ${user.parameters.width}/${user.parameters.height} R${user.parameters.radius}
+                    ${product.parameters.brand} ${product.name} ${product.parameters.width}/${product.parameters.height} R${product.parameters.radius}
                 </div>
             </c:forEach>
         </c:when>
