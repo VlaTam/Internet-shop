@@ -112,7 +112,7 @@
             </div>
             <div class="col-lg-9">
                 <div>
-                    ${order.date}
+                    <fmt:formatDate value="${order.date}" pattern="dd-MM-yyyy" />
                 </div>
             </div>
         </div>
@@ -187,6 +187,9 @@
                     ${order.delivery.method}
                 </div>
             </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3 mb-3">
+            <a href="${pageContext.servletContext.contextPath}/order/manage" class="btn btn-info">Go back to orders</a>
         </div>
     </section>
 </common:layout>

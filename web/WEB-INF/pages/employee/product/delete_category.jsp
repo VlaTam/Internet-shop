@@ -14,7 +14,7 @@
                 <sf:button class="btn btn-danger">Delete</sf:button>
             </div>
         </sf:form>
-        <div>
+        <div class="d-flex justify-content-center mt-4">
             <a href="${pageContext.servletContext.contextPath}/category">Go to categories</a>
         </div>
     </section>

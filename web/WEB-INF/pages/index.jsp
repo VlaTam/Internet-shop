@@ -86,8 +86,4 @@
         </div>
       </div>
     </sec:authorize>
-
-    <div>
-        <a href="${pageContext.servletContext.contextPath}/message">Send message</a>
-    </div>
 </common:layout>

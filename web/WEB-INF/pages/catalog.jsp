@@ -13,9 +13,9 @@
                     <label for="brand_id">Brand</label>
                     <sf:select path="brand" id="brand_id">
                         <sf:option value="${null}">-</sf:option>
-                        <c:forEach var="parameter" items="${parametersList}">
-                            <c:if test="${parametersSet.add(parameter.brand)}">
-                                <sf:option value="${parameter.brand}">${parameter.brand}</sf:option>
+                        <c:forEach var="product" items="${products}">
+                            <c:if test="${parametersSet.add(product.parameters.brand)}">
+                                <sf:option value="${product.parameters.brand}">${product.parameters.brand}</sf:option>
                             </c:if>
                         </c:forEach>
                     </sf:select>

@@ -14,4 +14,7 @@
             <sf:button class="btn btn-success">Confirm</sf:button>
         </div>
     </sf:form>
+    <div class="d-flex justify-content-center mt-4">
+        <a href="${pageContext.servletContext.contextPath}/category">Go to categories</a>
+    </div>
 </common:layout>

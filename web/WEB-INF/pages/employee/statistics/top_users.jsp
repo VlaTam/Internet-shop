@@ -3,16 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <common:layout title="Top users">
+    <div class="d-flex justify-content-center mt-5 mb-2">
+        <h2>Top of customers</h2>
+    </div>
     <c:choose>
         <c:when test="${topTenUsers.size() > 0}">
             <c:forEach var="product" items="${topTenUsers}">
-                <div>
-                    ${product.lastName} ${product.firstName} ${product.birthday} ${product.mailAddress}
+                <div  class="d-flex justify-content-center mt-2">
+                    <p>${product.lastName} ${product.firstName} <b>${product.mailAddress}</b></p>
                 </div>
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <div>
+            <div class="d-flex justify-content-center mt-3">
                 No statistics
             </div>
         </c:otherwise>

@@ -35,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult){
+    public String saveProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "employee/product/add";
         }

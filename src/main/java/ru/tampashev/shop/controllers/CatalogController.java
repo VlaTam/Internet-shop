@@ -31,7 +31,8 @@ public class CatalogController {
     @GetMapping("/filtered")
     public String openFilteredCatalog(@ModelAttribute("parameters") Parameters parameters, Model model){
         model.addAttribute("products", productService.findByParameters(parameters));
-        model.addAttribute("parametersList", parametersService.findAll());
+        model.addAttribute("pList", parametersService.findAll());
+        //model.addAttribute("parametersList", parametersService.findAll());
         model.addAttribute("parameters", parameters);
         return "catalog";
     }

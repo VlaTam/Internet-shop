@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.tampashev.shop.config.JmsConfig;
 import ru.tampashev.shop.dto.Order;
 import ru.tampashev.shop.dto.OrderStatus;
 
@@ -24,6 +25,9 @@ public class OrderController {
 
     @Autowired
     private DeliveryService deliveryService;
+
+    @Autowired
+    private JmsService jmsService;
 
     @GetMapping("/edit/{id}")
     public String openOrder(@PathVariable("id") Integer id, Model model){
@@ -51,6 +55,7 @@ public class OrderController {
     @PostMapping("/add")
     public String addOrder(@ModelAttribute("order") Order order){
         orderService.create(order);
+        jmsService.sendMessage();
         return "redirect:/";
     }
 
