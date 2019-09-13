@@ -1,5 +1,6 @@
 package ru.tampashev.shop.services.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tampashev.shop.converters.Converter;
@@ -24,6 +25,8 @@ import java.util.List;
 @Transactional
 @SuppressWarnings("all")
 public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order> implements OrderService {
+
+    private static final Logger logger = Logger.getLogger(OrderServiceImpl.class);
 
     @Autowired
     private HttpSession session;
@@ -90,6 +93,7 @@ public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order>
         session.removeAttribute("purchaseSet");
         session.removeAttribute("totalPrice");
 
+        logger.info("--->Order create: " + order.getUser().getMailAddress());
         return orderId;
     }
 
@@ -148,6 +152,7 @@ public class OrderServiceImpl extends AbstractGenericService<OrderEntity, Order>
         existedOrder.setDelivery(deliveryService.findById(deliveryId));
 
         update(existedOrder);
+        logger.info("--->Order change status: " + "Order id " + order.getId());
         return order.getId();
     }
 }

@@ -12,7 +12,7 @@ import ru.tampashev.shop.services.BasketService;
 public class BasketController {
 
     @Autowired
-    private BasketService binService;
+    private BasketService basketService;
 
     @GetMapping
     public String openBin(Model model){
@@ -22,11 +22,11 @@ public class BasketController {
 
     @PostMapping("/add")
     public String addToBin(){
-        return binService.add() ? "redirect:/catalog" : "redirect:/product?message=Product has not added into the bin";
+        return basketService.add() ? "redirect:/catalog" : "redirect:/product?message=Product has not added into the bin";
     }
 
     @DeleteMapping("/delete")
     public String deletePurchase(@ModelAttribute("product") Product product){
-        return binService.delete(product) ? "redirect:/basket" : "redirect:/basket?message=Product has not deleted";
+        return basketService.delete(product) ? "redirect:/basket" : "redirect:/basket?message=Product has not deleted";
     }
 }

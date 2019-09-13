@@ -67,7 +67,7 @@
             <div class="col-md-4">
                 <form action="${pageContext.servletContext.contextPath}/basket/add" method="POST">
                     <input name="productId" value="${product.id}" hidden/>
-                    <input name="quantity" type="number" min="1" max="${product.quantityInStock}"/>
+                    <input name="quantity" value="1" type="number" min="1" max="${product.quantityInStock}" required/>
                     <button class="btn btn-success">Add to the basket</button>
                 </form>
             </div>

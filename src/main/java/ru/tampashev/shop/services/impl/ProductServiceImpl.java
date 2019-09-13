@@ -1,5 +1,6 @@
 package ru.tampashev.shop.services.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import java.util.List;
 @Service
 @Transactional
 public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Product> implements ProductService {
+
+    private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
     @Autowired
     private ProductDao productDao;
@@ -70,7 +73,6 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     @Override
     public Integer create(Product product) {
         Integer userId = -1;
-        //System.out.println(product.getCategory());
         Category category = categoryService.findById(product.getCategory().getId());
 
         if (find(product) < 0 & category.getName() != null){
@@ -81,6 +83,7 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
 
             ProductEntity productEntity = productConverter.convertToEntity(product);
             userId = productDao.create(productEntity);
+            logger.info("--->Product create: " + product.getParameters().getBrand() + " " + product.getName());
         }
         return userId;
     }
@@ -95,11 +98,13 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
         product.getParameters().setId(parametersId);
         ProductEntity productEntity = productConverter.convertToEntity(product);
         productDao.update(productEntity);
+        logger.info("--->Product update: " + product.getParameters().getBrand() + " " + product.getName());
     }
 
     @Override
     public void delete(Product product) {
        product.setStatus("inValid");
        update(product);
+        logger.info("--->Product delete: " + product.getParameters().getBrand() + " " + product.getName());
     }
 }

@@ -36,7 +36,7 @@ public class OrderController {
         return "employee/order/order_status";
     }
 
-    @PutMapping("/edit")
+    @PostMapping("/edit")
     public String changeOrderStatus(@ModelAttribute("order") Order order){
         orderService.changeStatus(order);
         return "redirect:/order/edit/" + order.getId() + "?message=Order has updated";

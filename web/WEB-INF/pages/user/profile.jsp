@@ -46,13 +46,13 @@
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="password_id">Password</label>
-                        <sf:password class="form-control" maxlength="100" path="password" value="${user.password}" id="password_id" placeholder="Your password" required="true"/>
+                        <sf:password class="form-control" maxlength="100" path="password" id="password_id" placeholder="Your password" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="confirmation_id">Confirm password</label>
-                        <sf:password class="form-control" maxlength="100" path="confirmation" value="${user.confirmation}" id="confirmation_id" placeholder="Confirm password" required="true"/>
+                        <sf:password class="form-control" maxlength="100" path="confirmation" id="confirmation_id" placeholder="Confirm password" required="true"/>
                     </div>
                 </div>
             </fieldset>

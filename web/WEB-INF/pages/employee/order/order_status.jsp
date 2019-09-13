@@ -6,7 +6,7 @@
 
 <common:layout title="Order status">
     <jsp:useBean id="namesSet" class="java.util.HashSet"/>
-    <sf:form action="${pageContext.servletContext.contextPath}/order/edit" methodParam="_method" method="PUT" modelAttribute="order">
+    <sf:form action="${pageContext.servletContext.contextPath}/order/edit" methodParam="_method" method="POST" modelAttribute="order">
         <sf:input path="id" value="${order.id}" hidden="true"/>
         <div class="row mt-5 mb-3 justify-content-md-around align-items-end">
             <div class="">

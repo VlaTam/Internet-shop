@@ -1,5 +1,6 @@
 package ru.tampashev.shop.services.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl extends AbstractGenericService<UserEntity, User> implements UserService {
+
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 
     private final String roleCustomer = "ROLE_CUSTOMER";
 
@@ -69,7 +72,9 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
         UserEntity userEntity = userConverter.convertToEntity(user);
-        return userDao.create(userEntity);
+        Integer userId = userDao.create(userEntity);
+        logger.info("--->User create: " + user.getMailAddress());
+        return userId;
     }
 
     private void setValidAddress(User user){
@@ -95,5 +100,6 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
             userDao.update(userEntity);
             addressService.update(user.getAddress());
         }
+        logger.info("--->User update: " + user.getMailAddress());
     }
 }
