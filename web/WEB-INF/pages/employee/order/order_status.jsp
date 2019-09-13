@@ -8,7 +8,7 @@
     <jsp:useBean id="namesSet" class="java.util.HashSet"/>
     <sf:form action="${pageContext.servletContext.contextPath}/order/edit" methodParam="_method" method="PUT" modelAttribute="order">
         <sf:input path="id" value="${order.id}" hidden="true"/>
-        <div class="row mt-5 mb-5 justify-content-md-around align-items-end">
+        <div class="row mt-5 mb-3 justify-content-md-around align-items-end">
             <div class="">
                 <label for="payment_status_id">Payment status</label>
                 <sf:select class="form-control" path="payment.paymentStatus" id="payment_status_id">
@@ -67,6 +67,9 @@
         </div>
     </sf:form>
 
+    <div class="d-flex justify-content-center">
+        <h4 class="mt-3 text-danger">${param.message}</h4>
+    </div>
     <section class="container">
         <div class="row mb-1">
             <div class="col-lg-3">

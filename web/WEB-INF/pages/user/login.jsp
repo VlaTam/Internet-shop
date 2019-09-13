@@ -8,10 +8,10 @@
         <sf:form action="${pageContext.servletContext.contextPath}/j_spring_security_check" method="POST">
             <h2 class="form-signin-heading">Please sign in</h2>
             <div class="mb-3">
-                <input type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus autocomplete="off">
+                <input type="text" maxlength="30" class="form-control" name="j_username" placeholder="Email address" required autofocus autocomplete="off">
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control" name="j_password" placeholder="Password" required autocomplete="off">
+                <input type="password" maxlength="30" class="form-control" name="j_password" placeholder="Password" required autocomplete="off">
             </div>
             <div>
                 <button class="btn btn-lg btn-primary btn-block">Войти</button>

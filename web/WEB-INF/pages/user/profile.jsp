@@ -17,6 +17,7 @@
     </div>
     <sf:form action="${pageContext.servletContext.contextPath}/user" method="PUT" modelAttribute="user">
         <section class="row mt-2 justify-content-lg-center align-items-md-start">
+            <sf:errors path="*" cssClass="error text-danger"/>
             <sf:input path="id" value="${user.id}" hidden="true"/>
             <sf:input path="mailAddress" value="${user.mailAddress}" hidden="true"/>
             <sf:input path="address.id" value="${user.address.id}" hidden="true"/>
@@ -25,13 +26,13 @@
                 <div class="row justify-content-lg-center">
                     <div>
                         <label for="last_name_id">Last name</label>
-                        <sf:input class="form-control" path="lastName" id="last_name_id" value="${user.lastName}" required="true" autofocus="true"/>
+                        <sf:input class="form-control" maxlength="30" path="lastName" id="last_name_id" value="${user.lastName}" required="true" autofocus="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="first_name_id">First name</label>
-                        <sf:input class="form-control" path="firstName" id="first_name_id" value="${user.firstName}" required="true"/>
+                        <sf:input class="form-control" maxlength="30" path="firstName" id="first_name_id" value="${user.firstName}" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
@@ -45,13 +46,13 @@
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="password_id">Password</label>
-                        <sf:password class="form-control" path="password" id="password_id" placeholder="Your password" required="true"/>
+                        <sf:password class="form-control" maxlength="100" path="password" value="${user.password}" id="password_id" placeholder="Your password" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="confirmation_id">Confirm password</label>
-                        <sf:password class="form-control" path="confirmation" id="confirmation_id" placeholder="Confirm password" required="true"/>
+                        <sf:password class="form-control" maxlength="100" path="confirmation" value="${user.confirmation}" id="confirmation_id" placeholder="Confirm password" required="true"/>
                     </div>
                 </div>
             </fieldset>
@@ -60,37 +61,37 @@
                 <div class="row justify-content-lg-center">
                     <div>
                         <label for="country_id">Country</label>
-                        <sf:input class="form-control" path="address.country" id="country_id" value="${user.address.country}" required="true"/>
+                        <sf:input class="form-control" maxlength="30" path="address.country" id="country_id" value="${user.address.country}" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="city_id">City</label>
-                        <sf:input class="form-control" path="address.city" id="city_id" value="${user.address.city}" required="true"/>
+                        <sf:input class="form-control" maxlength="30" path="address.city" id="city_id" value="${user.address.city}" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="street_id">Street</label>
-                        <sf:input class="form-control" path="address.street" id="street_id" value="${user.address.street}" required="true"/>
+                        <sf:input class="form-control" maxlength="30" path="address.street" id="street_id" value="${user.address.street}" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="postal_code_id">Postal code</label>
-                        <sf:input class="form-control" path="address.postalCode" id="postal_code_id" value="${user.address.postalCode}" required="true"/>
+                        <sf:input class="form-control" maxlength="6" path="address.postalCode" id="postal_code_id" value="${user.address.postalCode}" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="House_number_id">House number</label>
-                        <sf:input class="form-control" path="address.houseNumber" id="House_number_id" value="${user.address.houseNumber}" required="true"/>
+                        <sf:input class="form-control" maxlength="4" path="address.houseNumber" id="House_number_id" value="${user.address.houseNumber}" required="true"/>
                     </div>
                 </div>
                 <div class="row justify-content-lg-center mt-3">
                     <div>
                         <label for="flat_number_id">Flat number</label>
-                        <sf:input class="form-control" path="address.flatNumber" id="flat_number_id" value="${user.address.flatNumber}" required="true"/>
+                        <sf:input class="form-control" maxlength="4" path="address.flatNumber" id="flat_number_id" value="${user.address.flatNumber}" required="true"/>
                     </div>
                 </div>
             </fieldset>

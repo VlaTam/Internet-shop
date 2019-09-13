@@ -2,7 +2,9 @@ package ru.tampashev.shop.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.URL;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -15,9 +17,11 @@ public class Product {
     private Integer id;
 
     @NotBlank(message = "email is empty")
+    @Size(min = 2, max = 30, message = "length of name is between 2 and 30 symbols")
     private String name;
 
     @NotNull(message = "type price")
+    @Digits(integer = 7, fraction = 2, message = "price must be a number")
     @DecimalMin(value = "0", message = "price is negative, correct it")
     @DecimalMax(value = "1000000", message = "max price is 1000000")
     private BigDecimal price;
@@ -27,6 +31,7 @@ public class Product {
     private Category category;
 
     @NotNull(message = "choose parameters")
+    @Valid
     private Parameters parameters;
 
     @JsonIgnore
@@ -48,7 +53,9 @@ public class Product {
     private Integer quantityInStock;
 
     @JsonIgnore
+    @Size(min = 2, max = 30, message = "length of status is between 2 and 30 symbols")
     private String status;
+
     @JsonIgnore
     private Collection<Order> orders;
 

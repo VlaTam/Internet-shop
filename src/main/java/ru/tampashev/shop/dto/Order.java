@@ -2,6 +2,7 @@ package ru.tampashev.shop.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
@@ -9,8 +10,13 @@ import java.util.Date;
 public class Order {
 
     private Integer id;
+
     private User user;
+
+    @NotNull(message = "choose payment")
     private Payment payment;
+
+    @NotNull(message = "choose delivery")
     private Delivery delivery;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

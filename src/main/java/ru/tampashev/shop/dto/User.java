@@ -2,8 +2,10 @@ package ru.tampashev.shop.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
@@ -11,31 +13,38 @@ import java.util.List;
 public class User {
 
     private Integer id;
+
     @NotBlank(message = "last name is empty")
+    @Size(min = 2, max = 30, message = "length of last name is between 2 and 30 symbols")
     private String lastName;
+
     @NotBlank(message = "first name is empty")
+    @Size(min = 2, max = 30, message = "length of first name is between 2 and 30 symbols")
     private String firstName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "choose date")
+    @Past(message = "You have chosen future date")
     private Date birthday;
 
     @NotBlank(message = "email is empty")
-    @Size(min = 10, max = 60, message = "length of email is between 10 and 60 symbols")
+    @Size(min = 10, max = 30, message = "length of email is between 10 and 30 symbols")
     private String mailAddress;
 
     @NotBlank(message = "password is empty")
-    @Size(min = 4, max = 12, message = "length of password is between 4 and 12 symbols")
+    @Size(min = 4, max = 100, message = "length of password is between 4 and 30 symbols")
     private String password;
 
     @NotBlank(message = "confirmation is empty")
-    @Size(min = 4, max = 12, message = "length of confirmation is between 4 and 12 symbols")
+    @Size(min = 4, max = 100, message = "length of confirmation is between 4 and 30 symbols")
     private String confirmation;
 
-    @NotNull(message = "choose role")
     private Role role;
 
     @NotNull(message = "choose address")
+    @Valid
     private Address address;
+
     private List<Order> orders;
 
     public Integer getId() {

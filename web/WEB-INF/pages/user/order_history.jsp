@@ -1,22 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/common" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <common:layout title="Order history">
     <c:if test="${orderList.size() == 0}">
-        <section class="row">
+        <section class="d-flex justify-content-center mt-5 mb-2">
             <div>
                 <div>
-                    <p>You don't have orders</p>
+                    <h3>You don't have orders</h3>
                 </div>
             </div>
         </section>
     </c:if>
     <c:if test="${orderList.size() > 0}">
-        <section class="row">
+        <section class="d-flex justify-content-center mt-5 mb-2">
             <div>
                 <div>
-                    <p>Your orders</p>
+                    <h3>Your orders</h3>
                 </div>
             </div>
         </section>
@@ -25,21 +26,28 @@
                 <div class="row">
                     <div>
                         <div>
-                            Date: ${order.date}
+                            <span><b>Date:</b> <fmt:formatDate value="${order.date}" pattern="dd-MM-yyyy" /></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div>
                         <div>
-                            Payment: ${order.payment.method}
+                            <span><b>Payment:</b> ${order.payment.method}</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div>
                         <div>
-                            Delivery: ${order.delivery.method}
+                            <span><b>Delivery:</b> ${order.delivery.method}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <div>
+                            <span><b>Total price:</b> ${order.totalPrice} RUB</span>
                         </div>
                     </div>
                 </div>
@@ -51,16 +59,16 @@
                                 ${productOrder.product.parameters.width}/${productOrder.product.parameters.height}
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-4">
                             <div>
-                                ${productOrder.quantityOfProduct}
+                                <span>${productOrder.quantityOfProduct} X ${productOrder.fixProductPrice} = ${productOrder.quantityOfProduct*productOrder.fixProductPrice} RUB</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                    <%--    <div class="col-md-3">
                             <div>
                                 ${productOrder.fixProductPrice}
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </c:forEach>
             </section>

@@ -5,9 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.tampashev.shop.dto.User;
 import ru.tampashev.shop.services.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("user")
@@ -25,7 +28,10 @@ public class UserController {
     }
 
     @PutMapping
-    public String editProfile(@ModelAttribute("user") User user){
+    public String editProfile(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "user/profile";
+        }
         userService.update(user);
         return "redirect:/";
     }
@@ -47,7 +53,10 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String register(@ModelAttribute("user") User user) {
+    public String register(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "registration";
+        }
         return userService.create(user) > 0 ? "redirect:/" : "/errors/register";
     }
 }

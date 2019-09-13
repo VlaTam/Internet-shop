@@ -70,7 +70,7 @@ public class ProductServiceImpl extends AbstractGenericService<ProductEntity, Pr
     @Override
     public Integer create(Product product) {
         Integer userId = -1;
-        System.out.println(product.getCategory());
+        //System.out.println(product.getCategory());
         Category category = categoryService.findById(product.getCategory().getId());
 
         if (find(product) < 0 & category.getName() != null){

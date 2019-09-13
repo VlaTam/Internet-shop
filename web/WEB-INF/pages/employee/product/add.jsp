@@ -8,17 +8,16 @@
         <h2>New product</h2>
     </div>
     <sf:form action="${pageContext.servletContext.contextPath}/product/add" method="POST" modelAttribute="product">
+        <sf:errors path="*" cssClass="error text-danger"/>
         <div class="d-flex justify-content-around mt-5 align-items-baseline">
             <section>
                 <div>
                     <label for="product_name">Name</label>
-                    <sf:input path="name" id="product_name" autofocus="true" required="true" autocomplete="off"/>
-                    <sf:errors path="name" cssClass="error"/>
+                    <sf:input path="name" maxlength="30" id="product_name" autofocus="true" required="true" autocomplete="off"/>
                 </div>
                 <div>
                     <label for="product_price">Price</label>
-                    <sf:input path="price" id="product_price" required="true" autocomplete="off"/>
-                    <sf:errors path="price" cssClass="error"/>
+                    <sf:input path="price" type="number" min="0" max="9999999" step="0.1" maxlength="10" id="product_price" required="true" autocomplete="off"/>
                 </div>
                 <div>
                     <label for="product_category">Category</label>
@@ -27,45 +26,41 @@
                             <sf:option value="${currentCategory.id}">${currentCategory.name}</sf:option>
                         </c:forEach>
                     </sf:select>
-                    <sf:errors path="category" cssClass="error"/>
                 </div>
                 <div>
                     <label for="product_weight">Weight</label>
-                    <sf:input path="weight" id="product_weight" required="true" autocomplete="off"/>
-                    <sf:errors path="weight" cssClass="error"/>
+                    <sf:input path="weight" type="number" min="1" max="1000" step="0.1" maxlength="7" id="product_weight" required="true" autocomplete="off"/>
                 </div>
                 <div>
                     <label for="product_volume">Volume</label>
-                    <sf:input path="volume" id="product_volume" required="true" autocomplete="off"/>
-                    <sf:errors path="volume" cssClass="error"/>
+                    <sf:input path="volume" type="number" min="1" max="1000" step="0.1" maxlength="7" id="product_volume" required="true" autocomplete="off"/>
                 </div>
                 <div>
                     <label for="product_quantityInStock">Quantity in stock</label>
-                    <sf:input path="quantityInStock" id="product_quantityInStock" required="true" autocomplete="off"/>
-                    <sf:errors path="quantityInStock" cssClass="error"/>
+                    <sf:input path="quantityInStock" type="number" min="0" max="9999999" maxlength="7" id="product_quantityInStock" required="true" autocomplete="off"/>
                 </div>
             </section>
 
             <section>
                 <div>
                     <label for="brand">Brand</label>
-                    <sf:input path="parameters.brand" id="brand" required="true" autocomplete="off"/>
-                    <sf:errors path="parameters.brand" cssClass="error"/>
+                    <sf:input path="parameters.brand" maxlength="30" id="brand" required="true" autocomplete="off"/>
+
                 </div>
                 <div>
                     <label for="width">Width</label>
-                    <sf:input path="parameters.width" id="width" required="true" autocomplete="off"/>
-                    <sf:errors path="parameters.width" cssClass="error"/>
+                    <sf:input path="parameters.width" type="number" min="0" max="1000" maxlength="3" id="width" required="true" autocomplete="off"/>
+
                 </div>
                 <div>
                     <label for="height">Height</label>
-                    <sf:input path="parameters.height" id="height" required="true" autocomplete="off"/>
-                    <sf:errors path="parameters.height" cssClass="error"/>
+                    <sf:input path="parameters.height" type="number" min="0" max="1000" maxlength="3" id="height" required="true" autocomplete="off"/>
+
                 </div>
                 <div>
                     <label for="radius">Radius</label>
-                    <sf:input path="parameters.radius" id="radius" required="true" autocomplete="off"/>
-                    <sf:errors path="parameters.radius" cssClass="error"/>
+                    <sf:input path="parameters.radius" type="number" min="0" max="200" maxlength="3" id="radius" required="true" autocomplete="off"/>
+
                 </div>
             </section>
         </div>

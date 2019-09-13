@@ -11,9 +11,9 @@
             <div class="row">
                 <div class="col">
                     <label for="brand_id">Brand</label>
-                    <sf:select path="brand" id="brand_id">
+                    <sf:select path="brand" id="brand_id" class="btn btn-secondary dropdown-toggle">
                         <sf:option value="${null}">-</sf:option>
-                        <c:forEach var="product" items="${products}">
+                        <c:forEach var="product" items="${productList}">
                             <c:if test="${parametersSet.add(product.parameters.brand)}">
                                 <sf:option value="${product.parameters.brand}">${product.parameters.brand}</sf:option>
                             </c:if>
@@ -22,33 +22,35 @@
                 </div>
                 <div class="col">
                     <label for="width_id">Width</label>
-                    <sf:select path="width" id="width_id">
+                    <sf:select path="width" id="width_id" class="btn btn-secondary dropdown-toggle">
                         <sf:option value="${null}">-</sf:option>
-                        <c:forEach var="parameter" items="${parametersList}">
-                            <c:if test="${parametersSet.add(parameter.width)}">
-                                <sf:option value="${parameter.width}">${parameter.width}</sf:option>
+                        <c:forEach var="product" items="${productList}">
+                            <c:if test="${parametersSet.add(product.parameters.width)}">
+                                <sf:option value="${product.parameters.width}">${product.parameters.width}</sf:option>
                             </c:if>
                         </c:forEach>
                     </sf:select>
                 </div>
                 <div class="col">
+                        ${parametersSet.clear()}
                     <label for="height_id">Height</label>
-                    <sf:select path="height" id="height_id">
+                    <sf:select path="height" id="height_id" class="btn btn-secondary dropdown-toggle">
                         <sf:option value="${null}">-</sf:option>
-                        <c:forEach var="parameter" items="${parametersList}">
-                            <c:if test="${parametersSet.add(parameter.height)}">
-                                <sf:option value="${parameter.height}">${parameter.height}</sf:option>
+                        <c:forEach var="product" items="${productList}">
+                            <c:if test="${parametersSet.add(product.parameters.height)}">
+                                <sf:option value="${product.parameters.height}">${product.parameters.height}</sf:option>
                             </c:if>
                         </c:forEach>
                     </sf:select>
                 </div>
                 <div class="col">
                     <label for="radius_id">Radius</label>
-                    <sf:select path="radius" id="radius_id">
+                        ${parametersSet.clear()}
+                    <sf:select path="radius" id="radius_id" class="btn btn-secondary dropdown-toggle">
                         <sf:option value="${null}">-</sf:option>
-                        <c:forEach var="parameter" items="${parametersList}">
-                            <c:if test="${parametersSet.add(parameter.radius)}">
-                                <sf:option value="${parameter.radius}">${parameter.radius}</sf:option>
+                        <c:forEach var="product" items="${productList}">
+                            <c:if test="${parametersSet.add(product.parameters.radius)}">
+                                <sf:option value="${product.parameters.radius}">${product.parameters.radius}</sf:option>
                             </c:if>
                         </c:forEach>
                     </sf:select>

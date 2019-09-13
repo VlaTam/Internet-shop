@@ -1,9 +1,6 @@
 package ru.tampashev.shop.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -12,15 +9,19 @@ public class Address {
     private Integer id;
 
     @NotBlank(message = "country is empty")
+    @Size(max = 30, message = "max length of country is 30 symbols")
     private String country;
 
     @NotBlank(message = "city is empty")
+    @Size(max = 30, message = "max length of city is 30 symbols")
     private String city;
 
     @NotBlank(message = "postal code is empty")
+    @Size(max = 6, message = "max length of postal code is 6 symbols")
     private String postalCode;
 
     @NotBlank(message = "street is empty")
+    @Size(max = 30, message = "max length of street is 30 symbols")
     private String street;
 
     @NotNull(message = "type house number")
@@ -29,7 +30,7 @@ public class Address {
     private Integer houseNumber;
 
     @NotNull(message = "type flat number")
-    @Min(value = 1, message = "flat number: min value is 1")
+    @Min(value = 1L, message = "flat number: min value is 1")
     @Max(value = 2000, message = "flat number: max value is 2000")
     private Integer flatNumber;
 

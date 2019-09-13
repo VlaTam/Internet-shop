@@ -3,10 +3,7 @@ package ru.tampashev.shop.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -17,6 +14,7 @@ public class Parameters {
     private Integer id;
 
     @NotBlank(message = "type brand")
+    @Size(min = 2, max = 30, message = "length of brand is between 2 and 30 symbols")
     private String brand;
 
     @NotNull(message = "type width")

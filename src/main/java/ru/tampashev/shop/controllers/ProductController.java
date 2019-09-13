@@ -35,8 +35,9 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String saveProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult){
+    public String saveProduct(@ModelAttribute("product") @Valid() Product product, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
+            model.addAttribute("categories", categoryService.findAll());
             return "employee/product/add";
         }
         return productService.create(product) > 0 ? "index" : "errors/product";
@@ -57,7 +58,7 @@ public class ProductController {
         return "employee/product/update_product";
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public String updateProduct(@ModelAttribute("product") Product product){
         productService.update(product);
         jmsService.sendMessage();

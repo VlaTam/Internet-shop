@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.tampashev.shop.config.JmsConfig;
 import ru.tampashev.shop.dto.Order;
 import ru.tampashev.shop.dto.OrderStatus;
 
@@ -40,7 +39,7 @@ public class OrderController {
     @PutMapping("/edit")
     public String changeOrderStatus(@ModelAttribute("order") Order order){
         orderService.changeStatus(order);
-        return "redirect:/order/manage";
+        return "redirect:/order/edit/" + order.getId() + "?message=Order has updated";
     }
 
     @GetMapping("/add")
@@ -79,7 +78,7 @@ public class OrderController {
         model.addAttribute("paymentList", paymentService.findAll());
         model.addAttribute("deliveryList", deliveryService.findAll());
         model.addAttribute("activeOrders", orderService.findByStatus(orderStatus));
-        model.addAttribute("orderStatus", new OrderStatus());
+        model.addAttribute("orderStatus", orderStatus);
         return "employee/order/show_orders";
     }
 }

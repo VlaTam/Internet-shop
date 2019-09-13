@@ -23,7 +23,7 @@ public class CatalogController {
     @GetMapping
     public String openCatalog(Model model){
         model.addAttribute("products", productService.findAll());
-        model.addAttribute("parametersList", parametersService.findAll());
+        model.addAttribute("productList", productService.findAll());
         model.addAttribute("parameters", new Parameters());
         return "catalog";
     }
@@ -31,7 +31,7 @@ public class CatalogController {
     @GetMapping("/filtered")
     public String openFilteredCatalog(@ModelAttribute("parameters") Parameters parameters, Model model){
         model.addAttribute("products", productService.findByParameters(parameters));
-        model.addAttribute("pList", parametersService.findAll());
+        model.addAttribute("productList", productService.findAll());
         //model.addAttribute("parametersList", parametersService.findAll());
         model.addAttribute("parameters", parameters);
         return "catalog";

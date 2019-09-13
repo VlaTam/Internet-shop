@@ -10,7 +10,7 @@
         <div class="row mt-5 mb-5 justify-content-md-around align-items-end">
             <div class="">
                 <label for="payment_status_id">Payment status</label>
-                <sf:select class="form-control" path="payment.paymentStatus" id="payment_status_id">
+                <sf:select class="form-control btn btn-secondary dropdown-toggle" path="payment.paymentStatus" id="payment_status_id">
                     <sf:option value="${null}">-</sf:option>
                     <c:forEach var="payment" items="${paymentList}">
                         <c:if test="${namesSet.add(payment.paymentStatus)}">
@@ -21,7 +21,7 @@
             </div>
             <div class="">
                 <label for="payment_method_id">Payment method</label>
-                <sf:select class="form-control" path="payment.method" id="payment_method_id">
+                <sf:select class="form-control btn btn-secondary dropdown-toggle" path="payment.method" id="payment_method_id">
                     <sf:option value="${null}">-</sf:option>
                     <c:forEach var="payment" items="${paymentList}">
                         <c:if test="${namesSet.add(payment.method)}">
@@ -32,7 +32,7 @@
             </div>
             <div class="">
                 <label for="delivery_status_id">Delivery status</label>
-                <sf:select class="form-control" path="delivery.deliveryStatus" id="delivery_status_id">
+                <sf:select class="form-control btn btn-secondary dropdown-toggle" path="delivery.deliveryStatus" id="delivery_status_id">
                     <sf:option value="${null}">-</sf:option>
                     <c:forEach var="delivery" items="${deliveryList}">
                         <c:if test="${namesSet.add(delivery.deliveryStatus)}">
@@ -43,7 +43,7 @@
             </div>
             <div class="">
                 <label for="delivery_method_id">Delivery method</label>
-                <sf:select class="form-control" path="delivery.method" id="delivery_method_id">
+                <sf:select class="form-control btn btn-secondary dropdown-toggle" path="delivery.method" id="delivery_method_id">
                     <sf:option value="${null}">-</sf:option>
                     <c:forEach var="delivery" items="${deliveryList}">
                         <c:if test="${namesSet.add(delivery.method)}">

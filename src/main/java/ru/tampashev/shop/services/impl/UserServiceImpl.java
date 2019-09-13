@@ -57,6 +57,9 @@ public class UserServiceImpl extends AbstractGenericService<UserEntity, User> im
 
     @Override
     public Integer create(User user) {
+        if(!user.getPassword().equals(user.getConfirmation()))
+            return -1;
+
         setValidAddress(user);
         setValidRole(user);
 
